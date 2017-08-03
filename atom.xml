@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pingchuan.ma/"/>
-  <updated>2017-08-03T12:52:39.000Z</updated>
+  <updated>2017-08-03T12:55:51.000Z</updated>
   <id>https://pingchuan.ma/</id>
   
   <author>
@@ -19,10 +19,10 @@
     <title>Free Free Internet</title>
     <link href="https://pingchuan.ma/free-free-internet/"/>
     <id>https://pingchuan.ma/free-free-internet/</id>
-    <published>2017-08-03T12:52:42.936Z</published>
-    <updated>2017-08-03T12:52:39.000Z</updated>
+    <published>2017-08-03T12:55:58.312Z</published>
+    <updated>2017-08-03T12:55:51.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>As a Chinese university students, I am enjoying an special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered my anyway.</p>
+    <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>As a Chinese university student, I am enjoying a special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered me anyway.</p>
 <p>Despite the inconvenience discussed above, it is totally free to get online through IPv6. Apparently, if I convert my IPv4 network traffic into IPv6 one and introduce a hosting server to agent it, all problem will be settled.</p>
 <p>In a nutshell, I am going to:</p>
 <ol>
@@ -41,8 +41,8 @@
 <p>As for many people, this multi-featured tool plays an indispensable role in research and study. In particular, it serves me well in network testing and website boosting.</p>
 <h2 id="Why-Shadowsocks"><a href="#Why-Shadowsocks" class="headerlink" title="Why Shadowsocks?"></a>Why Shadowsocks?</h2><p>Technically speaking, I did not really figure out how it works. However, to my experience, shadowsocks can maximum my network <strong>securely</strong>. Moreover, I find it friendly and easy to build for a Linux newbie like me. As a result, I chose shadowsocks.</p>
 <p>Rumor has it that the censorship is fighting against shadowsocks, but I believe that <strong>technology and science commit no crime</strong>. I am not good at memorization, so I recorded my building steps for further reference.</p>
-<h2 id="How-to-Make-it"><a href="#How-to-Make-it" class="headerlink" title="How to Make it?"></a>How to Make it?</h2><h3 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h3><p>An Internet hosting, such as VPS or cloud hosting, and nothing more. DigitalOcean’s VPS service is  good enough for me. I would not like to discuss the choosing of hosting service here.</p>
-<p>My DigitalOcean VPS is installed with Ubuntu 16.04 LTS x64. The tutorial will also based on it.</p>
+<h2 id="How-to-Make-it"><a href="#How-to-Make-it" class="headerlink" title="How to Make it?"></a>How to Make it?</h2><h3 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h3><p>An Internet hosting, such as VPS or cloud hosting, and nothing more. DigitalOcean’s VPS service is good enough for me. I would not like to discuss the choosing of hosting service here.</p>
+<p>My DigitalOcean VPS is installed with Ubuntu 16.04 LTS x64. The tutorial will also be based on it.</p>
 <h3 id="Install-pip"><a href="#Install-pip" class="headerlink" title="Install pip"></a>Install pip</h3><p>I am building with python3, so I need pip for python3. Omit it if you have installed it.</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install python3-pip</div></pre></td></tr></table></figure>
 <h3 id="Install-shadowsocks"><a href="#Install-shadowsocks" class="headerlink" title="Install shadowsocks"></a>Install shadowsocks</h3><p>The author of shadowsocks stopped the maintenance in official pip, so we get the latest version via git.</p>
@@ -113,11 +113,12 @@
 <p>Edit our shadowsocks configuration file:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo vim /etc/shadowsocks.json</div></pre></td></tr></table></figure>
 <p>Then we set the value of <code>fast_open</code> to <code>true</code>. Restart shadowsocks to validate your changes.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo systemctl restart shadowsocks-server</div></pre></td></tr></table></figure>]]></content>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo systemctl restart shadowsocks-server</div></pre></td></tr></table></figure>
+]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;p&gt;As a Chinese university students, I am enjoying an special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered my anyway.&lt;/p&gt;
+      &lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;p&gt;As a Chinese university student, I am enjoying a special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered me anyway.&lt;/p&gt;
 &lt;p&gt;Despite the inconvenience discussed above, it is totally free to get online through IPv6. Apparently, if I convert my IPv4 network traffic into IPv6 one and introduce a hosting server to agent it, all problem will be settled.&lt;/p&gt;
 &lt;p&gt;In a nutshell, I am going to:&lt;/p&gt;
 &lt;ol&gt;
