@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pingchuan.ma/"/>
-  <updated>2017-08-03T12:44:16.000Z</updated>
+  <updated>2017-08-03T12:52:39.000Z</updated>
   <id>https://pingchuan.ma/</id>
   
   <author>
@@ -19,16 +19,15 @@
     <title>Free Free Internet</title>
     <link href="https://pingchuan.ma/free-free-internet/"/>
     <id>https://pingchuan.ma/free-free-internet/</id>
-    <published>2017-08-03T12:44:20.600Z</published>
-    <updated>2017-08-03T12:44:16.000Z</updated>
+    <published>2017-08-03T12:52:42.936Z</published>
+    <updated>2017-08-03T12:52:39.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>As a Chinese university students, I am enjoying an special Internet as we all know. It is especially difficult for me to accomplish my research goal with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered my anyway.</p>
+    <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>As a Chinese university students, I am enjoying an special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered my anyway.</p>
 <p>Despite the inconvenience discussed above, it is totally free to get online through IPv6. Apparently, if I convert my IPv4 network traffic into IPv6 one and introduce a hosting server to agent it, all problem will be settled.</p>
 <p>In a nutshell, I am going to:</p>
 <ol>
-<li>get online for <strong>free</strong> through IPv6;</li>
-<li>reach out for <strong>unrestricted</strong> Internet;</li>
-<li><strong>optimize</strong> the performance.</li>
+<li>get online <strong>free</strong> (free of charge) through IPv6;</li>
+<li>reach out for <strong>free</strong> (unrestricted) Internet;</li>
 </ol>
 <a id="more"></a>
 <h2 id="What-is-Shadowsocks"><a href="#What-is-Shadowsocks" class="headerlink" title="What is Shadowsocks?"></a>What is Shadowsocks?</h2><p>According to its <a href="https://github.com/shadowsocks/shadowsocks/tree/master" target="_blank" rel="external">GitHub</a> description, shadowsocks works as a fast tunnel proxy with several friendly features:</p>
@@ -118,13 +117,12 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;p&gt;As a Chinese university students, I am enjoying an special Internet as we all know. It is especially difficult for me to accomplish my research goal with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered my anyway.&lt;/p&gt;
+      &lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;p&gt;As a Chinese university students, I am enjoying an special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered my anyway.&lt;/p&gt;
 &lt;p&gt;Despite the inconvenience discussed above, it is totally free to get online through IPv6. Apparently, if I convert my IPv4 network traffic into IPv6 one and introduce a hosting server to agent it, all problem will be settled.&lt;/p&gt;
 &lt;p&gt;In a nutshell, I am going to:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;get online for &lt;strong&gt;free&lt;/strong&gt; through IPv6;&lt;/li&gt;
-&lt;li&gt;reach out for &lt;strong&gt;unrestricted&lt;/strong&gt; Internet;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;optimize&lt;/strong&gt; the performance.&lt;/li&gt;
+&lt;li&gt;get online &lt;strong&gt;free&lt;/strong&gt; (free of charge) through IPv6;&lt;/li&gt;
+&lt;li&gt;reach out for &lt;strong&gt;free&lt;/strong&gt; (unrestricted) Internet;&lt;/li&gt;
 &lt;/ol&gt;
     
     </summary>
@@ -143,11 +141,11 @@
   </entry>
   
   <entry>
-    <title>hello world</title>
+    <title>Hello World</title>
     <link href="https://pingchuan.ma/hello-world/"/>
     <id>https://pingchuan.ma/hello-world/</id>
     <published>2016-12-30T16:00:00.000Z</published>
-    <updated>2017-08-03T12:14:47.000Z</updated>
+    <updated>2017-08-03T12:49:27.000Z</updated>
     
     <content type="html"><![CDATA[<p><em>This is my first post!</em></p>
 ]]></content>
