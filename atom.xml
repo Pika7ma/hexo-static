@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pingchuan.ma/"/>
-  <updated>2017-08-03T12:55:51.000Z</updated>
+  <updated>2017-08-04T09:31:59.000Z</updated>
   <id>https://pingchuan.ma/</id>
   
   <author>
@@ -19,8 +19,8 @@
     <title>Free Free Internet</title>
     <link href="https://pingchuan.ma/free-free-internet/"/>
     <id>https://pingchuan.ma/free-free-internet/</id>
-    <published>2017-08-03T12:55:58.312Z</published>
-    <updated>2017-08-03T12:55:51.000Z</updated>
+    <published>2017-08-03T03:46:22.000Z</published>
+    <updated>2017-08-04T09:31:59.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>As a Chinese university student, I am enjoying a special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered me anyway.</p>
 <p>Despite the inconvenience discussed above, it is totally free to get online through IPv6. Apparently, if I convert my IPv4 network traffic into IPv6 one and introduce a hosting server to agent it, all problem will be settled.</p>
@@ -145,8 +145,8 @@
     <title>Hello World</title>
     <link href="https://pingchuan.ma/hello-world/"/>
     <id>https://pingchuan.ma/hello-world/</id>
-    <published>2016-12-30T16:00:00.000Z</published>
-    <updated>2017-08-03T12:49:27.000Z</updated>
+    <published>2017-08-02T15:04:10.000Z</published>
+    <updated>2017-08-04T09:32:28.000Z</updated>
     
     <content type="html"><![CDATA[<p><em>This is my first post!</em></p>
 ]]></content>
