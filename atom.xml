@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pingchuan.ma/"/>
-  <updated>2017-08-05T14:14:31.000Z</updated>
+  <updated>2017-08-05T16:05:44.000Z</updated>
   <id>https://pingchuan.ma/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://pingchuan.ma/free-free-internet/"/>
     <id>https://pingchuan.ma/free-free-internet/</id>
     <published>2017-08-03T03:46:22.000Z</published>
-    <updated>2017-08-05T14:14:31.000Z</updated>
+    <updated>2017-08-05T16:05:44.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>As a Chinese university student, I am enjoying a special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered me anyway.</p>
 <p>Despite the inconvenience discussed above, it is totally free to get online through IPv6. Apparently, if I convert my IPv4 network traffic into IPv6 one and introduce a hosting server to agent it, all problem will be settled.</p>
@@ -41,34 +41,40 @@
 <p>As for many people, this multi-featured tool plays an indispensable role in research and study. In particular, it serves me well in network testing and website boosting.</p>
 <h2 id="Why-Shadowsocks"><a href="#Why-Shadowsocks" class="headerlink" title="Why Shadowsocks?"></a>Why Shadowsocks?</h2><p>Technically speaking, I did not really figure out how it works. However, to my experience, shadowsocks can maximum my network <strong>securely</strong>. Moreover, I find it friendly and easy to build for a Linux newbie like me. As a result, I chose shadowsocks.</p>
 <p>Rumor has it that the censorship is fighting against shadowsocks, but I believe that <strong>technology and science commit no crime</strong>. I am not good at memorization, so I recorded my building steps for further reference.</p>
-<h2 id="How-to-Make-it"><a href="#How-to-Make-it" class="headerlink" title="How to Make it?"></a>How to Make it?</h2><h3 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h3><p>An Internet hosting, such as VPS or cloud hosting, and nothing more. DigitalOcean’s VPS service is  good enough for me. I would not like to discuss the choosing of hosting service here.</p>
-<p>My DigitalOcean VPS is installed with Ubuntu 16.04 LTS x64. The tutorial will also based on it.</p>
+<h2 id="How-to-Make-it"><a href="#How-to-Make-it" class="headerlink" title="How to Make it?"></a>How to Make it?</h2><h3 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h3><p>An Internet hosting, such as VPS or cloud hosting, and nothing more. DigitalOcean’s VPS service is good enough for me. I would not like to discuss the choosing of hosting service here.</p>
+<p>My DigitalOcean VPS is installed with Ubuntu 16.04 LTS x64. The tutorial will also be based on it.</p>
 <h3 id="Install-pip"><a href="#Install-pip" class="headerlink" title="Install pip"></a>Install pip</h3><p>I am building with python3, so I need pip for python3. Omit it if you have installed it.</p>
-<pre><code>$ sudo apt-get update
-$ sudo apt-get install python3-pip</code></pre>
+<pre><code class="bash">$ sudo apt-get update
+$ sudo apt-get install python3-pip
+</code></pre>
 <h3 id="Install-shadowsocks"><a href="#Install-shadowsocks" class="headerlink" title="Install shadowsocks"></a>Install shadowsocks</h3><p>The author of shadowsocks stopped the maintenance in official pip, so we get the latest version via git.</p>
-<pre><code>$ sudo pip3 install git+https:&#x2F;&#x2F;github.com&#x2F;shadowsocks&#x2F;shadowsocks.git@master</code></pre>
+<pre><code class="bash">$ sudo pip3 install git+https://github.com/shadowsocks/shadowsocks.git@master
+</code></pre>
 <p>To look up the version of shadowsocks, we should use this command:</p>
-<pre><code>$ sudo ssserver --version</code></pre>
+<pre><code class="bash">$ sudo ssserver --version
+</code></pre>
 <p>If shadowsocks has been installed successfully, it should show this:</p>
-<pre><code>Shadowsocks 3.0.0</code></pre>
+<pre><code class="bash">Shadowsocks 3.0.0
+</code></pre>
 <h3 id="Implement-Safer-Encryption-Method-optional"><a href="#Implement-Safer-Encryption-Method-optional" class="headerlink" title="Implement Safer Encryption Method (optional)"></a>Implement Safer Encryption Method (optional)</h3><p>According to the <a href="https://github.com/shadowsocks/shadowsocks/wiki/Encryption" target="_blank" rel="external">introduction</a> of encryption:</p>
 <blockquote>
 <p><code>rc4-md5</code> is a safe, fast encryption that use different key per connection. It is recommended for OpenWRT routers.</p>
 <p><code>salsa20</code> and <code>chacha20</code> are fast stream ciphers. Optimized <code>salsa20</code> implementation on x86_64 is even 2x faster than <code>rc4</code> (but slightly slower on ARM).</p>
 </blockquote>
 <p>For me, I chose chacha20 as my encryption method. Let’s install the requirements:</p>
-<pre><code>$ sudo apt-get install python-m2crypto
+<pre><code class="bash">$ sudo apt-get install python-m2crypto
 $ sudo apt-get install build-essential
-$ wget https:&#x2F;&#x2F;github.com&#x2F;jedisct1&#x2F;libsodium&#x2F;releases&#x2F;download&#x2F;1.0.13&#x2F;libsodium-1.0.13.tar.gz
+$ wget https://github.com/jedisct1/libsodium/releases/download/1.0.13/libsodium-1.0.13.tar.gz
 $ sudo tar xf libsodium-1.0.13.tar.gz &amp;&amp; cd libsodium-1.0.13
-$ sudo .&#x2F;configure &amp;&amp; sudo make -j2
+$ sudo ./configure &amp;&amp; sudo make -j2
 $ sudo make install
-$ sudo ldconfig</code></pre>
+$ sudo ldconfig
+</code></pre>
 <h3 id="Work-with-Configuration-File"><a href="#Work-with-Configuration-File" class="headerlink" title="Work with Configuration File"></a>Work with Configuration File</h3><p>To configure the shadowsocks, we create a configuration file:</p>
-<pre><code>$ sudo vim &#x2F;etc&#x2F;shadowsocks.json</code></pre>
+<pre><code class="bash">$ sudo vim /etc/shadowsocks.json
+</code></pre>
 <p>Then we fill our configuration with details: (do not forget to change the ports and passwords)</p>
-<pre><code>{
+<pre><code class="json">{
     &quot;server&quot;: &quot;::&quot;,
     &quot;local_address&quot;: &quot;127.0.0.1&quot;,
     &quot;local_port&quot;: 1080,
@@ -79,55 +85,70 @@ $ sudo ldconfig</code></pre>
     &quot;timeout&quot;: 300,
     &quot;method&quot;: &quot;chacha20&quot;,
     &quot;fast_open&quot;: false
-}</code></pre>
+}
+</code></pre>
 <p>We set the value of <code>server</code> to <code>::</code> in order to ask shadowsocks to receive the traffic from both IPv4 and <strong>IPv6</strong>. <code>method</code> means the encryption method you want shadowsocks to arm with. And <code>fast_open</code> field will be discuss later in the optimization.</p>
 <h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><p>To run shadowsocks in the background:</p>
-<pre><code>$ sudo ssserver -c &#x2F;etc&#x2F;shadowsocks.json -d start</code></pre>
+<pre><code class="bash">$ sudo ssserver -c /etc/shadowsocks.json -d start
+</code></pre>
 <p>To stop it:</p>
-<pre><code>$ sudo ssserver -d stop</code></pre>
+<pre><code class="bash">$ sudo ssserver -d stop
+</code></pre>
 <h3 id="Run-with-Startup"><a href="#Run-with-Startup" class="headerlink" title="Run with Startup"></a>Run with Startup</h3><p>Ubuntu 16.04 introduced a new module named Systemd to manage system and service. We are using the fresh features here.</p>
 <p>Create the management file of shadowsocks:</p>
-<pre><code>$ sudo vim &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;shadowsocks-server.service</code></pre>
+<pre><code class="bash">$ sudo vim /etc/systemd/system/shadowsocks-server.service
+</code></pre>
 <p>Then paste the configuration:</p>
 <pre><code>[Unit]
 Description = Shadowsocks Server
 After = network.target
 
 [Service]
-ExecStart = &#x2F;usr&#x2F;local&#x2F;bin&#x2F;ssserver -c &#x2F;etc&#x2F;shadowsocks.json
+ExecStart = /usr/local/bin/ssserver -c /etc/shadowsocks.json
 Restart = on-abort
 
 [Install]
-WantedBy = multi-user.target</code></pre>
-<p>So now we get a new approach to run shadowsocks:</p>
-<pre><code>$ sudo systemctl start shadowsocks-server</code></pre>
+WantedBy = multi-user.target
+</code></pre><p>So now we get a new approach to run shadowsocks:</p>
+<pre><code class="bash">$ sudo systemctl start shadowsocks-server
+</code></pre>
 <p>Make shadowsocks run with startup in case of accidentally crash and reboot:</p>
-<pre><code>$ sudo systemctl enable shadowsocks-server</code></pre>
+<pre><code class="bash">$ sudo systemctl enable shadowsocks-server
+</code></pre>
 <h2 id="Optimizations"><a href="#Optimizations" class="headerlink" title="Optimizations"></a>Optimizations</h2><p>Here are some trick to optimize the performance of shadowsocks.</p>
 <h3 id="Enable-BBR"><a href="#Enable-BBR" class="headerlink" title="Enable BBR"></a>Enable BBR</h3><p>BBR stands for a brand new congestion control algorithm developed by Google. It can boost our server to a large extent.</p>
 <h4 id="Update-Linux-Kernel"><a href="#Update-Linux-Kernel" class="headerlink" title="Update Linux Kernel"></a>Update Linux Kernel</h4><p>BBR is impossible to enable as long as Linux kernel version is lower than 4.9.0. So firstly let’s check the version of kernel:</p>
-<pre><code>$ uname -r</code></pre>
+<pre><code class="bash">$ uname -r
+</code></pre>
 <p>If it shows a version compatible with BBR, please skip to “Edit Configuration”.</p>
 <p>Go to a temporary download folder with command <code>cd</code> to prepare for kernel. Then download the latest stable kernel from <a href="http://kernel.ubuntu.com/~kernel-ppa/mainline/" target="_blank" rel="external">kernel PPA webpage</a>. For example, I chose v4.12.4 mainline build for amd64 succeeded:</p>
-<pre><code>$ wget http:&#x2F;&#x2F;kernel.ubuntu.com&#x2F;~kernel-ppa&#x2F;mainline&#x2F;v4.12.4&#x2F;linux-headers-4.12.4-041204_4.12.4-041204.201707271932_all.deb
-$ wget http:&#x2F;&#x2F;kernel.ubuntu.com&#x2F;~kernel-ppa&#x2F;mainline&#x2F;v4.12.4&#x2F;linux-headers-4.12.4-041204-generic_4.12.4-041204.201707271932_amd64.deb
-$ wget http:&#x2F;&#x2F;kernel.ubuntu.com&#x2F;~kernel-ppa&#x2F;mainline&#x2F;v4.12.4&#x2F;linux-image-4.12.4-041204-generic_4.12.4-041204.201707271932_amd64.deb</code></pre>
+<pre><code class="bash">$ wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.12.4/linux-headers-4.12.4-041204_4.12.4-041204.201707271932_all.deb
+$ wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.12.4/linux-headers-4.12.4-041204-generic_4.12.4-041204.201707271932_amd64.deb
+$ wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.12.4/linux-image-4.12.4-041204-generic_4.12.4-041204.201707271932_amd64.deb
+</code></pre>
 <p>Then we install the kernels we downloaded:</p>
-<pre><code>$ sudo dpkg -i *.deb</code></pre>
+<pre><code class="bash">$ sudo dpkg -i *.deb
+</code></pre>
 <p>Then we should <code>reboot</code> and delete the old kernels:</p>
-<pre><code>$ sudo purge-old-kernels</code></pre>
+<pre><code class="bash">$ sudo purge-old-kernels
+</code></pre>
 <h4 id="Edit-Configuration"><a href="#Edit-Configuration" class="headerlink" title="Edit Configuration"></a>Edit Configuration</h4><p>Let’s check if we have already switched BBR on:</p>
-<pre><code>$ sudo lsmod | grep bbr</code></pre>
+<pre><code class="bash">$ sudo lsmod | grep bbr
+</code></pre>
 <p>If there is not <code>tcp_bbr</code> in the results, we follow this to enable it:</p>
-<pre><code>$ sudo echo &quot;net.core.default_qdisc=fq&quot; &gt;&gt; &#x2F;etc&#x2F;sysctl.conf
-$ sudo echo &quot;net.ipv4.tcp_congestion_control=bbr&quot; &gt;&gt; &#x2F;etc&#x2F;sysctl.conf</code></pre>
+<pre><code class="bash">$ sudo echo &quot;net.core.default_qdisc=fq&quot; &gt;&gt; /etc/sysctl.conf
+$ sudo echo &quot;net.ipv4.tcp_congestion_control=bbr&quot; &gt;&gt; /etc/sysctl.conf
+</code></pre>
 <p>Then we save the configuration and make it go into effort:</p>
-<pre><code>$ sudo sysctl -p</code></pre>
-<h4 id="Validate"><a href="#Validate" class="headerlink" title="Validate"></a>Validate</h4><pre><code>$ sysctl net.ipv4.tcp_available_congestion_control
-$ sysctl net.ipv4.tcp_congestion_control</code></pre>
+<pre><code class="bash">$ sudo sysctl -p
+</code></pre>
+<h4 id="Validate"><a href="#Validate" class="headerlink" title="Validate"></a>Validate</h4><pre><code class="bash">$ sysctl net.ipv4.tcp_available_congestion_control
+$ sysctl net.ipv4.tcp_congestion_control
+</code></pre>
 <p>If the results both contain <code>bbr</code>, we are sure that BBR has been enabled.</p>
 <h3 id="Optimize-I-O"><a href="#Optimize-I-O" class="headerlink" title="Optimize I/O"></a>Optimize I/O</h3><p>To make it, we create a configuration file:</p>
-<pre><code>$ sudo vim &#x2F;etc&#x2F;sysctl.d&#x2F;local.conf</code></pre>
+<pre><code class="bash">$ sudo vim /etc/sysctl.d/local.conf
+</code></pre>
 <p>Then we fill it with some settings:</p>
 <pre><code># max open files
 fs.file-max = 51200
@@ -170,33 +191,39 @@ net.ipv4.tcp_wmem = 4096 65536 67108864
 net.ipv4.tcp_mtu_probing = 1
 
 # for low-latency network, use cubic instead
-# net.ipv4.tcp_congestion_control = cubic</code></pre>
-<p>Then we make it come into effort:</p>
-<pre><code>$ sudo sysctl --system</code></pre>
+# net.ipv4.tcp_congestion_control = cubic
+</code></pre><p>Then we make it come into effort:</p>
+<pre><code class="bash">$ sudo sysctl --system
+</code></pre>
 <p>Then edit the <code>shadowsocks-server.service</code> file above:</p>
-<pre><code>$ sudo vim &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;shadowsocks-server.service</code></pre>
+<pre><code class="bash">$ sudo vim /etc/systemd/system/shadowsocks-server.service
+</code></pre>
 <p>Insert a line before <code>ExecStart</code>:</p>
-<pre><code>ExecStartPre = &#x2F;bin&#x2F;sh -c &#39;ulimit -n 51200&#39;</code></pre>
-<p>Overall <code>shadowsocks-server.service</code>:</p>
+<pre><code>ExecStartPre = /bin/sh -c &#39;ulimit -n 51200&#39;
+</code></pre><p>Overall <code>shadowsocks-server.service</code>:</p>
 <pre><code>[Unit]
 Description = Shadowsocks Server
 After = network.target
 
 [Service]
-ExecStartPre = &#x2F;bin&#x2F;sh -c &#39;ulimit -n 51200&#39;
-ExecStart = &#x2F;usr&#x2F;local&#x2F;bin&#x2F;ssserver -c &#x2F;etc&#x2F;shadowsocks.json
+ExecStartPre = /bin/sh -c &#39;ulimit -n 51200&#39;
+ExecStart = /usr/local/bin/ssserver -c /etc/shadowsocks.json
 Restart = on-abort
 
 [Install]
-WantedBy = multi-user.target</code></pre>
-<p>Make them come into effort:</p>
-<pre><code>$ sudo systemctl daemon-reload
-$ sudo systemctl restart shadowsocks-server</code></pre>
+WantedBy = multi-user.target
+</code></pre><p>Make them come into effort:</p>
+<pre><code class="bash">$ sudo systemctl daemon-reload
+$ sudo systemctl restart shadowsocks-server
+</code></pre>
 <h3 id="Enable-TCP-Fast-Open"><a href="#Enable-TCP-Fast-Open" class="headerlink" title="Enable TCP Fast Open"></a>Enable TCP Fast Open</h3><p>TCP Fast Open is designed to reduce delay between server and clients. Now it is the time to enable it.</p>
 <p>Edit our shadowsocks configuration file:</p>
-<pre><code>$ sudo vim &#x2F;etc&#x2F;shadowsocks.json</code></pre>
+<pre><code class="bash">$ sudo vim /etc/shadowsocks.json
+</code></pre>
 <p>Then we set the value of <code>fast_open</code> to <code>true</code>. Restart shadowsocks to validate your changes.</p>
-<pre><code>$ sudo systemctl restart shadowsocks-server</code></pre>]]></content>
+<pre><code class="bash">$ sudo systemctl restart shadowsocks-server
+</code></pre>
+]]></content>
     
     <summary type="html">
     
