@@ -1731,13 +1731,13 @@ pre .javascript .function {
 .site-author-image {
   border-radius: 100%;
   padding: 2px;
-  border: 2px dashed #fff;
+  border: 2px solid #fff;
   animation: cycle 2s 0.5s forwards;
   transition: border-radius 2s;
 }
 .site-author-image:hover {
   border-radius: 0;
-  border: 2px solid #ffeb3b;
+  border: 2px solid #fff;
 }
 .site-author-name {
   margin: 5px 0 0;
@@ -1822,7 +1822,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ece73b;
+  background: #ffa1a3;
 }
 .links-of-blogroll {
   font-size: 13px;
