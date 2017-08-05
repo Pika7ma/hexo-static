@@ -1737,7 +1737,7 @@ pre .javascript .function {
 }
 .site-author-image:hover {
   border-radius: 0;
-  border: 2px solid #fff;
+  border: 2px solid #e0ce95;
 }
 .site-author-name {
   margin: 5px 0 0;
@@ -1822,7 +1822,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffa1a3;
+  background: #ad601b;
 }
 .links-of-blogroll {
   font-size: 13px;
