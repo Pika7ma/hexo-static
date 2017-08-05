@@ -156,6 +156,7 @@
 
 
 
+<link href="/js/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
   <title>About Me | OpenPIKA</title>
   
 
@@ -190,6 +191,15 @@
     
   
 
+  <script type="text/javascript" src="/js/google-code-prettify/prettify.js"></script>
+  <script type="text/javascript">
+  $(window).load(function(){
+    $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+    prettyPrint();
+  })    
+  </script>
+  
+  
   <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
