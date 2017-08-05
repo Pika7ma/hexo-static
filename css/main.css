@@ -1822,7 +1822,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #947dff;
+  background: #28f7b8;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2955,4 +2955,14 @@ hr {
 }
 ::-webkit-scrollbar-button:end:active {
   background: url("../images/scrollbar_arrow.png") no-repeat -30px -18px;
+}
+.top-scroll-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: none;
+  width: 0;
+  height: 2px;
+  background: #6d6d6d;
 }
