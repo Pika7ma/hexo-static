@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://pingchuan.ma/free-free-internet/</loc>
-    <lastmod>2017-08-06T08:37:15.000Z</lastmod>
+    <lastmod>2017-08-06T08:43:13.000Z</lastmod>
     <data>
         <display>
         <title>Free Free Internet</title>
@@ -23,6 +23,24 @@
            
              
               <breadCrumb title="Network" url="https://pingchuan.ma/categories/network/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://pingchuan.ma/hello-world/</loc>
+    <lastmod>2017-08-06T08:38:55.000Z</lastmod>
+    <data>
+        <display>
+        <title>Hello World</title>
+        <pubTime>2017-08-02T15:04:10.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Uncategorized" url="https://pingchuan.ma/categories/uncategorized/"/>
           
         </display>
     </data>
@@ -49,24 +67,6 @@
            
              
               <breadCrumb title="Network" url="https://pingchuan.ma/categories/network/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://pingchuan.ma/hello-world/</loc>
-    <lastmod>2017-08-04T09:34:32.000Z</lastmod>
-    <data>
-        <display>
-        <title>Hello World</title>
-        <pubTime>2017-08-02T15:04:10.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Uncategorized" url="https://pingchuan.ma/categories/uncategorized/"/>
           
         </display>
     </data>
