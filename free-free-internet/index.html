@@ -117,7 +117,7 @@
 <meta property="og:site_name" content="OpenPIKA">
 <meta property="og:description" content="IntroductionAs a Chinese university student, I am enjoying a special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or W">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-08-06T07:50:51.000Z">
+<meta property="og:updated_time" content="2017-08-06T07:53:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Free Free Internet">
 <meta name="twitter:description" content="IntroductionAs a Chinese university student, I am enjoying a special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or W">
@@ -461,11 +461,11 @@
 <h2 id="How-to-Make-it"><a href="#How-to-Make-it" class="headerlink" title="How to Make it?"></a>How to Make it?</h2><h3 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h3><p>An Internet hosting, such as VPS or cloud hosting, and nothing more. DigitalOcean’s VPS service is good enough for me. I would not like to discuss the choosing of hosting service here.</p>
 <p>My DigitalOcean VPS is installed with Ubuntu 16.04 LTS x64. The tutorial will also be based on it.</p>
 <h3 id="Install-pip"><a href="#Install-pip" class="headerlink" title="Install pip"></a>Install pip</h3><p>I am building with python3, so I need pip for python3. Omit it if you have installed it.</p>
-<pre><code class="sh">$ sudo apt-get update
+<pre><code class="bash">$ sudo apt-get update
 $ sudo apt-get install python3-pip
 </code></pre>
 <h3 id="Install-shadowsocks"><a href="#Install-shadowsocks" class="headerlink" title="Install shadowsocks"></a>Install shadowsocks</h3><p>The author of shadowsocks stopped the maintenance in official pip, so we get the latest version via git.</p>
-<pre><code class="shell">$ sudo pip3 install git+https://github.com/shadowsocks/shadowsocks.git@master
+<pre><code class="bash">$ sudo pip3 install git+https://github.com/shadowsocks/shadowsocks.git@master
 </code></pre>
 <p>To look up the version of shadowsocks, we should use this command:</p>
 <pre><code class="bash">$ sudo ssserver --version
@@ -479,15 +479,16 @@ $ sudo apt-get install python3-pip
 <p><code>salsa20</code> and <code>chacha20</code> are fast stream ciphers. Optimized <code>salsa20</code> implementation on x86_64 is even 2x faster than <code>rc4</code> (but slightly slower on ARM).</p>
 </blockquote>
 <p>For me, I chose chacha20 as my encryption method. Let’s install the requirements:</p>
-<pre><code>$ sudo apt-get install python-m2crypto
-$ sudo apt-get install build-essential
-$ wget https://github.com/jedisct1/libsodium/releases/download/1.0.13/libsodium-1.0.13.tar.gz
-$ sudo tar xf libsodium-1.0.13.tar.gz &amp;&amp; cd libsodium-1.0.13
-$ sudo ./configure &amp;&amp; sudo make -j2
-$ sudo make install
-$ sudo ldconfig
-</code></pre><h3 id="Work-with-Configuration-File"><a href="#Work-with-Configuration-File" class="headerlink" title="Work with Configuration File"></a>Work with Configuration File</h3><p>To configure the shadowsocks, we create a configuration file:</p>
-<pre><code class="bsh">$ sudo vim /etc/shadowsocks.json
+<pre><code class="bash">sudo apt-get install python-m2crypto
+sudo apt-get install build-essential
+wget https://github.com/jedisct1/libsodium/releases/download/1.0.13/libsodium-1.0.13.tar.gz
+sudo tar xf libsodium-1.0.13.tar.gz &amp;&amp; cd libsodium-1.0.13
+sudo ./configure &amp;&amp; sudo make -j2
+sudo make install
+sudo ldconfig
+</code></pre>
+<h3 id="Work-with-Configuration-File"><a href="#Work-with-Configuration-File" class="headerlink" title="Work with Configuration File"></a>Work with Configuration File</h3><p>To configure the shadowsocks, we create a configuration file:</p>
+<pre><code class="bash">$ sudo vim /etc/shadowsocks.json
 </code></pre>
 <p>Then we fill our configuration with details: (do not forget to change the ports and passwords)</p>
 <pre><code class="json">{
