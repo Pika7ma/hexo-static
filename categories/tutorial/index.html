@@ -151,6 +151,8 @@
 
 
 
+  <link href="/vendors/google-code-prettify/themes/tomorrow.min.css" type="text/css" rel="stylesheet" />
+
 
 
 
@@ -625,6 +627,14 @@
   <script type="text/javascript" src="/js/src/custom/custom.js?v=5.1.2"></script>
 
 
+  
+    <script src="/vendors/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+      prettyPrint();
+    })
+    </script>
   
   
   
