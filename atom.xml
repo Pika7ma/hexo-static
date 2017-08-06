@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pingchuan.ma/"/>
-  <updated>2017-08-06T08:28:16.000Z</updated>
+  <updated>2017-08-06T10:08:44.000Z</updated>
   <id>https://pingchuan.ma/</id>
   
   <author>
@@ -20,9 +20,102 @@
     <link href="https://pingchuan.ma/install-nginx-on-ubuntu/"/>
     <id>https://pingchuan.ma/install-nginx-on-ubuntu/</id>
     <published>2017-08-06T08:22:22.000Z</published>
-    <updated>2017-08-06T08:28:16.000Z</updated>
+    <updated>2017-08-06T10:08:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>To set up a website based on my VPS, it is necessary to choose a web server which is capable for holding my traffic. When I am a high school boy, I tried to build my personal website on WordPress based on Apache, but I found they are both too extravagant for me. This time, I chose Nginx to hold my website.</p>
+<a id="more"></a>
+<h2 id="What-is-Nginx"><a href="#What-is-Nginx" class="headerlink" title="What is Nginx?"></a>What is Nginx?</h2><p><a href="https://www.nginx.com/" target="_blank" rel="external">Nginx</a> is one of the most popular web servers in the world and is responsible for hosting some of the largest and highest-traffic sites on the Internet. It is more resource-friendly than Apache in most cases and can be used as a web server or a reverse proxy.</p>
+<h2 id="Why-Nginx"><a href="#Why-Nginx" class="headerlink" title="Why Nginx?"></a>Why Nginx?</h2><p>In fact, I have tens of millions of choices, for example, Nginx, Apache, lighttpd, etc. But in my opinion, Nginx is a light-weighted web server which perfectly fits personal users like me. Actually, last semester I enrolled in a JAVA Programming Language course, and I suffered a lot from Apache there. So, this time I tried Nginx out and surprised by its usability.</p>
+<h2 id="How-to-make-it"><a href="#How-to-make-it" class="headerlink" title="How to make it?"></a>How to make it?</h2><h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
+<li>An Internet hosting, such as VPS or cloud hosting. And, it should be running Ubuntu.</li>
+<li>A non-root user with the right to <code>sudo</code>.</li>
+</ul>
+<p>My <a href="https://m.do.co/c/c037166332e8" title="Click here to get $10 in credit." target="_blank" rel="external">DigitalOcean</a> VPS is installed with Ubuntu 16.04 LTS x64. The post will also be based on it.</p>
+<h3 id="Install-Nginx"><a href="#Install-Nginx" class="headerlink" title="Install Nginx"></a>Install Nginx</h3><p>Nginx is so popular that Ubuntu’s default repositories included it:</p>
+<pre><code class="bash">$ sudo apt-get update
+$ sudo apt-get install nginx
+</code></pre>
+<h3 id="Configure-the-Firewall-optional"><a href="#Configure-the-Firewall-optional" class="headerlink" title="Configure the Firewall (optional)"></a>Configure the Firewall (optional)</h3><p>To secure our server, I highly recommend that set a firewall, such as <a href="https://help.ubuntu.com/community/UFW" target="_blank" rel="external">Uncomplicated Firewall</a> (<code>ufw</code>) to protect it. I will not include the initialization of <code>ufw</code> here.</p>
+<p>Let’s check the applications list inside <code>ufw</code>:</p>
+<pre><code class="bash">$ sudo ufw app list
+</code></pre>
+<p>Then there should be something showed up like:</p>
+<pre><code class="bash">Available applications:
+  Nginx Full
+  Nginx HTTP
+  Nginx HTTPS
+  OpenSSH
+  ...
+</code></pre>
+<p>There are three profiles registered in Nginx:</p>
+<ul>
+<li><strong>Nginx Full</strong>: This profile opens both port 80 (normal, unencrypted web traffic) and port 443 (TLS/SSL encrypted traffic)</li>
+<li><strong>Nginx HTTP</strong>: This profile opens only port 80 (normal, unencrypted web traffic)</li>
+<li><strong>Nginx HTTPS</strong>: This profile opens only port 443 (TLS/SSL encrypted traffic)</li>
+</ul>
+<p>For example, I am using both HTTP and HTTPS now so I will type:</p>
+<pre><code class="bash">$ sudo ufw allow &#39;Nginx Full&#39;
+</code></pre>
+<p>Then you can verify it by typing:</p>
+<pre><code class="bash">$ sudo ufw status
+</code></pre>
+<p>Then the status of <code>ufw</code> shows up:</p>
+<pre><code class="bash">Status: active
+
+To                  Action      From
+--                  ------      ----
+OpenSSH             ALLOW       Anywhere                  
+Nginx Full          ALLOW       Anywhere                  
+OpenSSH (v6)        ALLOW       Anywhere (v6)             
+Nginx Full (v6)     ALLOW       Anywhere (v6)
+</code></pre>
+<h3 id="Is-it-working"><a href="#Is-it-working" class="headerlink" title="Is it working?"></a>Is it working?</h3><p>To check if Nginx is running, we should type:</p>
+<pre><code class="bash">$ systemctl status nginx
+</code></pre>
+<p>If it IS running, the output should be something like:</p>
+<pre><code class="bash">● nginx.service - A high performance web server and a reverse proxy server
+   Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
+   Active: active (running) since Sun 2017-08-06 16:22:46 HKT; 1h 3min ago
+  Process: 1611 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+  Process: 1498 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0
+ Main PID: 1615 (nginx)
+    Tasks: 2
+   Memory: 11.7M
+      CPU: 121ms
+   CGroup: /system.slice/nginx.service
+           ├─1615 nginx: master process /usr/sbin/nginx -g daemon on; master_process on
+           └─1616 nginx: worker process
+</code></pre>
+<p>This is mine, and since it is not identical for everyone, yours should differ from my version. However, if you see <code>running</code> on the screen, you made it.</p>
+<p>If you have got your IP address or have assigned your domain name to your IP address with DNS’s help, go and have a look at it through browser.</p>
+<pre><code>http://server_domain_or_IP
+</code></pre><p>Then here is the default welcome page of Nginx:</p>
+<div align="center"><br><img src="/install-nginx-on-ubuntu/nginx_default_page.png" alt="Nginx Default Page" title="Nginx Default Page"><br></div>
+
+<h3 id="Basic-Commands"><a href="#Basic-Commands" class="headerlink" title="Basic Commands"></a>Basic Commands</h3><p>Now that you have your web server up and running, we can go over some basic management commands.</p>
+<p>To stop your web server, you can type:</p>
+<pre><code class="bash">$ sudo systemctl stop nginx
+</code></pre>
+<p>To start the web server when it is stopped, type:</p>
+<pre><code class="bash">$ sudo systemctl start nginx
+</code></pre>
+<p>To stop and then start the service again, type:</p>
+<pre><code class="bash">$ sudo systemctl restart nginx
+</code></pre>
+<p>If you are simply making configuration changes, Nginx can often reload without dropping connections. To do this, this command can be used:</p>
+<pre><code class="bash">$ sudo systemctl reload nginx
+</code></pre>
+<p>By default, Nginx is configured to start automatically when the server boots. If this is not what you want, you can disable this behavior by typing:</p>
+<pre><code class="bash">$ sudo systemctl disable nginx
+</code></pre>
+<p>To re-enable the service to start up at boot, you can type:</p>
+<pre><code class="bash">$ sudo systemctl enable nginx
+</code></pre>
+]]></content>
     
     <summary type="html">
+    
+      &lt;p&gt;To set up a website based on my VPS, it is necessary to choose a web server which is capable for holding my traffic. When I am a high school boy, I tried to build my personal website on WordPress based on Apache, but I found they are both too extravagant for me. This time, I chose Nginx to hold my website.&lt;/p&gt;
     
     </summary>
     
@@ -44,9 +137,9 @@
     <link href="https://pingchuan.ma/free-free-internet/"/>
     <id>https://pingchuan.ma/free-free-internet/</id>
     <published>2017-08-03T03:46:22.000Z</published>
-    <updated>2017-08-06T08:43:13.000Z</updated>
+    <updated>2017-08-06T10:09:08.000Z</updated>
     
-    <content type="html"><![CDATA[<p>As a Chinese university student, I am enjoying a special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered me anyway.</p>
+    <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>As a Chinese university student, I am enjoying a special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered me anyway.</p>
 <p>Despite the inconvenience discussed above, it is totally free to get online through IPv6. Apparently, if I convert my IPv4 network traffic into IPv6 one and introduce a hosting server to agent it, all problem will be settled.</p>
 <p>In a nutshell, I am going to:</p>
 <ol>
@@ -54,7 +147,7 @@
 <li>reach out for <strong>free</strong> (unrestricted) Internet;</li>
 </ol>
 <a id="more"></a>
-<h2 id="What-is-Shadowsocks"><a href="#What-is-Shadowsocks" class="headerlink" title="What is Shadowsocks?"></a>What is Shadowsocks?</h2><p>According to its <a href="https://github.com/shadowsocks/shadowsocks/tree/master" target="_blank" rel="external">GitHub</a> description, shadowsocks works as a fast tunnel proxy with several friendly features:</p>
+<h2 id="What-is-Shadowsocks"><a href="#What-is-Shadowsocks" class="headerlink" title="What is Shadowsocks?"></a>What is Shadowsocks?</h2><p>According to its GitHub description, <a href="https://github.com/shadowsocks/shadowsocks/tree/master" target="_blank" rel="external">shadowsocks</a> works as a fast tunnel proxy with several friendly features:</p>
 <ul>
 <li>TCP &amp; UDP support</li>
 <li>User management API</li>
@@ -65,10 +158,10 @@
 <p>As for many people, this multi-featured tool plays an indispensable role in research and study. In particular, it serves me well in network testing and website boosting.</p>
 <h2 id="Why-Shadowsocks"><a href="#Why-Shadowsocks" class="headerlink" title="Why Shadowsocks?"></a>Why Shadowsocks?</h2><p>Technically speaking, I did not really figure out how it works. However, to my experience, shadowsocks can maximum my network <strong>securely</strong>. Moreover, I find it friendly and easy to build for a Linux newbie like me. As a result, I chose shadowsocks.</p>
 <p>Rumor has it that the censorship is fighting against shadowsocks, but I believe that <strong>technology and science commit no crime</strong>. I am not good at memorization, so I recorded my building steps for further reference.</p>
-<h2 id="How-to-Make-it"><a href="#How-to-Make-it" class="headerlink" title="How to Make it?"></a>How to Make it?</h2><h3 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h3><ul>
+<h2 id="How-to-Make-it"><a href="#How-to-Make-it" class="headerlink" title="How to Make it?"></a>How to Make it?</h2><h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
 <li>An Internet hosting, such as VPS or cloud hosting. <em>DigitalOcean’s VPS service is good enough for me. I would not like to discuss the choosing of hosting service here.</em></li>
 </ul>
-<p>My DigitalOcean VPS is installed with Ubuntu 16.04 LTS x64. The tutorial will also be based on it.</p>
+<p>My <a href="https://m.do.co/c/c037166332e8" title="Click here to get $10 in credit." target="_blank" rel="external">DigitalOcean</a> VPS is installed with Ubuntu 16.04 LTS x64. The post will also be based on it.</p>
 <h3 id="Install-pip"><a href="#Install-pip" class="headerlink" title="Install pip"></a>Install pip</h3><p>I am building with python3, so I need pip for python3. Omit it if you have installed it.</p>
 <pre><code class="bash">$ sudo apt-get update
 $ sudo apt-get install python3-pip
@@ -253,7 +346,7 @@ $ sudo systemctl restart shadowsocks-server
     
     <summary type="html">
     
-      &lt;p&gt;As a Chinese university student, I am enjoying a special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered me anyway.&lt;/p&gt;
+      &lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;p&gt;As a Chinese university student, I am enjoying a special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered me anyway.&lt;/p&gt;
 &lt;p&gt;Despite the inconvenience discussed above, it is totally free to get online through IPv6. Apparently, if I convert my IPv4 network traffic into IPv6 one and introduce a hosting server to agent it, all problem will be settled.&lt;/p&gt;
 &lt;p&gt;In a nutshell, I am going to:&lt;/p&gt;
 &lt;ol&gt;
