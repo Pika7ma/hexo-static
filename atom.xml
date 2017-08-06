@@ -44,7 +44,7 @@
     <link href="https://pingchuan.ma/free-free-internet/"/>
     <id>https://pingchuan.ma/free-free-internet/</id>
     <published>2017-08-03T03:46:22.000Z</published>
-    <updated>2017-08-06T08:33:36.000Z</updated>
+    <updated>2017-08-06T08:37:15.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>As a Chinese university student, I am enjoying a special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered me anyway.</p>
 <p>Despite the inconvenience discussed above, it is totally free to get online through IPv6. Apparently, if I convert my IPv4 network traffic into IPv6 one and introduce a hosting server to agent it, all problem will be settled.</p>
@@ -99,7 +99,7 @@ $ sudo ldconfig
 <h3 id="Work-with-Configuration-File"><a href="#Work-with-Configuration-File" class="headerlink" title="Work with Configuration File"></a>Work with Configuration File</h3><p>To configure the shadowsocks, we create a configuration file:</p>
 <pre><code class="bash">$ sudo vim /etc/shadowsocks.json
 </code></pre>
-<p>Then we fill our configuration with details: (do not forget to change the ports and passwords)</p>
+<p>Then we fill our configuration file with details: (do not forget to change the ports and passwords)</p>
 <pre><code class="json">{
     &quot;server&quot;: &quot;::&quot;,
     &quot;local_address&quot;: &quot;127.0.0.1&quot;,
@@ -124,7 +124,7 @@ $ sudo ldconfig
 <p>Create the management file of shadowsocks:</p>
 <pre><code class="bash">$ sudo vim /etc/systemd/system/shadowsocks-server.service
 </code></pre>
-<p>Then paste the configuration:</p>
+<p>Then paste the configuration content:</p>
 <pre><code>[Unit]
 Description = Shadowsocks Server
 After = network.target
@@ -146,7 +146,7 @@ WantedBy = multi-user.target
 <h4 id="Update-Linux-Kernel"><a href="#Update-Linux-Kernel" class="headerlink" title="Update Linux Kernel"></a>Update Linux Kernel</h4><p>BBR is impossible to enable as long as Linux kernel version is lower than 4.9.0. So firstly let’s check the version of kernel:</p>
 <pre><code class="bash">$ uname -r
 </code></pre>
-<p>If it shows a version compatible with BBR, please skip to “Edit Configuration”.</p>
+<p>If it shows a version compatible with BBR, please skip to “Edit Configuration File”.</p>
 <p>Go to a temporary download folder with command <code>cd</code> to prepare for kernel. Then download the latest stable kernel from <a href="http://kernel.ubuntu.com/~kernel-ppa/mainline/" target="_blank" rel="external">kernel PPA webpage</a>. For example, I chose v4.12.4 mainline build for amd64 succeeded:</p>
 <pre><code class="bash">$ wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.12.4/linux-headers-4.12.4-041204_4.12.4-041204.201707271932_all.deb
 $ wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.12.4/linux-headers-4.12.4-041204-generic_4.12.4-041204.201707271932_amd64.deb
@@ -158,14 +158,14 @@ $ wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.12.4/linux-image-4.12.4-
 <p>Then we should <code>reboot</code> and delete the old kernels:</p>
 <pre><code class="bash">$ sudo purge-old-kernels
 </code></pre>
-<h4 id="Edit-Configuration"><a href="#Edit-Configuration" class="headerlink" title="Edit Configuration"></a>Edit Configuration</h4><p>Let’s check if we have already switched BBR on:</p>
+<h4 id="Edit-Configuration-File"><a href="#Edit-Configuration-File" class="headerlink" title="Edit Configuration File"></a>Edit Configuration File</h4><p>Let’s check if we have already switched BBR on:</p>
 <pre><code class="bash">$ sudo lsmod | grep bbr
 </code></pre>
 <p>If there is not <code>tcp_bbr</code> in the results, we follow this to enable it:</p>
 <pre><code class="bash">$ sudo echo &quot;net.core.default_qdisc=fq&quot; &gt;&gt; /etc/sysctl.conf
 $ sudo echo &quot;net.ipv4.tcp_congestion_control=bbr&quot; &gt;&gt; /etc/sysctl.conf
 </code></pre>
-<p>Then we save the configuration and make it go into effort:</p>
+<p>Then we save the configuration file and make it go into effort:</p>
 <pre><code class="bash">$ sudo sysctl -p
 </code></pre>
 <h4 id="Validate"><a href="#Validate" class="headerlink" title="Validate"></a>Validate</h4><pre><code class="bash">$ sysctl net.ipv4.tcp_available_congestion_control

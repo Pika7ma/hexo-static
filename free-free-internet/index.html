@@ -117,7 +117,7 @@
 <meta property="og:site_name" content="OpenPIKA">
 <meta property="og:description" content="IntroductionAs a Chinese university student, I am enjoying a special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or W">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-08-06T08:33:36.000Z">
+<meta property="og:updated_time" content="2017-08-06T08:37:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Free Free Internet">
 <meta name="twitter:description" content="IntroductionAs a Chinese university student, I am enjoying a special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or W">
@@ -492,7 +492,7 @@ $ sudo ldconfig
 <h3 id="Work-with-Configuration-File"><a href="#Work-with-Configuration-File" class="headerlink" title="Work with Configuration File"></a>Work with Configuration File</h3><p>To configure the shadowsocks, we create a configuration file:</p>
 <pre><code class="bash">$ sudo vim /etc/shadowsocks.json
 </code></pre>
-<p>Then we fill our configuration with details: (do not forget to change the ports and passwords)</p>
+<p>Then we fill our configuration file with details: (do not forget to change the ports and passwords)</p>
 <pre><code class="json">{
     &quot;server&quot;: &quot;::&quot;,
     &quot;local_address&quot;: &quot;127.0.0.1&quot;,
@@ -517,7 +517,7 @@ $ sudo ldconfig
 <p>Create the management file of shadowsocks:</p>
 <pre><code class="bash">$ sudo vim /etc/systemd/system/shadowsocks-server.service
 </code></pre>
-<p>Then paste the configuration:</p>
+<p>Then paste the configuration content:</p>
 <pre><code>[Unit]
 Description = Shadowsocks Server
 After = network.target
@@ -539,7 +539,7 @@ WantedBy = multi-user.target
 <h4 id="Update-Linux-Kernel"><a href="#Update-Linux-Kernel" class="headerlink" title="Update Linux Kernel"></a>Update Linux Kernel</h4><p>BBR is impossible to enable as long as Linux kernel version is lower than 4.9.0. So firstly let’s check the version of kernel:</p>
 <pre><code class="bash">$ uname -r
 </code></pre>
-<p>If it shows a version compatible with BBR, please skip to “Edit Configuration”.</p>
+<p>If it shows a version compatible with BBR, please skip to “Edit Configuration File”.</p>
 <p>Go to a temporary download folder with command <code>cd</code> to prepare for kernel. Then download the latest stable kernel from <a href="http://kernel.ubuntu.com/~kernel-ppa/mainline/" target="_blank" rel="external">kernel PPA webpage</a>. For example, I chose v4.12.4 mainline build for amd64 succeeded:</p>
 <pre><code class="bash">$ wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.12.4/linux-headers-4.12.4-041204_4.12.4-041204.201707271932_all.deb
 $ wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.12.4/linux-headers-4.12.4-041204-generic_4.12.4-041204.201707271932_amd64.deb
@@ -551,14 +551,14 @@ $ wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.12.4/linux-image-4.12.4-
 <p>Then we should <code>reboot</code> and delete the old kernels:</p>
 <pre><code class="bash">$ sudo purge-old-kernels
 </code></pre>
-<h4 id="Edit-Configuration"><a href="#Edit-Configuration" class="headerlink" title="Edit Configuration"></a>Edit Configuration</h4><p>Let’s check if we have already switched BBR on:</p>
+<h4 id="Edit-Configuration-File"><a href="#Edit-Configuration-File" class="headerlink" title="Edit Configuration File"></a>Edit Configuration File</h4><p>Let’s check if we have already switched BBR on:</p>
 <pre><code class="bash">$ sudo lsmod | grep bbr
 </code></pre>
 <p>If there is not <code>tcp_bbr</code> in the results, we follow this to enable it:</p>
 <pre><code class="bash">$ sudo echo &quot;net.core.default_qdisc=fq&quot; &gt;&gt; /etc/sysctl.conf
 $ sudo echo &quot;net.ipv4.tcp_congestion_control=bbr&quot; &gt;&gt; /etc/sysctl.conf
 </code></pre>
-<p>Then we save the configuration and make it go into effort:</p>
+<p>Then we save the configuration file and make it go into effort:</p>
 <pre><code class="bash">$ sudo sysctl -p
 </code></pre>
 <h4 id="Validate"><a href="#Validate" class="headerlink" title="Validate"></a>Validate</h4><pre><code class="bash">$ sysctl net.ipv4.tcp_available_congestion_control
@@ -873,7 +873,7 @@ $ sudo systemctl restart shadowsocks-server
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-Shadowsocks"><span class="nav-number">2.</span> <span class="nav-text">What is Shadowsocks?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Shadowsocks"><span class="nav-number">3.</span> <span class="nav-text">Why Shadowsocks?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-Make-it"><span class="nav-number">4.</span> <span class="nav-text">How to Make it?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Requirements"><span class="nav-number">4.1.</span> <span class="nav-text">Requirements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-pip"><span class="nav-number">4.2.</span> <span class="nav-text">Install pip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-shadowsocks"><span class="nav-number">4.3.</span> <span class="nav-text">Install shadowsocks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implement-Safer-Encryption-Method-optional"><span class="nav-number">4.4.</span> <span class="nav-text">Implement Safer Encryption Method (optional)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Work-with-Configuration-File"><span class="nav-number">4.5.</span> <span class="nav-text">Work with Configuration File</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Usage"><span class="nav-number">4.6.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-with-Startup"><span class="nav-number">4.7.</span> <span class="nav-text">Run with Startup</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimizations"><span class="nav-number">5.</span> <span class="nav-text">Optimizations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Enable-BBR"><span class="nav-number">5.1.</span> <span class="nav-text">Enable BBR</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Update-Linux-Kernel"><span class="nav-number">5.1.1.</span> <span class="nav-text">Update Linux Kernel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Edit-Configuration"><span class="nav-number">5.1.2.</span> <span class="nav-text">Edit Configuration</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Validate"><span class="nav-number">5.1.3.</span> <span class="nav-text">Validate</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optimize-I-O"><span class="nav-number">5.2.</span> <span class="nav-text">Optimize I/O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Enable-TCP-Fast-Open"><span class="nav-number">5.3.</span> <span class="nav-text">Enable TCP Fast Open</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-Shadowsocks"><span class="nav-number">2.</span> <span class="nav-text">What is Shadowsocks?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Shadowsocks"><span class="nav-number">3.</span> <span class="nav-text">Why Shadowsocks?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-Make-it"><span class="nav-number">4.</span> <span class="nav-text">How to Make it?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Requirements"><span class="nav-number">4.1.</span> <span class="nav-text">Requirements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-pip"><span class="nav-number">4.2.</span> <span class="nav-text">Install pip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-shadowsocks"><span class="nav-number">4.3.</span> <span class="nav-text">Install shadowsocks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implement-Safer-Encryption-Method-optional"><span class="nav-number">4.4.</span> <span class="nav-text">Implement Safer Encryption Method (optional)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Work-with-Configuration-File"><span class="nav-number">4.5.</span> <span class="nav-text">Work with Configuration File</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Usage"><span class="nav-number">4.6.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-with-Startup"><span class="nav-number">4.7.</span> <span class="nav-text">Run with Startup</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimizations"><span class="nav-number">5.</span> <span class="nav-text">Optimizations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Enable-BBR"><span class="nav-number">5.1.</span> <span class="nav-text">Enable BBR</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Update-Linux-Kernel"><span class="nav-number">5.1.1.</span> <span class="nav-text">Update Linux Kernel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Edit-Configuration-File"><span class="nav-number">5.1.2.</span> <span class="nav-text">Edit Configuration File</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Validate"><span class="nav-number">5.1.3.</span> <span class="nav-text">Validate</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optimize-I-O"><span class="nav-number">5.2.</span> <span class="nav-text">Optimize I/O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Enable-TCP-Fast-Open"><span class="nav-number">5.3.</span> <span class="nav-text">Enable TCP Fast Open</span></a></li></ol></li></ol></div>
             
 
           </div>
