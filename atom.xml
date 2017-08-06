@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pingchuan.ma/"/>
-  <updated>2017-08-06T10:23:05.000Z</updated>
+  <updated>2017-08-06T10:27:03.000Z</updated>
   <id>https://pingchuan.ma/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://pingchuan.ma/install-nginx-on-ubuntu/"/>
     <id>https://pingchuan.ma/install-nginx-on-ubuntu/</id>
     <published>2017-08-06T08:22:22.000Z</published>
-    <updated>2017-08-06T10:23:05.000Z</updated>
+    <updated>2017-08-06T10:27:03.000Z</updated>
     
     <content type="html"><![CDATA[<p>To set up a website based on my VPS, it is necessary to choose a web server which is capable for holding my traffic. When I am a high school boy, I tried to build my personal website on WordPress based on Apache, but I found they are both too extravagant for me. This time, I chose Nginx to hold my website.</p>
 <a id="more"></a>
@@ -30,7 +30,7 @@
 <li>An Internet hosting, such as VPS or cloud hosting. And, it should be running Ubuntu.</li>
 <li>A non-root user with the right to <code>sudo</code>.</li>
 </ul>
-<p>My <a href="https://m.do.co/c/c037166332e8" title="Click here to get $10 in credit." target="_blank" rel="external">DigitalOcean</a> VPS is installed with Ubuntu 16.04 LTS x64. The post will also be based on it.</p>
+<p>My <a href="https://m.do.co/c/c037166332e8" title="Click here to get $10 in credit." target="_blank" rel="external">DigitalOcean</a> VPS is installed with Ubuntu 16.04 LTS x64. This post will also be based on it.</p>
 <h3 id="Install-Nginx"><a href="#Install-Nginx" class="headerlink" title="Install Nginx"></a>Install Nginx</h3><p>Nginx is so popular that Ubuntu’s default repositories included it:</p>
 <pre><code class="bash">$ sudo apt-get update
 $ sudo apt-get install nginx
@@ -92,7 +92,7 @@ Nginx Full (v6)     ALLOW       Anywhere (v6)
 </code></pre><p>Then here is the default welcome page of Nginx:</p>
 <div align="center"><br><img src="/install-nginx-on-ubuntu/nginx_default_page.png" alt="Nginx Default Page" title="Nginx Default Page"><br></div>  
 
-<h3 id="Basic-Commands"><a href="#Basic-Commands" class="headerlink" title="Basic Commands"></a>Basic Commands</h3><p>Now that you have your web server up and running, we can go over some basic management commands.</p>
+<h2 id="Basic-Commands"><a href="#Basic-Commands" class="headerlink" title="Basic Commands"></a>Basic Commands</h2><p>Now that you have your web server up and running, we can go over some basic management commands.</p>
 <p>To stop your web server, you can type:</p>
 <pre><code class="bash">$ sudo systemctl stop nginx
 </code></pre>
@@ -137,9 +137,9 @@ Nginx Full (v6)     ALLOW       Anywhere (v6)
     <link href="https://pingchuan.ma/free-free-internet/"/>
     <id>https://pingchuan.ma/free-free-internet/</id>
     <published>2017-08-03T03:46:22.000Z</published>
-    <updated>2017-08-06T10:10:44.000Z</updated>
+    <updated>2017-08-06T10:26:53.000Z</updated>
     
-    <content type="html"><![CDATA[<p>As a Chinese university student, I am enjoying a special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered me anyway.</p>
+    <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>As a Chinese university student, I am enjoying a special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered me anyway.</p>
 <p>Despite the inconvenience discussed above, it is totally free to get online through IPv6. Apparently, if I convert my IPv4 network traffic into IPv6 one and introduce a hosting server to agent it, all problem will be settled.</p>
 <p>In a nutshell, I am going to:</p>
 <ol>
@@ -161,7 +161,7 @@ Nginx Full (v6)     ALLOW       Anywhere (v6)
 <h2 id="How-to-Make-it"><a href="#How-to-Make-it" class="headerlink" title="How to Make it?"></a>How to Make it?</h2><h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
 <li>An Internet hosting, such as VPS or cloud hosting. <em>DigitalOcean’s VPS service is good enough for me. I would not like to discuss the choosing of hosting service here.</em></li>
 </ul>
-<p>My <a href="https://m.do.co/c/c037166332e8" title="Click here to get $10 in credit." target="_blank" rel="external">DigitalOcean</a> VPS is installed with Ubuntu 16.04 LTS x64. The post will also be based on it.</p>
+<p>My <a href="https://m.do.co/c/c037166332e8" title="Click here to get $10 in credit." target="_blank" rel="external">DigitalOcean</a> VPS is installed with Ubuntu 16.04 LTS x64. This post will also be based on it.</p>
 <h3 id="Install-pip"><a href="#Install-pip" class="headerlink" title="Install pip"></a>Install pip</h3><p>I am building with python3, so I need pip for python3. Omit it if you have installed it.</p>
 <pre><code class="bash">$ sudo apt-get update
 $ sudo apt-get install python3-pip
@@ -346,7 +346,7 @@ $ sudo systemctl restart shadowsocks-server
     
     <summary type="html">
     
-      &lt;p&gt;As a Chinese university student, I am enjoying a special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered me anyway.&lt;/p&gt;
+      &lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;p&gt;As a Chinese university student, I am enjoying a special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered me anyway.&lt;/p&gt;
 &lt;p&gt;Despite the inconvenience discussed above, it is totally free to get online through IPv6. Apparently, if I convert my IPv4 network traffic into IPv6 one and introduce a hosting server to agent it, all problem will be settled.&lt;/p&gt;
 &lt;p&gt;In a nutshell, I am going to:&lt;/p&gt;
 &lt;ol&gt;
