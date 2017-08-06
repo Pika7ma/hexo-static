@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pingchuan.ma/"/>
-  <updated>2017-08-06T08:08:26.388Z</updated>
+  <updated>2017-08-06T07:54:40.000Z</updated>
   <id>https://pingchuan.ma/</id>
   
   <author>
@@ -14,20 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Install-Nginx-on-Ubuntu</title>
-    <link href="https://pingchuan.ma/install-nginx-on-ubuntu/"/>
-    <id>https://pingchuan.ma/install-nginx-on-ubuntu/</id>
-    <published>2017-08-06T00:08:26.000Z</published>
-    <updated>2017-08-06T08:08:26.388Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>Free Free Internet</title>
