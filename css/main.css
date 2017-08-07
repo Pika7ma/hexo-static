@@ -193,7 +193,7 @@ th {
 }
 body {
   position: relative;
-  font-family: 'Lato', Hiragino Sans, Hiragino Kaku Gothic ProN, "Hiragino Kaku Gothic Pro W3", "PingFang TC", sans-serif;
+  font-family: 'Lato', Hiragino Sans, Hiragino Kaku Gothic ProN, Hiragino Kaku Gothic Pro W3, PingFang TC, sans-serif;
   font-size: 14px;
   line-height: 2;
   color: #555;
@@ -224,7 +224,7 @@ h6 {
   padding: 0;
   font-weight: bold;
   line-height: 1.5;
-  font-family: 'Playfair Display', 'Lato', Hiragino Sans, Hiragino Kaku Gothic ProN, "Hiragino Kaku Gothic Pro W3", "PingFang TC", sans-serif;
+  font-family: 'Playfair Display', 'Lato', Hiragino Sans, Hiragino Kaku Gothic ProN, Hiragino Kaku Gothic Pro W3, PingFang TC, sans-serif;
 }
 h2,
 h3,
@@ -490,7 +490,7 @@ pre,
 }
 pre,
 code {
-  font-family: Monaco, 'Monaco-external', consolas, Menlo, Hiragino Sans, Hiragino Kaku Gothic ProN, "Hiragino Kaku Gothic Pro W3", "PingFang TC", monospace;
+  font-family: Monaco, 'Monaco-external', consolas, Menlo, Hiragino Sans, Hiragino Kaku Gothic ProN, Hiragino Kaku Gothic Pro W3, PingFang TC, monospace;
 }
 code {
   padding: 2px 4px;
@@ -1118,7 +1118,7 @@ pre .javascript .function {
   line-height: 36px;
   font-size: 20px;
   font-weight: normal;
-  font-family: 'Poiret One', 'Lato', Hiragino Sans, Hiragino Kaku Gothic ProN, "Hiragino Kaku Gothic Pro W3", "PingFang TC", sans-serif;
+  font-family: 'Poiret One', 'Lato', Hiragino Sans, Hiragino Kaku Gothic ProN, Hiragino Kaku Gothic Pro W3, PingFang TC, sans-serif;
 }
 .site-subtitle {
   margin-top: 10px;
@@ -1206,7 +1206,7 @@ pre .javascript .function {
   opacity: 0;
 }
 .post-body {
-  font-family: 'Lato', 'Lato', Hiragino Sans, Hiragino Kaku Gothic ProN, "Hiragino Kaku Gothic Pro W3", "PingFang TC", sans-serif;
+  font-family: 'Lato', 'Lato', Hiragino Sans, Hiragino Kaku Gothic ProN, Hiragino Kaku Gothic Pro W3, PingFang TC, sans-serif;
 }
 @media (max-width: 767px) {
   .post-body {
@@ -1479,7 +1479,7 @@ pre .javascript .function {
 .posts-expand .post-meta {
   margin: 3px 0 60px 0;
   color: #999;
-  font-family: 'Lato', 'Lato', Hiragino Sans, Hiragino Kaku Gothic ProN, "Hiragino Kaku Gothic Pro W3", "PingFang TC", sans-serif;
+  font-family: 'Lato', 'Lato', Hiragino Sans, Hiragino Kaku Gothic ProN, Hiragino Kaku Gothic Pro W3, PingFang TC, sans-serif;
   font-size: 12px;
   text-align: center;
 }
@@ -1830,7 +1830,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #06938b;
+  background: #746395;
 }
 .links-of-blogroll {
   font-size: 13px;
