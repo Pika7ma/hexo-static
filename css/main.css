@@ -1,6 +1,12 @@
 @font-face {
   font-family: YunlinSans;
+  font-weight: 400;
   src: url("/fonts/YunlinSans-Regular.ttf");
+}
+@font-face {
+  font-family: YunlinSans;
+  font-weight: 700;
+  src: url("/fonts/YunlinSans-Bold.ttf");
 }
 @font-face {
   font-family: Monaco;
@@ -1118,7 +1124,7 @@ pre .javascript .function {
   line-height: 36px;
   font-size: 20px;
   font-weight: normal;
-  font-family: 'Special Elite', 'Lato', "YunlinSans", "PingFang TC", sans-serif;
+  font-family: 'Press Start 2P', 'Lato', "YunlinSans", "PingFang TC", sans-serif;
 }
 .site-subtitle {
   margin-top: 10px;
@@ -1830,7 +1836,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #32c194;
+  background: #7747c9;
 }
 .links-of-blogroll {
   font-size: 13px;
