@@ -4,6 +4,32 @@
 
     
   <url>
+    <loc>https://pingchuan.ma/free-free-internet/</loc>
+    <lastmod>2017-08-07T12:35:33.000Z</lastmod>
+    <data>
+        <display>
+        <title>Free Free Internet</title>
+        <pubTime>2017-08-03T03:46:22.000Z</pubTime>
+        
+        <tag>Ubuntu</tag>
+         
+        <tag>Linux</tag>
+         
+        <tag>Network</tag>
+         
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="Network" url="https://pingchuan.ma/categories/network/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://pingchuan.ma/install-nginx-on-ubuntu/</loc>
     <lastmod>2017-08-07T07:50:15.000Z</lastmod>
     <data>
@@ -18,32 +44,6 @@
         <tag>Linux</tag>
          
         <tag>Network</tag>
-         
-         
-           
-             
-              <breadCrumb title="Network" url="https://pingchuan.ma/categories/network/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://pingchuan.ma/free-free-internet/</loc>
-    <lastmod>2017-08-07T07:45:27.000Z</lastmod>
-    <data>
-        <display>
-        <title>Free Free Internet</title>
-        <pubTime>2017-08-03T03:46:22.000Z</pubTime>
-        
-        <tag>Ubuntu</tag>
-         
-        <tag>Linux</tag>
-         
-        <tag>Network</tag>
-         
-        <tag>Python</tag>
          
          
            
