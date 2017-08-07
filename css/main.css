@@ -1206,7 +1206,7 @@ pre .javascript .function {
   opacity: 0;
 }
 .post-body {
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", 'Lato', 'Lato', "Hiragino Kaku Gothic Pro W3", "PingFang TC", sans-serif;
+  font-family: 'Lato', 'Lato', "Hiragino Kaku Gothic Pro W3", "PingFang TC", sans-serif;
 }
 @media (max-width: 767px) {
   .post-body {
@@ -1479,7 +1479,7 @@ pre .javascript .function {
 .posts-expand .post-meta {
   margin: 3px 0 60px 0;
   color: #999;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", 'Lato', 'Lato', "Hiragino Kaku Gothic Pro W3", "PingFang TC", sans-serif;
+  font-family: 'Lato', 'Lato', "Hiragino Kaku Gothic Pro W3", "PingFang TC", sans-serif;
   font-size: 12px;
   text-align: center;
 }
@@ -1830,7 +1830,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #e2cd2e;
+  background: #b6baa8;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2361,13 +2361,6 @@ pre .javascript .function {
 .site-pv .busuanzi-value,
 .page-pv .busuanzi-value {
   margin: 0 5px;
-}
-.site-uv {
-  margin-right: 10px;
-}
-.site-uv::after {
-  content: "|";
-  padding-left: 10px;
 }
 .use-motion .post {
   opacity: 0;
