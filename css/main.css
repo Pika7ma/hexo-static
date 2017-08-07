@@ -1,5 +1,5 @@
 @font-face {
-  font-family: Monaco;
+  font-family: Monaco-external;
   src: url("/fonts/monaco.ttf") format("truetype");
 }
 @font-face {
@@ -490,7 +490,7 @@ pre,
 }
 pre,
 code {
-  font-family: Monaco, 'Monaco', consolas, Menlo, Hiragino Sans, Hiragino Kaku Gothic ProN, "Hiragino Kaku Gothic Pro W3", "PingFang TC", monospace;
+  font-family: Monaco, 'Monaco-external', consolas, Menlo, Hiragino Sans, Hiragino Kaku Gothic ProN, "Hiragino Kaku Gothic Pro W3", "PingFang TC", monospace;
 }
 code {
   padding: 2px 4px;
@@ -1830,7 +1830,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #5dee20;
+  background: #06938b;
 }
 .links-of-blogroll {
   font-size: 13px;
