@@ -230,7 +230,7 @@ h6 {
   padding: 0;
   font-weight: bold;
   line-height: 1.5;
-  font-family: 'Lato', 'Lato', "YunlinSans", "PingFang TC", sans-serif;
+  font-family: 'Josefin Sans', 'Lato', "YunlinSans", "PingFang TC", sans-serif;
 }
 h2,
 h3,
@@ -1212,7 +1212,7 @@ pre .javascript .function {
   opacity: 0;
 }
 .post-body {
-  font-family: 'Lato', 'Lato', "YunlinSans", "PingFang TC", sans-serif;
+  font-family: 'Josefin Sans', 'Lato', "YunlinSans", "PingFang TC", sans-serif;
 }
 @media (max-width: 767px) {
   .post-body {
@@ -1485,7 +1485,7 @@ pre .javascript .function {
 .posts-expand .post-meta {
   margin: 3px 0 60px 0;
   color: #999;
-  font-family: 'Lato', 'Lato', "YunlinSans", "PingFang TC", sans-serif;
+  font-family: 'Josefin Sans', 'Lato', "YunlinSans", "PingFang TC", sans-serif;
   font-size: 12px;
   text-align: center;
 }
@@ -1836,7 +1836,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #be94ff;
+  background: #8637df;
 }
 .links-of-blogroll {
   font-size: 13px;
