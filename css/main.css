@@ -230,7 +230,7 @@ h6 {
   padding: 0;
   font-weight: bold;
   line-height: 1.5;
-  font-family: 'Cormorant', 'Open Sans', "YunlinSans", "PingFang TC", sans-serif;
+  font-family: 'Playfair Display', 'Open Sans', "YunlinSans", "PingFang TC", sans-serif;
 }
 h2,
 h3,
@@ -1836,7 +1836,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #fc3694;
+  background: #f71dd5;
 }
 .links-of-blogroll {
   font-size: 13px;
