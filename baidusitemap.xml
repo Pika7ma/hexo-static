@@ -4,34 +4,8 @@
 
     
   <url>
-    <loc>https://pingchuan.ma/equip-nginx-server-with-https/</loc>
-    <lastmod>2017-08-07T07:28:19.000Z</lastmod>
-    <data>
-        <display>
-        <title>Equip Nginx Server With HTTPS</title>
-        <pubTime>2017-08-07T05:57:47.000Z</pubTime>
-        
-        <tag>Nginx</tag>
-         
-        <tag>Ubuntu</tag>
-         
-        <tag>Linux</tag>
-         
-        <tag>Network</tag>
-         
-         
-           
-             
-              <breadCrumb title="Network" url="https://pingchuan.ma/categories/network/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://pingchuan.ma/install-nginx-on-ubuntu/</loc>
-    <lastmod>2017-08-07T07:05:38.000Z</lastmod>
+    <lastmod>2017-08-07T07:48:20.000Z</lastmod>
     <data>
         <display>
         <title>Install Nginx on Ubuntu</title>
@@ -57,7 +31,7 @@
     
   <url>
     <loc>https://pingchuan.ma/free-free-internet/</loc>
-    <lastmod>2017-08-06T10:29:41.000Z</lastmod>
+    <lastmod>2017-08-07T07:45:27.000Z</lastmod>
     <data>
         <display>
         <title>Free Free Internet</title>
@@ -70,6 +44,32 @@
         <tag>Network</tag>
          
         <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="Network" url="https://pingchuan.ma/categories/network/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://pingchuan.ma/equip-nginx-server-with-https/</loc>
+    <lastmod>2017-08-07T07:36:43.000Z</lastmod>
+    <data>
+        <display>
+        <title>Equip Nginx Server With HTTPS</title>
+        <pubTime>2017-08-07T05:57:47.000Z</pubTime>
+        
+        <tag>Nginx</tag>
+         
+        <tag>Ubuntu</tag>
+         
+        <tag>Linux</tag>
+         
+        <tag>Network</tag>
          
          
            

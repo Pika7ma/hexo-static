@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pingchuan.ma/"/>
-  <updated>2017-08-07T07:28:19.000Z</updated>
+  <updated>2017-08-07T07:36:43.000Z</updated>
   <id>https://pingchuan.ma/</id>
   
   <author>
@@ -20,12 +20,12 @@
     <link href="https://pingchuan.ma/equip-nginx-server-with-https/"/>
     <id>https://pingchuan.ma/equip-nginx-server-with-https/</id>
     <published>2017-08-07T05:57:47.000Z</published>
-    <updated>2017-08-07T07:28:19.000Z</updated>
+    <updated>2017-08-07T07:36:43.000Z</updated>
     
     <content type="html"><![CDATA[<p><strong>HTTP</strong> is the foundation of data communication for the World Wide Web. However, the connection is not so secure as we thought. To keep our information safe and sound, <strong>HTTPS</strong> was introduced. Next let’s see how to enable HTTPS on website based on Nginx of Ubuntu with the help of <strong>Let’s Encrypt</strong>.</p>
 <a id="more"></a>
-<h2 id="What-is-Let’s-Encrypt"><a href="#What-is-Let’s-Encrypt" class="headerlink" title="What is Let’s Encrypt?"></a>What is Let’s Encrypt?</h2><p>To enable HTTPS on your website, you need to get a certificate (a type of file) from a Certificate Authority (CA). <a href="https://letsencrypt.org/" target="_blank" rel="external">Let’s Encrypt</a> is a CA. In order to get a certificate for your website’s domain from Let’s Encrypt, you have to demonstrate control over the domain. With Let’s Encrypt, you do this using software that uses the ACME protocol, which typically runs on your web host.</p>
-<h2 id="How-does-HTTPS-work"><a href="#How-does-HTTPS-work" class="headerlink" title="How does HTTPS work?"></a>How does HTTPS work?</h2><p>HTTPS pages typically use one of two secure protocols to encrypt communications - <strong>SSL</strong> (<strong>Secure Sockets Layer</strong>) or <strong>TLS</strong> (<strong>Transport Layer Security</strong>). Both the TLS and SSL protocols use what is known as an ‘asymmetric’ Public Key Infrastructure (PKI) system. An asymmetric system uses two ‘keys’ to encrypt communications, a ‘public’ key and a ‘private’ key. Anything encrypted with the public key can only be decrypted by the private key and vice versa.</p>
+<h2 id="What-is-Let’s-Encrypt"><a href="#What-is-Let’s-Encrypt" class="headerlink" title="What is Let’s Encrypt?"></a>What is Let’s Encrypt?</h2><p>To enable HTTPS on your website, you need to get a certificate (a type of file) from a <strong>Certificate Authority</strong> (<strong>CA</strong>). <a href="https://letsencrypt.org/" target="_blank" rel="external">Let’s Encrypt</a> is a CA. In order to get a certificate for your website’s domain from Let’s Encrypt, you have to demonstrate control over the domain. With Let’s Encrypt, you do this using software that uses the ACME protocol, which typically runs on your web host.</p>
+<h2 id="How-does-HTTPS-work"><a href="#How-does-HTTPS-work" class="headerlink" title="How does HTTPS work?"></a>How does HTTPS work?</h2><p>HTTPS pages typically use one of two secure protocols to encrypt communications - <strong>SSL</strong> (<strong>Secure Sockets Layer</strong>) or <strong>TLS</strong> (<strong>Transport Layer Security</strong>). Both the TLS and SSL protocols use what is known as an ‘asymmetric’ <strong>Public Key Infrastructure</strong> (<strong>PKI</strong>) system. An asymmetric system uses two ‘keys’ to encrypt communications, a ‘public’ key and a ‘private’ key. Anything encrypted with the public key can only be decrypted by the private key and vice versa.</p>
 <p>As the names suggest, the ‘private’ key should be kept strictly protected and should only be accessible the owner of the private key. In the case of a website, the private key remains securely ensconced on the web server. Conversely, the public key is intended to be distributed to anybody and everybody that needs to be able to decrypt information that was encrypted with the private key.</p>
 <div align="center"><br><img src="/equip-nginx-server-with-https/http-vs-https.png" alt="HTTP v.s. HTTPS" title="HTTP v.s. HTTPS"><br></div>
 
@@ -35,7 +35,8 @@
 <li>A non-root user with the right to <code>sudo</code>.</li>
 <li>You should have the control right of a domain name and associate it with your Nginx-running server. It is recommend that resolve both <code>example.com</code> and <code>www.example.com</code> to your server. E.g. I used CNAME service to redirect <code>www.pingchuan.ma</code> to <code>pingchuan.ma</code>.</li>
 </ul>
-<h3 id="Install-Certbot"><a href="#Install-Certbot" class="headerlink" title="Install Certbot"></a>Install Certbot</h3><p>Let’s Encrypt used <strong>certbot</strong> to deploy SSL certificate automatically for your server. It is not included in Ubuntu’s default repositories so we add it now:</p>
+<p>My <a href="https://m.do.co/c/c037166332e8" title="Click here to get $10 in credit." target="_blank" rel="external">DigitalOcean</a> VPS is installed with Ubuntu 16.04 LTS x64. This post will also be based on it.</p>
+<h3 id="Install-Certbot"><a href="#Install-Certbot" class="headerlink" title="Install Certbot"></a>Install Certbot</h3><p>Let’s Encrypt used <code>certbot</code> to deploy SSL certificate automatically for your server. It is not included in Ubuntu’s default repositories so we add it now:</p>
 <pre><code class="bash">$ sudo add-apt-repository ppa:certbot/certbot
 </code></pre>
 <p>We should press <code>ENTER</code> to validate your command. Then, we will obtain new package information from the repositories:</p>
@@ -91,7 +92,7 @@ Nginx Full          ALLOW       Anywhere
 OpenSSH (v6)        ALLOW       Anywhere (v6)             
 Nginx Full (v6)     ALLOW       Anywhere (v6)
 </code></pre>
-<h3 id="Obtaining-an-SSL-Certificate"><a href="#Obtaining-an-SSL-Certificate" class="headerlink" title="Obtaining an SSL Certificate"></a>Obtaining an SSL Certificate</h3><p><code>certbot</code> provides a variety of ways to obtain SSL certificates, through various plugins. The Nginx plugin will take care of reconfiguring Nginx and reloading the configuration file whenever necessary:</p>
+<h3 id="Obtain-an-SSL-Certificate"><a href="#Obtain-an-SSL-Certificate" class="headerlink" title="Obtain an SSL Certificate"></a>Obtain an SSL Certificate</h3><p><code>certbot</code> provides a variety of ways to obtain SSL certificates, through various plugins. The Nginx plugin will take care of reconfiguring Nginx and reloading the configuration file whenever necessary:</p>
 <pre><code class="bash">$ sudo certbot --nginx -d example.com -d www.example.com
 </code></pre>
 <p>For me, it is:</p>
@@ -128,7 +129,7 @@ Select the appropriate number [1-2] then [enter] (press &#39;c&#39; to cancel):
 <p>Our certificates are downloaded, installed, and loaded. Try reloading our website using <code>https://</code> and notice our browser’s security indicator. It should represent that the site is properly secured, usually with a green lock icon.</p>
 <div align="center"><br><img src="/equip-nginx-server-with-https/https-browsers.png" alt="HTTPS browsers" title="HTTPS browsers"><br></div>
 
-<h3 id="Updating-Diffie-Hellman-Parameters"><a href="#Updating-Diffie-Hellman-Parameters" class="headerlink" title="Updating Diffie-Hellman Parameters"></a>Updating Diffie-Hellman Parameters</h3><p>If you test your server using the <a href="https://www.ssllabs.com/ssltest/" target="_blank" rel="external">SSL Labs Server Test</a> now, it will only get a <strong>B</strong> grade due to weak Diffie-Hellman parameters. This effects the security of the initial key exchange between our server and its users. We can fix this by creating a new <code>dhparam.pem</code> file and adding it to our <code>server</code> block.</p>
+<h3 id="Update-Diffie-Hellman-Parameters"><a href="#Update-Diffie-Hellman-Parameters" class="headerlink" title="Update Diffie-Hellman Parameters"></a>Update Diffie-Hellman Parameters</h3><p>If you test your server using the <a href="https://www.ssllabs.com/ssltest/" target="_blank" rel="external">SSL Labs Server Test</a> now, it will only get a <strong>B</strong> grade due to weak Diffie-Hellman parameters. This effects the security of the initial key exchange between our server and its users. We can fix this by creating a new <code>dhparam.pem</code> file and adding it to our <code>server</code> block.</p>
 <p>Create the file using <code>openssl</code>:</p>
 <pre><code class="bash">$ sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
 </code></pre>
@@ -146,7 +147,7 @@ ssl_dhparam /etc/ssl/certs/dhparam.pem;
 <pre><code class="bash">$ sudo systemctl reload nginx
 </code></pre>
 <p>Your site is now more secure, and should receive an <strong>A</strong> rating.</p>
-<h3 id="Setting-Up-Auto-Renewal"><a href="#Setting-Up-Auto-Renewal" class="headerlink" title="Setting Up Auto Renewal"></a>Setting Up Auto Renewal</h3><p>Certificates from Let’s Encrypt certificates are only valid for ninety days. This is to encourage users to automate their certificate renewal process. We’ll need to set up a regularly run command to check for expiring certificates and renew them automatically.</p>
+<h3 id="Set-Up-Auto-Renewal"><a href="#Set-Up-Auto-Renewal" class="headerlink" title="Set Up Auto Renewal"></a>Set Up Auto Renewal</h3><p>Certificates from Let’s Encrypt certificates are only valid for ninety days. This is to encourage users to automate their certificate renewal process. We will need to set up a regularly run command to check for expiring certificates and renew them automatically.</p>
 <p>To run the renewal check daily, we will use cron, a standard system service for running periodic jobs. We tell <code>cron</code> what to do by opening and editing a file called a <code>crontab</code>.</p>
 <pre><code class="bash">$ sudo crontab -e
 </code></pre>
@@ -155,8 +156,8 @@ ssl_dhparam /etc/ssl/certs/dhparam.pem;
 15 3 * * * /usr/bin/certbot renew --quiet
 ...
 </code></pre><p>The <code>15 3 * * *</code> part of this line means “run the following command at 3:15 am, every day”. You may choose any time.</p>
-<p>The renew command for <code>certbot</code> will check all certificates installed on the system and update any that are set to expire in less than thirty days. <code>--quiet</code> tells Certbot not to output information or wait for user input.</p>
-<p><code>cron</code> will now run this command daily. All installed certificates will be automatically renewed and reloaded when they have thirty days or less before they expire. are only valid for ninety days. This is to encourage users to automate their certificate renewal process. We will need to set up a regularly run command to check for expiring certificates and renew them automatically.</p>
+<p>The renew command for <code>certbot</code> will check all certificates installed on the system and update any that are set to expire in less than thirty days. <code>--quiet</code> tells <code>certbot</code> not to output information or wait for user input.</p>
+<p><code>cron</code> will now run this command daily. All installed certificates will be automatically renewed and reloaded when they have thirty days or less before they expire.</p>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
 <li><p><a href="https://www.instantssl.com/ssl-certificate-products/https.html" target="_blank" rel="external">HTTP to HTTPS | What is a HTTPS Certificate</a></p>
 </li>
@@ -191,12 +192,12 @@ ssl_dhparam /etc/ssl/certs/dhparam.pem;
     <link href="https://pingchuan.ma/install-nginx-on-ubuntu/"/>
     <id>https://pingchuan.ma/install-nginx-on-ubuntu/</id>
     <published>2017-08-06T08:22:22.000Z</published>
-    <updated>2017-08-07T07:05:38.000Z</updated>
+    <updated>2017-08-07T07:48:20.000Z</updated>
     
-    <content type="html"><![CDATA[<p>To set up a website based on my VPS, it is necessary to choose a web server which is capable for holding my traffic. When I was a high school boy, I tried to build my personal website on WordPress based on Apache, but I found they are both too extravagant for me. This time, I chose Nginx to hold my website.</p>
+    <content type="html"><![CDATA[<p>To set up a website based on my VPS, it is necessary to choose a web server which is capable for holding my traffic. When I was a high school boy, I tried to build my personal website on <strong>WordPress</strong> based on Apache, but I found they are both too extravagant for me. This time, I chose <strong>Nginx</strong> to hold my website.</p>
 <a id="more"></a>
 <h2 id="What-is-Nginx"><a href="#What-is-Nginx" class="headerlink" title="What is Nginx?"></a>What is Nginx?</h2><p><a href="https://www.nginx.com/" target="_blank" rel="external">Nginx</a> is one of the most popular web servers in the world and is responsible for hosting some of the largest and highest-traffic sites on the Internet. It is more resource-friendly than Apache in most cases and can be used as a web server or a reverse proxy.</p>
-<h2 id="Why-Nginx"><a href="#Why-Nginx" class="headerlink" title="Why Nginx?"></a>Why Nginx?</h2><p>In fact, I have tens of millions of choices, for example, Nginx, Apache, lighttpd, etc. But in my opinion, Nginx is a light-weighted web server which perfectly fits personal users like me. Actually, last semester I enrolled in a JAVA Programming Language course, and I suffered a lot from Apache there. So, this time I tried Nginx out and surprised by its usability.</p>
+<h2 id="Why-Nginx"><a href="#Why-Nginx" class="headerlink" title="Why Nginx?"></a>Why Nginx?</h2><p>In fact, I have tens of millions of choices, for example, <strong>Nginx</strong>, <strong>Apache</strong>, <strong>lighttpd</strong>, etc. But in my opinion, Nginx is a light-weighted web server which perfectly fits personal users like me. Actually, last semester I enrolled in a <strong>JAVA Programming Language</strong> course, and I suffered a lot from Apache there. So, this time I tried Nginx out and surprised by its usability.</p>
 <h2 id="How-to-make-it"><a href="#How-to-make-it" class="headerlink" title="How to make it?"></a>How to make it?</h2><h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
 <li>An Internet hosting, such as VPS or cloud hosting. And, it should be running Ubuntu.</li>
 <li>A non-root user with the right to <code>sudo</code>.</li>
@@ -282,11 +283,16 @@ Nginx Full (v6)     ALLOW       Anywhere (v6)
 <p>To re-enable the service to start up at boot, you can type:</p>
 <pre><code class="bash">$ sudo systemctl enable nginx
 </code></pre>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-16-04" target="_blank" rel="external">How To Install Nginx on Ubuntu 16.04</a></li>
+<li><a href="https://www.nginx.com/resources/wiki/start/topics/tutorials/install/" target="_blank" rel="external">Install | NGINX</a></li>
+<li></li>
+</ol>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;To set up a website based on my VPS, it is necessary to choose a web server which is capable for holding my traffic. When I was a high school boy, I tried to build my personal website on WordPress based on Apache, but I found they are both too extravagant for me. This time, I chose Nginx to hold my website.&lt;/p&gt;
+      &lt;p&gt;To set up a website based on my VPS, it is necessary to choose a web server which is capable for holding my traffic. When I was a high school boy, I tried to build my personal website on &lt;strong&gt;WordPress&lt;/strong&gt; based on Apache, but I found they are both too extravagant for me. This time, I chose &lt;strong&gt;Nginx&lt;/strong&gt; to hold my website.&lt;/p&gt;
     
     </summary>
     
@@ -308,17 +314,18 @@ Nginx Full (v6)     ALLOW       Anywhere (v6)
     <link href="https://pingchuan.ma/free-free-internet/"/>
     <id>https://pingchuan.ma/free-free-internet/</id>
     <published>2017-08-03T03:46:22.000Z</published>
-    <updated>2017-08-06T10:29:41.000Z</updated>
+    <updated>2017-08-07T07:45:27.000Z</updated>
     
-    <content type="html"><![CDATA[<p>As a Chinese university student, I am enjoying a special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered me anyway.</p>
-<p>Despite the inconvenience discussed above, it is totally free to get online through IPv6. Apparently, if I convert my IPv4 network traffic into IPv6 one and introduce a hosting server to agent it, all problem will be settled.</p>
+    <content type="html"><![CDATA[<p>As a Chinese university student, I am enjoying a special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or Wikipedia.</p>
+<p>Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered me anyway. </p>
+<p>Despite the inconvenience discussed above, it is totally free to get online through <strong>IPv6</strong>. Apparently, if I convert my IPv4 network traffic into IPv6 one and introduce a hosting server to agent it, all problem will be settled.</p>
 <p>In a nutshell, I am going to:</p>
 <ol>
 <li>get online <strong>free</strong> (free of charge) through IPv6;</li>
 <li>reach out for <strong>free</strong> (unrestricted) Internet;</li>
 </ol>
 <a id="more"></a>
-<h2 id="What-is-Shadowsocks"><a href="#What-is-Shadowsocks" class="headerlink" title="What is Shadowsocks?"></a>What is Shadowsocks?</h2><p>According to its GitHub description, <a href="https://github.com/shadowsocks/shadowsocks/tree/master" target="_blank" rel="external">shadowsocks</a> works as a fast tunnel proxy with several friendly features:</p>
+<h2 id="What-is-Shadowsocks"><a href="#What-is-Shadowsocks" class="headerlink" title="What is Shadowsocks?"></a>What is Shadowsocks?</h2><p>According to its <a href="https://github.com/shadowsocks/shadowsocks/tree/master" target="_blank" rel="external">GitHub</a> description, <strong>shadowsocks</strong> works as a fast tunnel proxy with several friendly features:</p>
 <ul>
 <li>TCP &amp; UDP support</li>
 <li>User management API</li>
@@ -346,7 +353,7 @@ $ sudo apt-get install python3-pip
 <p>If shadowsocks has been installed successfully, it should show this:</p>
 <pre><code class="bash">Shadowsocks 3.0.0
 </code></pre>
-<h3 id="Implement-Safer-Encryption-Method-optional"><a href="#Implement-Safer-Encryption-Method-optional" class="headerlink" title="Implement Safer Encryption Method (optional)"></a>Implement Safer Encryption Method (optional)</h3><p>According to the <a href="https://github.com/shadowsocks/shadowsocks/wiki/Encryption" target="_blank" rel="external">introduction</a> of encryption:</p>
+<h3 id="Implement-Safer-Encryption-Methods-optional"><a href="#Implement-Safer-Encryption-Methods-optional" class="headerlink" title="Implement Safer Encryption Methods (optional)"></a>Implement Safer Encryption Methods (optional)</h3><p>According to the <a href="https://github.com/shadowsocks/shadowsocks/wiki/Encryption" target="_blank" rel="external">introduction</a> of encryption:</p>
 <blockquote>
 <p><code>rc4-md5</code> is a safe, fast encryption that use different key per connection. It is recommended for OpenWRT routers.</p>
 <p><code>salsa20</code> and <code>chacha20</code> are fast stream ciphers. Optimized <code>salsa20</code> implementation on x86_64 is even 2x faster than <code>rc4</code> (but slightly slower on ARM).</p>
@@ -513,12 +520,17 @@ $ sudo systemctl restart shadowsocks-server
 <p>Then we set the value of <code>fast_open</code> to <code>true</code>. Restart shadowsocks to validate your changes.</p>
 <pre><code class="bash">$ sudo systemctl restart shadowsocks-server
 </code></pre>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<li><a href="https://www.polarxiong.com/archives/Ubuntu-16-04%E4%B8%8BShadowsocks%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BC%98%E5%8C%96.html" target="_blank" rel="external">Ubuntu 16.04 下 Shadowsocks 伺服器端安装及優化 (The installation and optimization of Shadowsocks server in Ubuntu 16.04)</a></li>
+<li><a href="http://b.mindy.tk/tjunet" target="_blank" rel="external">我是如何在天津大学上網的 (How do I get online in Tianjin University)</a></li>
+</ol>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;As a Chinese university student, I am enjoying a special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered me anyway.&lt;/p&gt;
-&lt;p&gt;Despite the inconvenience discussed above, it is totally free to get online through IPv6. Apparently, if I convert my IPv4 network traffic into IPv6 one and introduce a hosting server to agent it, all problem will be settled.&lt;/p&gt;
+      &lt;p&gt;As a Chinese university student, I am enjoying a special-designed Internet as we all know. Needless to say that it is especially difficult for me to accomplish my research with Google or Wikipedia.&lt;/p&gt;
+&lt;p&gt;Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered me anyway. &lt;/p&gt;
+&lt;p&gt;Despite the inconvenience discussed above, it is totally free to get online through &lt;strong&gt;IPv6&lt;/strong&gt;. Apparently, if I convert my IPv4 network traffic into IPv6 one and introduce a hosting server to agent it, all problem will be settled.&lt;/p&gt;
 &lt;p&gt;In a nutshell, I am going to:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;get online &lt;strong&gt;free&lt;/strong&gt; (free of charge) through IPv6;&lt;/li&gt;
