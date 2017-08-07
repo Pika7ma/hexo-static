@@ -192,7 +192,7 @@ ssl_dhparam /etc/ssl/certs/dhparam.pem;
     <link href="https://pingchuan.ma/install-nginx-on-ubuntu/"/>
     <id>https://pingchuan.ma/install-nginx-on-ubuntu/</id>
     <published>2017-08-06T08:22:22.000Z</published>
-    <updated>2017-08-07T07:48:20.000Z</updated>
+    <updated>2017-08-07T07:50:15.000Z</updated>
     
     <content type="html"><![CDATA[<p>To set up a website based on my VPS, it is necessary to choose a web server which is capable for holding my traffic. When I was a high school boy, I tried to build my personal website on <strong>WordPress</strong> based on Apache, but I found they are both too extravagant for me. This time, I chose <strong>Nginx</strong> to hold my website.</p>
 <a id="more"></a>
@@ -286,7 +286,6 @@ Nginx Full (v6)     ALLOW       Anywhere (v6)
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
 <li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-16-04" target="_blank" rel="external">How To Install Nginx on Ubuntu 16.04</a></li>
 <li><a href="https://www.nginx.com/resources/wiki/start/topics/tutorials/install/" target="_blank" rel="external">Install | NGINX</a></li>
-<li></li>
 </ol>
 ]]></content>
     
