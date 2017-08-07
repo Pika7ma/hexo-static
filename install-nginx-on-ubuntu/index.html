@@ -91,7 +91,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Linux,Network,Ubuntu,Nginx," />
+  <meta name="keywords" content="Nginx,Ubuntu,Linux,Network," />
 
 
 
@@ -110,7 +110,7 @@
 
 
 <meta name="description" content="To set up a website based on my VPS, it is necessary to choose a web server which is capable for holding my traffic. When I was a high school boy, I tried to build my personal website on WordPress bas">
-<meta name="keywords" content="Linux,Network,Ubuntu,Nginx">
+<meta name="keywords" content="Nginx,Ubuntu,Linux,Network">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Install Nginx on Ubuntu">
 <meta property="og:url" content="https://pingchuan.ma/install-nginx-on-ubuntu/index.html">
@@ -118,7 +118,7 @@
 <meta property="og:description" content="To set up a website based on my VPS, it is necessary to choose a web server which is capable for holding my traffic. When I was a high school boy, I tried to build my personal website on WordPress bas">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://pingchuan.ma/install-nginx-on-ubuntu/nginx_default_page.png">
-<meta property="og:updated_time" content="2017-08-06T12:07:13.000Z">
+<meta property="og:updated_time" content="2017-08-07T07:05:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Install Nginx on Ubuntu">
 <meta name="twitter:description" content="To set up a website based on my VPS, it is necessary to choose a web server which is capable for holding my traffic. When I was a high school boy, I tried to build my personal website on WordPress bas">
@@ -472,10 +472,10 @@ $ sudo apt-get install nginx
 <li><strong>Nginx HTTP</strong>: This profile opens only port 80 (normal, unencrypted web traffic)</li>
 <li><strong>Nginx HTTPS</strong>: This profile opens only port 443 (TLS/SSL encrypted traffic)</li>
 </ul>
-<p>For example, I am using both HTTP and HTTPS now so I will type:</p>
+<p>For example, to allow HTTP traffic and to prepare for enabling HTTPS, I will type this:</p>
 <pre><code class="bash">$ sudo ufw allow &#39;Nginx Full&#39;
 </code></pre>
-<p>Then you can verify it by typing:</p>
+<p>Then we can verify it by typing:</p>
 <pre><code class="bash">$ sudo ufw status
 </code></pre>
 <p>Then the status of <code>ufw</code> shows up:</p>
@@ -509,7 +509,7 @@ Nginx Full (v6)     ALLOW       Anywhere (v6)
 <p>If you have got your IP address or have assigned your domain name to your IP address with DNS’s help, go and have a look at it through browser.</p>
 <pre><code>http://server_domain_or_IP
 </code></pre><p>Then here is the default welcome page of Nginx:</p>
-<div align="center"><br><img src="/install-nginx-on-ubuntu/nginx_default_page.png" alt="Nginx Default Page" title="Nginx Default Page"><br></div>  
+<div align="center"><br><img src="/install-nginx-on-ubuntu/nginx_default_page.png" alt="Nginx Default Page" title="Nginx Default Page"><br></div>
 
 <h2 id="Basic-Commands"><a href="#Basic-Commands" class="headerlink" title="Basic Commands"></a>Basic Commands</h2><p>Now that you have your web server up and running, we can go over some basic management commands.</p>
 <p>To stop your web server, you can type:</p>
@@ -547,13 +547,13 @@ Nginx Full (v6)     ALLOW       Anywhere (v6)
       
         <div class="post-tags">
           
-            <a href="/tags/linux/" rel="tag"># Linux</a>
-          
-            <a href="/tags/network/" rel="tag"># Network</a>
+            <a href="/tags/nginx/" rel="tag"># Nginx</a>
           
             <a href="/tags/ubuntu/" rel="tag"># Ubuntu</a>
           
-            <a href="/tags/nginx/" rel="tag"># Nginx</a>
+            <a href="/tags/linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/network/" rel="tag"># Network</a>
           
         </div>
       
@@ -575,6 +575,10 @@ Nginx Full (v6)     ALLOW       Anywhere (v6)
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/equip-nginx-server-with-https/" rel="prev" title="Equip Nginx Server With HTTPS">
+                Equip Nginx Server With HTTPS <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -661,7 +665,7 @@ Nginx Full (v6)     ALLOW       Anywhere (v6)
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
