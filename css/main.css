@@ -490,7 +490,7 @@ pre,
 }
 pre,
 code {
-  font-family: 'monaco', consolas, Menlo, "YunlinSans", "PingFang TC", monospace;
+  font-family: 'Monaco', consolas, Menlo, "YunlinSans", "PingFang TC", monospace;
 }
 code {
   padding: 2px 4px;
@@ -1830,7 +1830,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffffc7;
+  background: #402f82;
 }
 .links-of-blogroll {
   font-size: 13px;
