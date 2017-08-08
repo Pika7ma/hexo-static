@@ -1670,7 +1670,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffff9f;
+  background: #ff91fb;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2519,13 +2519,17 @@ hr {
   position: relative;
   display: block;
   height: 1px;
-  background: #222;
+  background: $bbb;
 }
 @media (max-width: 767px) {
   .logo-line-before i,
   .logo-line-after i {
     height: 3px;
   }
+}
+.logo-line-before i,
+.logo-line-after: hover i {
+  background: #222;
 }
 .use-motion .logo-line-before i {
   left: -100%;
