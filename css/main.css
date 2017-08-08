@@ -1670,7 +1670,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff91fb;
+  background: #ff7cc4;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2519,7 +2519,7 @@ hr {
   position: relative;
   display: block;
   height: 1px;
-  background: $bbb;
+  background: #bbb;
 }
 @media (max-width: 767px) {
   .logo-line-before i,
