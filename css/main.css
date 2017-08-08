@@ -1670,7 +1670,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #b8ee18;
+  background: #ff47f6;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2507,6 +2507,9 @@ hr {
   overflow: hidden;
   margin: 0 auto;
   width: 75%;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
 }
 @media (max-width: 767px) {
   .logo-line-before,
@@ -2526,6 +2529,10 @@ hr {
   .logo-line-after i {
     height: 3px;
   }
+}
+.logo-line-before:hover,
+.logo-line-fater:hover {
+  width: 100%;
 }
 .site-title {
   transition-duration: 0.2s;
