@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://pingchuan.ma/set-up-nginx-with-http-2-support/</loc>
-    <lastmod>2017-08-08T17:31:07.000Z</lastmod>
+    <lastmod>2017-08-08T17:40:31.000Z</lastmod>
     <data>
         <display>
         <title>Set up Nginx with HTTP/2 Support</title>
@@ -30,34 +30,8 @@
 
     
   <url>
-    <loc>https://pingchuan.ma/equip-nginx-server-with-https/</loc>
-    <lastmod>2017-08-08T17:26:06.000Z</lastmod>
-    <data>
-        <display>
-        <title>Equip Nginx Server with HTTPS</title>
-        <pubTime>2017-08-07T05:57:47.000Z</pubTime>
-        
-        <tag>Nginx</tag>
-         
-        <tag>Ubuntu</tag>
-         
-        <tag>Linux</tag>
-         
-        <tag>Network</tag>
-         
-         
-           
-             
-              <breadCrumb title="Network" url="https://pingchuan.ma/categories/network/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://pingchuan.ma/free-free-internet/</loc>
-    <lastmod>2017-08-08T17:25:47.000Z</lastmod>
+    <lastmod>2017-08-08T17:40:27.000Z</lastmod>
     <data>
         <display>
         <title>Free Free Internet</title>
@@ -82,8 +56,34 @@
 
     
   <url>
+    <loc>https://pingchuan.ma/equip-nginx-server-with-https/</loc>
+    <lastmod>2017-08-08T17:40:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>Equip Nginx Server with HTTPS</title>
+        <pubTime>2017-08-07T05:57:47.000Z</pubTime>
+        
+        <tag>Nginx</tag>
+         
+        <tag>Ubuntu</tag>
+         
+        <tag>Linux</tag>
+         
+        <tag>Network</tag>
+         
+         
+           
+             
+              <breadCrumb title="Network" url="https://pingchuan.ma/categories/network/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://pingchuan.ma/install-nginx-on-ubuntu/</loc>
-    <lastmod>2017-08-08T17:24:41.000Z</lastmod>
+    <lastmod>2017-08-08T17:39:35.000Z</lastmod>
     <data>
         <display>
         <title>Install Nginx on Ubuntu</title>

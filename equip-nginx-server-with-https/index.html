@@ -143,7 +143,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://pingchuan.ma/equip-nginx-server-with-https/http-vs-https.png">
 <meta property="og:image" content="https://pingchuan.ma/equip-nginx-server-with-https/https-browsers.png">
-<meta property="og:updated_time" content="2017-08-08T17:26:06.000Z">
+<meta property="og:updated_time" content="2017-08-08T17:40:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Equip Nginx Server with HTTPS">
 <meta name="twitter:description" content="HTTP is the foundation of data communication for the World Wide Web. However, the connection is not so secure as we thought. To keep our information safe and sound, HTTPS was introduced. Next let’s se">
@@ -581,9 +581,7 @@ Select the appropriate number [1-2] then [enter] (press &#39;c&#39; to cancel):
 <pre><code class="bash">$ sudo vim /etc/nginx/sites-available/default
 </code></pre>
 <p>Paste the following line anywhere you like within the <code>server</code> block:</p>
-<pre><code>...
-ssl_dhparam /etc/ssl/certs/dhparam.pem;
-...
+<pre><code>ssl_dhparam /etc/ssl/certs/dhparam.pem;
 </code></pre><p>Save the file and quit <code>vim</code>, then verify the configuration:</p>
 <pre><code class="bash">$ sudo nginx -t
 </code></pre>
@@ -596,9 +594,7 @@ ssl_dhparam /etc/ssl/certs/dhparam.pem;
 <pre><code class="bash">$ sudo crontab -e
 </code></pre>
 <p>Your text editor will open the default <code>crontab</code> which is a text file with some help text in it. Paste in the following line at the end of the file, then save and close it:</p>
-<pre><code>...
-15 3 * * * /usr/bin/certbot renew --quiet
-...
+<pre><code>15 3 * * * /usr/bin/certbot renew --quiet
 </code></pre><p>The <code>15 3 * * *</code> part of this line means “run the following command at 3:15 am, every day”. You may choose any time.</p>
 <p>The renew command for <code>certbot</code> will check all certificates installed on the system and update any that are set to expire in less than thirty days. <code>--quiet</code> tells <code>certbot</code> not to output information or wait for user input.</p>
 <p><code>cron</code> will now run this command daily. All installed certificates will be automatically renewed and reloaded when they have thirty days or less before they expire.</p>

@@ -141,7 +141,7 @@
 <meta property="og:site_name" content="OpenPIKA">
 <meta property="og:description" content="As a Chinese university student, it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is abo">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-08-08T17:25:47.000Z">
+<meta property="og:updated_time" content="2017-08-08T17:40:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Free Free Internet">
 <meta name="twitter:description" content="As a Chinese university student, it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is abo">
@@ -643,9 +643,7 @@ net.ipv4.tcp_mtu_probing = 1
 <pre><code class="bash">$ sudo vim /etc/systemd/system/shadowsocks-server.service
 </code></pre>
 <p>Insert a line before <code>ExecStart</code>:</p>
-<pre><code>. . .
-ExecStartPre = /bin/sh -c &#39;ulimit -n 51200&#39;
-. . .
+<pre><code>ExecStartPre = /bin/sh -c &#39;ulimit -n 51200&#39;
 </code></pre><p>Overall <code>shadowsocks-server.service</code>:</p>
 <pre><code>[Unit]
 Description = Shadowsocks Server

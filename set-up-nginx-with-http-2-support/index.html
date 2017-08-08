@@ -143,7 +143,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://pingchuan.ma/set-up-nginx-with-http-2-support/http-1-1-vs-http-2.png">
 <meta property="og:image" content="https://pingchuan.ma/set-up-nginx-with-http-2-support/protocol.png">
-<meta property="og:updated_time" content="2017-08-08T17:31:07.000Z">
+<meta property="og:updated_time" content="2017-08-08T17:40:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Set up Nginx with HTTP&#x2F;2 Support">
 <meta name="twitter:description" content="One of the protocols supported is the relatively new HTTP/2, which was published in May 2015 approximately. One of the main advantages of HTTP/2 is its high transfer speed for content-rich websites. T">
@@ -510,16 +510,12 @@
 <pre><code class="bash">$ sudo vim /etc/nginx/sites-available/default
 </code></pre>
 <p>By default, Nginx is set to listen to port <code>80</code>, which is the standard HTTP port:</p>
-<pre><code>. . .
-listen 80 default_server;
+<pre><code>listen 80 default_server;
 listen [::]:80 default_server;
-. . .
 </code></pre><p>As you can see, we have two different <code>listen</code> variables. The first one is for all IPv4 connections. The second one is for IPv6 connections. We will enable encryption for both.</p>
 <p>Modify the listening port to <code>443</code>, which is used by the HTTPS protocol:</p>
-<pre><code>. . .
-listen 443 ssl http2 default_server;
+<pre><code>listen 443 ssl http2 default_server;
 listen [::]:443 ssl http2 default_server;
-. . .
 </code></pre><p>Notice that in addition to <code>ssl</code>, we also added <code>http2</code> to the line. This variable tells Nginx to use HTTP/2 with supported browsers. Save the configuration file and exit the text editor.</p>
 <p>Whenever you make changes to Nginx configuration files, you should check the configuration for syntax errors, like this:</p>
 <pre><code class="bash">$ sudo nginx -t
@@ -534,9 +530,7 @@ nginx: configuration file /etc/nginx/nginx.conf test is successful
 <pre><code class="bash">$ sudo vim /etc/nginx/nginx.conf
 </code></pre>
 <p>Add this line after <code>ssl_prefer_server_ciphers on;</code>:</p>
-<pre><code>. . .
-ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
-. . .
+<pre><code>ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
 </code></pre><p>Save the file, and exit the text editor. Once again, check the configuration for syntax errors:</p>
 <pre><code class="bash">$ sudo nginx -t
 </code></pre>
@@ -545,8 +539,7 @@ ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH
 <pre><code class="bash">$ sudo vim /etc/nginx/sites-available/default
 </code></pre>
 <p>At the bottom of our file, we will create a new server block for redirecting all HTTP requests to HTTPS (be sure to replace the server name with your actual domain name):</p>
-<pre><code>. . .
-server {
+<pre><code>server {
     listen 80;
     listen [::]:80;
     server_name example.com;
@@ -599,22 +592,17 @@ server {
 </code></pre>
 <h4 id="Enable-Connection-Credentials-Caching"><a href="#Enable-Connection-Credentials-Caching" class="headerlink" title="Enable Connection Credentials Caching"></a>Enable Connection Credentials Caching</h4><p>Compared to HTTP, HTTPS takes a relatively longer time to establish initial connection between server and user. To minimize this difference in page load speed, we will enable caching of the connection credentials. That means instead of creating a new session on every page requested, the server will use a cached version of the credentials instead.</p>
 <p>To enable session caching, add these lines at the end of <code>http</code> block of your <code>nginx.conf</code> file:</p>
-<pre><code>. . .
-ssl_session_cache shared:SSL:5m;
+<pre><code>ssl_session_cache shared:SSL:5m;
 ssl_session_timeout 1h;
 </code></pre><p><code>ssl_session_cache specifies</code> the size of cache that will contain session information. 1 MB of it can store information for about 4000 sessions. The default value of 5 MB will be more than enough for most users, but if you expect really heavy traffic, you can increase this value accordingly.</p>
 <p><code>ssl_session_timeout</code> limits the time particular sessions are stored in the cache. This value shouldn’t be too big (more than an hour), but setting the value too low is pointless as well.</p>
 <h4 id="Enable-HTTP-Strict-Transport-Security-HSTS"><a href="#Enable-HTTP-Strict-Transport-Security-HSTS" class="headerlink" title="Enable HTTP Strict Transport Security (HSTS)"></a>Enable HTTP Strict Transport Security (HSTS)</h4><p>Even though we have already made all regular HTTP requests redirect to HTTPS in our Nginx configuration file, we also should enable HTTP Strict Transport Security to avoid having to do those redirects in the first place.</p>
 <p>If the browser finds an HSTS header, it will not try to connect to the server via regular HTTP again for the given time period. No matter what, it will exchange data using only encrypted HTTPS connection. This header should also protect us from protocol downgrade attacks.</p>
 <p>Add this line in <code>nginx.conf</code>:</p>
-<pre><code>. . .
-add_header Strict-Transport-Security &quot;max-age=15768000&quot; always;
-. . .
+<pre><code>add_header Strict-Transport-Security &quot;max-age=15768000&quot; always;
 </code></pre><p>The <code>max-age</code> is set in seconds. <code>15768000</code> seconds is equivalent to 6 months.</p>
 <p>By default, this header is not added to subdomain requests. If you have subdomains and want HSTS to apply to all of them, you should add the <code>includeSubDomains</code> variable at the end of the line, like this:</p>
-<pre><code>. . .
-add_header Strict-Transport-Security &quot;max-age=15768000; includeSubDomains&quot; always;
-. . .
+<pre><code>add_header Strict-Transport-Security &quot;max-age=15768000; includeSubDomains&quot; always;
 </code></pre><p>Save the file, and exit the text editor.</p>
 <p>Once again, check the configuration for syntax errors:</p>
 <pre><code class="bash">$ sudo nginx -t
