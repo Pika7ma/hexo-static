@@ -1670,7 +1670,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #f1e3c3;
+  background: #253473;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2535,14 +2535,14 @@ hr {
   transition-timing-function: ease-in-out;
   transition-delay: 0s;
 }
+.site-title:hover + .logo-line-before {
+  width: 100%;
+}
+.site-title:hover + .logo-line-after {
+  width: 100%;
+}
 .site-title:hover {
   text-shadow: 0 0 1px #000;
-}
-.site-title:hover span.logo-line-before {
-  width: 100%;
-}
-.site-title:hover span.logo-line-after {
-  width: 100%;
 }
 @media (max-width: 767px) {
   .site-title:hover {
