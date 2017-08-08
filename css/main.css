@@ -1670,7 +1670,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #f761a3;
+  background: #c1ff0e;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2501,7 +2501,31 @@ hr {
     line-height: 34px;
   }
 }
-.logo-line-before,
+.logo-line-before {
+  display: block;
+  overflow: hidden;
+  margin: 0 auto;
+  width: 75%;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
+}
+@media (max-width: 767px) {
+  .logo-line-before {
+    display: none;
+  }
+}
+.logo-line-before i {
+  position: relative;
+  display: block;
+  height: 1px;
+  background: #222;
+}
+@media (max-width: 767px) {
+  .logo-line-before i {
+    height: 3px;
+  }
+}
 .logo-line-after {
   display: block;
   overflow: hidden;
@@ -2512,12 +2536,10 @@ hr {
   transition-delay: 0s;
 }
 @media (max-width: 767px) {
-  .logo-line-before,
   .logo-line-after {
     display: none;
   }
 }
-.logo-line-before i,
 .logo-line-after i {
   position: relative;
   display: block;
@@ -2525,7 +2547,6 @@ hr {
   background: #222;
 }
 @media (max-width: 767px) {
-  .logo-line-before i,
   .logo-line-after i {
     height: 3px;
   }
@@ -2535,7 +2556,9 @@ hr {
   transition-timing-function: ease-in-out;
   transition-delay: 0s;
 }
-.site-title:hover + .logo-line-before,
+.site-title:hover + .logo-line-before {
+  width: 100%;
+}
 .site-title:hover + .logo-line-after {
   width: 100%;
 }
