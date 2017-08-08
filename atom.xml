@@ -177,13 +177,13 @@ ssl_dhparam /etc/ssl/certs/dhparam.pem;
       <category term="Network" scheme="https://pingchuan.ma/categories/network/"/>
     
     
-      <category term="Linux" scheme="https://pingchuan.ma/tags/linux/"/>
-    
-      <category term="Network" scheme="https://pingchuan.ma/tags/network/"/>
+      <category term="Nginx" scheme="https://pingchuan.ma/tags/nginx/"/>
     
       <category term="Ubuntu" scheme="https://pingchuan.ma/tags/ubuntu/"/>
     
-      <category term="Nginx" scheme="https://pingchuan.ma/tags/nginx/"/>
+      <category term="Linux" scheme="https://pingchuan.ma/tags/linux/"/>
+    
+      <category term="Network" scheme="https://pingchuan.ma/tags/network/"/>
     
   </entry>
   
@@ -298,13 +298,13 @@ Nginx Full (v6)     ALLOW       Anywhere (v6)
       <category term="Network" scheme="https://pingchuan.ma/categories/network/"/>
     
     
-      <category term="Linux" scheme="https://pingchuan.ma/tags/linux/"/>
-    
-      <category term="Network" scheme="https://pingchuan.ma/tags/network/"/>
+      <category term="Nginx" scheme="https://pingchuan.ma/tags/nginx/"/>
     
       <category term="Ubuntu" scheme="https://pingchuan.ma/tags/ubuntu/"/>
     
-      <category term="Nginx" scheme="https://pingchuan.ma/tags/nginx/"/>
+      <category term="Linux" scheme="https://pingchuan.ma/tags/linux/"/>
+    
+      <category term="Network" scheme="https://pingchuan.ma/tags/network/"/>
     
   </entry>
   
@@ -537,13 +537,13 @@ $ sudo systemctl restart shadowsocks-server
       <category term="Network" scheme="https://pingchuan.ma/categories/network/"/>
     
     
-      <category term="Python" scheme="https://pingchuan.ma/tags/python/"/>
+      <category term="Ubuntu" scheme="https://pingchuan.ma/tags/ubuntu/"/>
     
       <category term="Linux" scheme="https://pingchuan.ma/tags/linux/"/>
     
       <category term="Network" scheme="https://pingchuan.ma/tags/network/"/>
     
-      <category term="Ubuntu" scheme="https://pingchuan.ma/tags/ubuntu/"/>
+      <category term="Python" scheme="https://pingchuan.ma/tags/python/"/>
     
   </entry>
   
