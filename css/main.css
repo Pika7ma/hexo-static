@@ -1670,7 +1670,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff47f6;
+  background: #f1e3c3;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2530,10 +2530,6 @@ hr {
     height: 3px;
   }
 }
-.logo-line-before:hover,
-.logo-line-fater:hover {
-  width: 100%;
-}
 .site-title {
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
@@ -2541,6 +2537,12 @@ hr {
 }
 .site-title:hover {
   text-shadow: 0 0 1px #000;
+}
+.site-title:hover span.logo-line-before {
+  width: 100%;
+}
+.site-title:hover span.logo-line-after {
+  width: 100%;
 }
 @media (max-width: 767px) {
   .site-title:hover {
