@@ -1670,7 +1670,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #69be8e;
+  background: #09ffb9;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2531,9 +2531,6 @@ hr {
   overflow: hidden;
   margin: 0 auto;
   width: 75%;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in-out;
-  transition-delay: 0s;
 }
 @media (max-width: 767px) {
   .logo-line-after {
@@ -2555,12 +2552,6 @@ hr {
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
   transition-delay: 0s;
-}
-.site-title:hover + span.logo-line-before {
-  width: 100%;
-}
-.site-title:hover + .logo-line-after {
-  width: 100%;
 }
 .site-title:hover {
   text-shadow: 0 0 1px #000;
