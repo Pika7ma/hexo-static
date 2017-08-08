@@ -4,46 +4,20 @@
 
     
   <url>
-    <loc>https://pingchuan.ma/free-free-internet/</loc>
-    <lastmod>2017-08-07T12:35:33.000Z</lastmod>
+    <loc>https://pingchuan.ma/set-up-nginx-with-http-2-support/</loc>
+    <lastmod>2017-08-08T17:31:07.000Z</lastmod>
     <data>
         <display>
-        <title>Free Free Internet</title>
-        <pubTime>2017-08-03T03:46:22.000Z</pubTime>
+        <title>Set up Nginx with HTTP/2 Support</title>
+        <pubTime>2017-08-08T16:17:48.000Z</pubTime>
         
-        <tag>Python</tag>
-         
-        <tag>Linux</tag>
-         
-        <tag>Network</tag>
-         
-        <tag>Ubuntu</tag>
-         
-         
-           
-             
-              <breadCrumb title="Network" url="https://pingchuan.ma/categories/network/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://pingchuan.ma/install-nginx-on-ubuntu/</loc>
-    <lastmod>2017-08-07T07:50:15.000Z</lastmod>
-    <data>
-        <display>
-        <title>Install Nginx on Ubuntu</title>
-        <pubTime>2017-08-06T08:22:22.000Z</pubTime>
-        
-        <tag>Linux</tag>
-         
-        <tag>Network</tag>
-         
-        <tag>Ubuntu</tag>
-         
         <tag>Nginx</tag>
+         
+        <tag>Ubuntu</tag>
+         
+        <tag>Linux</tag>
+         
+        <tag>Network</tag>
          
          
            
@@ -57,19 +31,71 @@
     
   <url>
     <loc>https://pingchuan.ma/equip-nginx-server-with-https/</loc>
-    <lastmod>2017-08-07T07:36:43.000Z</lastmod>
+    <lastmod>2017-08-08T17:26:06.000Z</lastmod>
     <data>
         <display>
         <title>Equip Nginx Server with HTTPS</title>
         <pubTime>2017-08-07T05:57:47.000Z</pubTime>
         
+        <tag>Nginx</tag>
+         
+        <tag>Ubuntu</tag>
+         
         <tag>Linux</tag>
          
         <tag>Network</tag>
          
+         
+           
+             
+              <breadCrumb title="Network" url="https://pingchuan.ma/categories/network/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://pingchuan.ma/free-free-internet/</loc>
+    <lastmod>2017-08-08T17:25:47.000Z</lastmod>
+    <data>
+        <display>
+        <title>Free Free Internet</title>
+        <pubTime>2017-08-03T03:46:22.000Z</pubTime>
+        
         <tag>Ubuntu</tag>
          
+        <tag>Linux</tag>
+         
+        <tag>Network</tag>
+         
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="Network" url="https://pingchuan.ma/categories/network/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://pingchuan.ma/install-nginx-on-ubuntu/</loc>
+    <lastmod>2017-08-08T17:24:41.000Z</lastmod>
+    <data>
+        <display>
+        <title>Install Nginx on Ubuntu</title>
+        <pubTime>2017-08-06T08:22:22.000Z</pubTime>
+        
         <tag>Nginx</tag>
+         
+        <tag>Ubuntu</tag>
+         
+        <tag>Linux</tag>
+         
+        <tag>Network</tag>
          
          
            
@@ -83,7 +109,7 @@
     
   <url>
     <loc>https://pingchuan.ma/hello-world/</loc>
-    <lastmod>2017-08-06T08:38:55.000Z</lastmod>
+    <lastmod>2017-08-06T08:38:52.000Z</lastmod>
     <data>
         <display>
         <title>Hello World</title>

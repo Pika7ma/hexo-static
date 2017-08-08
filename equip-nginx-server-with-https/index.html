@@ -115,7 +115,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Linux,Network,Ubuntu,Nginx," />
+  <meta name="keywords" content="Nginx,Ubuntu,Linux,Network," />
 
 
 
@@ -134,7 +134,7 @@
 
 
 <meta name="description" content="HTTP is the foundation of data communication for the World Wide Web. However, the connection is not so secure as we thought. To keep our information safe and sound, HTTPS was introduced. Next let’s se">
-<meta name="keywords" content="Linux,Network,Ubuntu,Nginx">
+<meta name="keywords" content="Nginx,Ubuntu,Linux,Network">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Equip Nginx Server with HTTPS">
 <meta property="og:url" content="https://pingchuan.ma/equip-nginx-server-with-https/index.html">
@@ -143,7 +143,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://pingchuan.ma/equip-nginx-server-with-https/http-vs-https.png">
 <meta property="og:image" content="https://pingchuan.ma/equip-nginx-server-with-https/https-browsers.png">
-<meta property="og:updated_time" content="2017-08-07T07:36:43.000Z">
+<meta property="og:updated_time" content="2017-08-08T17:26:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Equip Nginx Server with HTTPS">
 <meta name="twitter:description" content="HTTP is the foundation of data communication for the World Wide Web. However, the connection is not so secure as we thought. To keep our information safe and sound, HTTPS was introduced. Next let’s se">
@@ -463,16 +463,19 @@
       
         <p><strong>HTTP</strong> is the foundation of data communication for the World Wide Web. However, the connection is not so secure as we thought. To keep our information safe and sound, <strong>HTTPS</strong> was introduced. Next let’s see how to enable HTTPS on website based on Nginx of Ubuntu with the help of <strong>Let’s Encrypt</strong>.</p>
 <a id="more"></a>
-<h2 id="What-is-Let’s-Encrypt"><a href="#What-is-Let’s-Encrypt" class="headerlink" title="What is Let’s Encrypt?"></a>What is Let’s Encrypt?</h2><p>To enable HTTPS on your website, you need to get a certificate (a type of file) from a <strong>Certificate Authority</strong> (<strong>CA</strong>). <a href="https://letsencrypt.org/" target="_blank" rel="external">Let’s Encrypt</a> is a CA. In order to get a certificate for your website’s domain from Let’s Encrypt, you have to demonstrate control over the domain. With Let’s Encrypt, you do this using software that uses the ACME protocol, which typically runs on your web host.</p>
-<h2 id="How-does-HTTPS-work"><a href="#How-does-HTTPS-work" class="headerlink" title="How does HTTPS work?"></a>How does HTTPS work?</h2><p>HTTPS pages typically use one of two secure protocols to encrypt communications - <strong>SSL</strong> (<strong>Secure Sockets Layer</strong>) or <strong>TLS</strong> (<strong>Transport Layer Security</strong>). Both the TLS and SSL protocols use what is known as an ‘asymmetric’ <strong>Public Key Infrastructure</strong> (<strong>PKI</strong>) system. An asymmetric system uses two ‘keys’ to encrypt communications, a ‘public’ key and a ‘private’ key. Anything encrypted with the public key can only be decrypted by the private key and vice versa.</p>
+<h2 id="What-Is-Let’s-Encrypt"><a href="#What-Is-Let’s-Encrypt" class="headerlink" title="What Is Let’s Encrypt?"></a>What Is Let’s Encrypt?</h2><p>To enable HTTPS on your website, you need to get a certificate (a type of file) from a <strong>Certificate Authority</strong> (<strong>CA</strong>). <a href="https://letsencrypt.org/" target="_blank" rel="external">Let’s Encrypt</a> is a CA. In order to get a certificate for your website’s domain from Let’s Encrypt, you have to demonstrate control over the domain. With Let’s Encrypt, you do this using software that uses the ACME protocol, which typically runs on your web host.</p>
+<h2 id="How-Does-HTTPS-Work"><a href="#How-Does-HTTPS-Work" class="headerlink" title="How Does HTTPS Work?"></a>How Does HTTPS Work?</h2><p>HTTPS pages typically use one of two secure protocols to encrypt communications - <strong>SSL</strong> (<strong>Secure Sockets Layer</strong>) or <strong>TLS</strong> (<strong>Transport Layer Security</strong>). Both the TLS and SSL protocols use what is known as an ‘asymmetric’ <strong>Public Key Infrastructure</strong> (<strong>PKI</strong>) system. An asymmetric system uses two ‘keys’ to encrypt communications, a ‘public’ key and a ‘private’ key. Anything encrypted with the public key can only be decrypted by the private key and vice versa.</p>
 <p>As the names suggest, the ‘private’ key should be kept strictly protected and should only be accessible the owner of the private key. In the case of a website, the private key remains securely ensconced on the web server. Conversely, the public key is intended to be distributed to anybody and everybody that needs to be able to decrypt information that was encrypted with the private key.</p>
 <div align="center"><br><img src="/equip-nginx-server-with-https/http-vs-https.png" alt="HTTP v.s. HTTPS" title="HTTP v.s. HTTPS"><br></div>
 
 <h2 id="Why-Let’s-Encrypt"><a href="#Why-Let’s-Encrypt" class="headerlink" title="Why Let’s Encrypt?"></a>Why Let’s Encrypt?</h2><p>Actually, there are hundreds of CA who can provide certificates. However, it is not always free. Let’s Encrypt is free and open project which is capable for providing creditable certificates. It is supported by plentiful large enterprises. So now let’s move on and try it.</p>
-<h2 id="How-to-make-it"><a href="#How-to-make-it" class="headerlink" title="How to make it?"></a>How to make it?</h2><h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
-<li>A Nginx-installed Ubuntu OS.</li>
-<li>A non-root user with the right to <code>sudo</code>.</li>
-<li>You should have the control right of a domain name and associate it with your Nginx-running server. It is recommend that resolve both <code>example.com</code> and <code>www.example.com</code> to your server. E.g. I used CNAME service to redirect <code>www.pingchuan.ma</code> to <code>pingchuan.ma</code>.</li>
+<h2 id="How-to-Make-It"><a href="#How-to-Make-It" class="headerlink" title="How to Make It?"></a>How to Make It?</h2><h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
+<li><p>A <a href="https://pingchuan.ma/install-nginx-on-ubuntu/">Nginx-installed</a> Ubuntu OS.</p>
+</li>
+<li><p>A non-root user with the right to <code>sudo</code>.</p>
+</li>
+<li><p>You should have the control right of a domain name and associate it with your Nginx-running server. It is recommend that resolve both <code>example.com</code> and <code>www.example.com</code> to your server. E.g. I used CNAME service to redirect <code>www.pingchuan.ma</code> to <code>pingchuan.ma</code>.</p>
+</li>
 </ul>
 <p>My <a href="https://m.do.co/c/c037166332e8" title="Click here to get $10 in credit." target="_blank" rel="external">DigitalOcean</a> VPS is installed with Ubuntu 16.04 LTS x64. This post will also be based on it.</p>
 <h3 id="Install-Certbot"><a href="#Install-Certbot" class="headerlink" title="Install Certbot"></a>Install Certbot</h3><p>Let’s Encrypt used <code>certbot</code> to deploy SSL certificate automatically for your server. It is not included in Ubuntu’s default repositories so we add it now:</p>
@@ -500,7 +503,7 @@
 </code></pre>
 <p>If that runs with no errors, reload Nginx to load the new configuration:</p>
 <pre><code>$ sudo systemctl reload nginx
-</code></pre><h3 id="Update-the-Firewall"><a href="#Update-the-Firewall" class="headerlink" title="Update the Firewall"></a>Update the Firewall</h3><p>If you have the <code>ufw</code> enabled, you will need to adjust the settings to allow for HTTPS traffic. If you followed my <a href="https://pingchuan.ma/install-nginx-on-ubuntu/">last tutorial</a> about building Nginx on Ubuntu, you should have done with it, so skip this part and go to next step.</p>
+</code></pre><h3 id="Update-the-Firewall"><a href="#Update-the-Firewall" class="headerlink" title="Update the Firewall"></a>Update the Firewall</h3><p>If you have the <code>ufw</code> enabled, you will need to adjust the settings to allow for HTTPS traffic. If you followed my <a href="https://pingchuan.ma/install-nginx-on-ubuntu/">previous tutorial</a> about building Nginx on Ubuntu, you should have done with it, so skip this part and go to next step.</p>
 <p>We can see the current setting by typing:</p>
 <pre><code class="bash">$ sudo ufw status
 </code></pre>
@@ -513,6 +516,7 @@ OpenSSH             ALLOW       Anywhere
 Nginx HTTP          ALLOW       Anywhere                  
 OpenSSH (v6)        ALLOW       Anywhere (v6)             
 Nginx HTTP (v6)     ALLOW       Anywhere (v6)
+. . .
 </code></pre>
 <p>To additionally let in HTTPS traffic, we can allow the “Nginx Full” profile and then delete the redundant “Nginx HTTP” profile allowance:</p>
 <pre><code class="bash">$ sudo ufw allow &#39;Nginx Full&#39;
@@ -530,6 +534,7 @@ OpenSSH             ALLOW       Anywhere
 Nginx Full          ALLOW       Anywhere                  
 OpenSSH (v6)        ALLOW       Anywhere (v6)             
 Nginx Full (v6)     ALLOW       Anywhere (v6)
+. . .
 </code></pre>
 <h3 id="Obtain-an-SSL-Certificate"><a href="#Obtain-an-SSL-Certificate" class="headerlink" title="Obtain an SSL Certificate"></a>Obtain an SSL Certificate</h3><p><code>certbot</code> provides a variety of ways to obtain SSL certificates, through various plugins. The Nginx plugin will take care of reconfiguring Nginx and reloading the configuration file whenever necessary:</p>
 <pre><code class="bash">$ sudo certbot --nginx -d example.com -d www.example.com
@@ -586,7 +591,7 @@ ssl_dhparam /etc/ssl/certs/dhparam.pem;
 <pre><code class="bash">$ sudo systemctl reload nginx
 </code></pre>
 <p>Your site is now more secure, and should receive an <strong>A</strong> rating.</p>
-<h3 id="Set-Up-Auto-Renewal"><a href="#Set-Up-Auto-Renewal" class="headerlink" title="Set Up Auto Renewal"></a>Set Up Auto Renewal</h3><p>Certificates from Let’s Encrypt certificates are only valid for ninety days. This is to encourage users to automate their certificate renewal process. We will need to set up a regularly run command to check for expiring certificates and renew them automatically.</p>
+<h3 id="Set-up-Auto-Renewal"><a href="#Set-up-Auto-Renewal" class="headerlink" title="Set up Auto Renewal"></a>Set up Auto Renewal</h3><p>Certificates from Let’s Encrypt certificates are only valid for ninety days. This is to encourage users to automate their certificate renewal process. We will need to set up a regularly run command to check for expiring certificates and renew them automatically.</p>
 <p>To run the renewal check daily, we will use cron, a standard system service for running periodic jobs. We tell <code>cron</code> what to do by opening and editing a file called a <code>crontab</code>.</p>
 <pre><code class="bash">$ sudo crontab -e
 </code></pre>
@@ -622,13 +627,13 @@ ssl_dhparam /etc/ssl/certs/dhparam.pem;
       
         <div class="post-tags">
           
-            <a href="/tags/linux/" rel="tag"># Linux</a>
-          
-            <a href="/tags/network/" rel="tag"># Network</a>
+            <a href="/tags/nginx/" rel="tag"># Nginx</a>
           
             <a href="/tags/ubuntu/" rel="tag"># Ubuntu</a>
           
-            <a href="/tags/nginx/" rel="tag"># Nginx</a>
+            <a href="/tags/linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/network/" rel="tag"># Network</a>
           
         </div>
       
@@ -650,6 +655,10 @@ ssl_dhparam /etc/ssl/certs/dhparam.pem;
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/set-up-nginx-with-http-2-support/" rel="prev" title="Set up Nginx with HTTP/2 Support">
+                Set up Nginx with HTTP/2 Support <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -736,7 +745,7 @@ ssl_dhparam /etc/ssl/certs/dhparam.pem;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -832,7 +841,7 @@ ssl_dhparam /etc/ssl/certs/dhparam.pem;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-Let’s-Encrypt"><span class="nav-number">1.</span> <span class="nav-text">What is Let’s Encrypt?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-does-HTTPS-work"><span class="nav-number">2.</span> <span class="nav-text">How does HTTPS work?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Let’s-Encrypt"><span class="nav-number">3.</span> <span class="nav-text">Why Let’s Encrypt?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-make-it"><span class="nav-number">4.</span> <span class="nav-text">How to make it?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Prerequisites"><span class="nav-number">4.1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-Certbot"><span class="nav-number">4.2.</span> <span class="nav-text">Install Certbot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configure-Nginx"><span class="nav-number">4.3.</span> <span class="nav-text">Configure Nginx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Update-the-Firewall"><span class="nav-number">4.4.</span> <span class="nav-text">Update the Firewall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Obtain-an-SSL-Certificate"><span class="nav-number">4.5.</span> <span class="nav-text">Obtain an SSL Certificate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Update-Diffie-Hellman-Parameters"><span class="nav-number">4.6.</span> <span class="nav-text">Update Diffie-Hellman Parameters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-Up-Auto-Renewal"><span class="nav-number">4.7.</span> <span class="nav-text">Set Up Auto Renewal</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-Is-Let’s-Encrypt"><span class="nav-number">1.</span> <span class="nav-text">What Is Let’s Encrypt?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-Does-HTTPS-Work"><span class="nav-number">2.</span> <span class="nav-text">How Does HTTPS Work?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Let’s-Encrypt"><span class="nav-number">3.</span> <span class="nav-text">Why Let’s Encrypt?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-Make-It"><span class="nav-number">4.</span> <span class="nav-text">How to Make It?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Prerequisites"><span class="nav-number">4.1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-Certbot"><span class="nav-number">4.2.</span> <span class="nav-text">Install Certbot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configure-Nginx"><span class="nav-number">4.3.</span> <span class="nav-text">Configure Nginx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Update-the-Firewall"><span class="nav-number">4.4.</span> <span class="nav-text">Update the Firewall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Obtain-an-SSL-Certificate"><span class="nav-number">4.5.</span> <span class="nav-text">Obtain an SSL Certificate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Update-Diffie-Hellman-Parameters"><span class="nav-number">4.6.</span> <span class="nav-text">Update Diffie-Hellman Parameters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-up-Auto-Renewal"><span class="nav-number">4.7.</span> <span class="nav-text">Set up Auto Renewal</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>

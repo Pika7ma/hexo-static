@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pingchuan.ma/"/>
-  <updated>2017-08-07T07:36:43.000Z</updated>
+  <updated>2017-08-08T17:31:07.000Z</updated>
   <id>https://pingchuan.ma/</id>
   
   <author>
@@ -16,24 +16,224 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Set up Nginx with HTTP/2 Support</title>
+    <link href="https://pingchuan.ma/set-up-nginx-with-http-2-support/"/>
+    <id>https://pingchuan.ma/set-up-nginx-with-http-2-support/</id>
+    <published>2017-08-08T16:17:48.000Z</published>
+    <updated>2017-08-08T17:31:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>One of the protocols supported is the relatively new <strong>HTTP/2</strong>, which was published in May 2015 approximately. One of the main advantages of HTTP/2 is its high transfer speed for content-rich websites. To boost my website as much as possible, I upgraded it with this modern protocol.</p>
+<a id="more"></a>
+<h2 id="What-is-HTTP-2"><a href="#What-is-HTTP-2" class="headerlink" title="What is HTTP/2?"></a>What is HTTP/2?</h2><p><strong>HTTP/2</strong> (originally named <strong>HTTP/2.0</strong>) is a major revision of the HTTP network protocol used by the World Wide Web. It was derived from the earlier experimental <strong>SPDY</strong> protocol, originally developed by Google. HTTP/2 was developed by the Hypertext Transfer Protocol working group <strong>httpbis</strong> (where <em>bis</em> means “second”) of the <a href="http://ietf.org/" target="_blank" rel="external">Internet Engineering Task Force</a>. HTTP/2 is the first new version of HTTP since HTTP 1.1, which was standardized in <a href="https://tools.ietf.org/html/rfc2068" target="_blank" rel="external">RFC 2068</a> in 1997. </p>
+<h2 id="Why-HTTP-2"><a href="#Why-HTTP-2" class="headerlink" title="Why HTTP/2?"></a>Why HTTP/2?</h2><p>In a nutshell, HTTP/2 has been released to address the inherent problems of HTTP1.1:</p>
+<ul>
+<li><p><strong>HTTP/2 is binary</strong> instead of textual like HTTP1.1 - this makes it transfer and parsing of data over HTTP/2 inherently more machine-friendly, thus faster, more efficient and less error prone.</p>
+</li>
+<li><p><strong>HTTP/2 is fully multiplexed</strong> allowing multiple files and requests to be transferred at the same time, as opposed to HTTP1.1 which only accepted one single request / connection at a time.</p>
+</li>
+<li><p><strong>HTTP/2 uses the same connection</strong> for transferring different files and requests, avoiding the heavy operation of opening a new connection for every file which needs to be transferred between a client and a server.</p>
+</li>
+<li><p><strong>HTTP/2 has header compression</strong> built-in which is another way of removing several of the overheads associated with HTTP1.1 having to retrieve several different resources from the same or multiple web servers.</p>
+</li>
+<li><p><strong>HTTP/2 allows servers to push</strong> required resources proactively rather than waiting for the client browser to request files when it thinks it need them.</p>
+</li>
+</ul>
+<div align="center"><br><img src="/set-up-nginx-with-http-2-support/http-1-1-vs-http-2.png" alt="HTTP 1.1 v.s. HTTP/2" title="HTTP 1.1 v.s. HTTP/2"><br></div>
+
+<p>These things are the best (if simplistic) depiction of how HTTP/2 is better than HTTP1.1. Rather than the browser having to go back to the server to fetch every single resource, it’s picking up all the resources and transferring them at once.</p>
+<h2 id="How-to-make-it"><a href="#How-to-make-it" class="headerlink" title="How to make it?"></a>How to make it?</h2><h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
+<li><p>A <a href="https://pingchuan.ma/install-nginx-on-ubuntu/">Nginx-installed</a> Ubuntu OS.</p>
+</li>
+<li><p>A non-root user with the right to <code>sudo</code>.</p>
+</li>
+<li><p>You should have the control right of a domain name and associate it with your Nginx-running server.</p>
+</li>
+<li><p>An <a href="https://pingchuan.ma/equip-nginx-server-with-https/">SSL certificate</a>.</p>
+</li>
+</ul>
+<p>My <a href="https://m.do.co/c/c037166332e8" title="Click here to get $10 in credit." target="_blank" rel="external">DigitalOcean</a> VPS is installed with Ubuntu 16.04 LTS x64. This post will also be based on it.</p>
+<h3 id="Upgrade-to-the-Latest-Version-of-Nginx"><a href="#Upgrade-to-the-Latest-Version-of-Nginx" class="headerlink" title="Upgrade to the Latest Version of Nginx"></a>Upgrade to the Latest Version of Nginx</h3><p>Support of the HTTP/2 protocol was introduced in Nginx 1.9.5. If you followed my <a href="https://pingchuan.ma/install-nginx-on-ubuntu/">previous tutorial</a> about building Nginx on Ubuntu, you should have had the up-to-date Nginx, so skip this part and go to next step. Fortunately, the default repository in Ubuntu 16.04 contains a version higher than this, so we don’t have to add a third party repository.</p>
+<p>First, update the list of available packages in the <code>apt</code> packaging system:</p>
+<pre><code class="bash">$ sudo apt-get update
+</code></pre>
+<p>Then, install Nginx:</p>
+<pre><code class="bash">$ sudo apt-get install nginx
+</code></pre>
+<p>After the installation process finishes, you can check the version of Nginx by typing:</p>
+<pre><code class="bash">$ sudo nginx -v
+</code></pre>
+<p>The output should be similar to the following:</p>
+<pre><code class="bash">nginx version: nginx/1.10.3 (Ubuntu)
+</code></pre>
+<p>In the next several steps, we will modify the Nginx configuration files. Each step will change an Nginx configuration option. We will test the syntax of the configuration file along the way. Finally, we will verify that Nginx supports HTTP/2 and make a few changes to optimize performance.</p>
+<h3 id="Change-the-Listening-Port-and-Enabling-HTTP-2"><a href="#Change-the-Listening-Port-and-Enabling-HTTP-2" class="headerlink" title="Change the Listening Port and Enabling HTTP/2"></a>Change the Listening Port and Enabling HTTP/2</h3><p>The first change we will make will be to change the listening port from <code>80</code> to <code>443</code>.</p>
+<p>Let’s open the configuration file:</p>
+<pre><code class="bash">$ sudo vim /etc/nginx/sites-available/default
+</code></pre>
+<p>By default, Nginx is set to listen to port <code>80</code>, which is the standard HTTP port:</p>
+<pre><code>. . .
+listen 80 default_server;
+listen [::]:80 default_server;
+. . .
+</code></pre><p>As you can see, we have two different <code>listen</code> variables. The first one is for all IPv4 connections. The second one is for IPv6 connections. We will enable encryption for both.</p>
+<p>Modify the listening port to <code>443</code>, which is used by the HTTPS protocol:</p>
+<pre><code>. . .
+listen 443 ssl http2 default_server;
+listen [::]:443 ssl http2 default_server;
+. . .
+</code></pre><p>Notice that in addition to <code>ssl</code>, we also added <code>http2</code> to the line. This variable tells Nginx to use HTTP/2 with supported browsers. Save the configuration file and exit the text editor.</p>
+<p>Whenever you make changes to Nginx configuration files, you should check the configuration for syntax errors, like this:</p>
+<pre><code class="bash">$ sudo nginx -t
+</code></pre>
+<p>If the syntax is error-free, you will see the following output:</p>
+<pre><code class="bash">nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+</code></pre>
+<h3 id="Avoid-Old-Cipher-Suites"><a href="#Avoid-Old-Cipher-Suites" class="headerlink" title="Avoid Old Cipher Suites"></a>Avoid Old Cipher Suites</h3><p>HTTP/2 has a huge blacklist of old and insecure ciphers, so we must avoid them. Cipher suites are a bunch of cryptographic algorithms, which describe how the transferring data should be encrypted.</p>
+<p>We will use a really popular cipher set, whose security was approved by Internet giants like <a href="https://www.cloudflare.com" target="_blank" rel="external">CloudFlare</a>. It does not allow the usage of <a href="https://en.wikipedia.org/wiki/MD5" target="_blank" rel="external">MD5</a> encryption (which was known as insecure since 1996, but despite this fact, its use is widespread even to this day).</p>
+<p>Open the following configuration file:</p>
+<pre><code class="bash">$ sudo vim /etc/nginx/nginx.conf
+</code></pre>
+<p>Add this line after <code>ssl_prefer_server_ciphers on;</code>:</p>
+<pre><code>. . .
+ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
+. . .
+</code></pre><p>Save the file, and exit the text editor. Once again, check the configuration for syntax errors:</p>
+<pre><code class="bash">$ sudo nginx -t
+</code></pre>
+<h3 id="Redirect-all-HTTP-Request-to-HTTPS"><a href="#Redirect-all-HTTP-Request-to-HTTPS" class="headerlink" title="Redirect all HTTP Request to HTTPS"></a>Redirect all HTTP Request to HTTPS</h3><p>Since we are interested in serving the content through HTTPS only, we should tell Nginx what it should do if the server receives an HTTP request.</p>
+<p>Open the configuration file:</p>
+<pre><code class="bash">$ sudo vim /etc/nginx/sites-available/default
+</code></pre>
+<p>At the bottom of our file, we will create a new server block for redirecting all HTTP requests to HTTPS (be sure to replace the server name with your actual domain name):</p>
+<pre><code>. . .
+server {
+    listen 80;
+    listen [::]:80;
+    server_name example.com;
+    return 301 https://$server_name$request_uri;
+}
+</code></pre><p>Save the file, and exit the configuration file.</p>
+<p>Check the configuration for syntax errors:</p>
+<pre><code class="bash">$ sudo nginx -t
+</code></pre>
+<h3 id="Reload-Nginx"><a href="#Reload-Nginx" class="headerlink" title="Reload Nginx"></a>Reload Nginx</h3><p>That’s it for all the Nginx configuration changes. Since we checked for syntax errors with each change, you should be ready to restart Nginx and test your changes.</p>
+<p>To summarize, ignoring commented out lines, your configuration file should now look similar to mine:</p>
+<pre><code>server {
+    listen 443 ssl http2 default_server;
+    listen [::]:443 ssl http2 default_server;
+
+    root /var/www/html;
+
+    index index.html index.htm index.nginx-debian.html;
+
+    server_name pingchuan.ma www.pingchuan.ma;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    ssl_certificate /etc/letsencrypt/live/pingchuan.ma/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/pingchuan.ma/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/ssl/certs/dhparam.pem;
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name pingchuan.ma www.pingchuan.ma;
+    return 301 https://$server_name$request_uri;
+}
+</code></pre><p>To apply the changes, restart the Nginx server.</p>
+<pre><code class="bash">$ sudo systemctl restart nginx
+</code></pre>
+<h3 id="Verify-the-Changes"><a href="#Verify-the-Changes" class="headerlink" title="Verify the Changes"></a>Verify the Changes</h3><p>Let’s check that our server is up and running. Open your web browser and navigate to your domain.</p>
+<p>If everything was configured properly, you should be automatically redirected to HTTPS. Now, let’s check that HTTP/2 is working: open the Chrome Developer Tools (<strong>View</strong> -&gt; <strong>Developer</strong> -&gt; <strong>Developer Tools</strong>) and reload the page (<strong>View</strong> -&gt; <strong>Reload This Page</strong>). Then navigate to the <strong>Network</strong> tab, click on table header row that starts with <strong>Name</strong>, right-click on it, and select the <strong>Protocol</strong> option.</p>
+<p>Now you should see <code>h2</code> (which stands for HTTP/2) in a new column for your website serving HTTP/2 content.</p>
+<div align="center"><br><img src="/set-up-nginx-with-http-2-support/protocol.png" alt="Protocol" title="Protocol"><br></div>
+
+<p>At this point, our server is ready to serve content through HTTP/2 protocol, but there are still some things we should do to prepare the server to be used in production.</p>
+<h3 id="Optimize-Nginx-for-Best-Performance"><a href="#Optimize-Nginx-for-Best-Performance" class="headerlink" title="Optimize Nginx for Best Performance"></a>Optimize Nginx for Best Performance</h3><p>In this step we will tune the main Nginx configuration file for best performance and security.</p>
+<p>First of all, let’s open <code>nginx.conf</code> by typing the following in the console:</p>
+<pre><code class="bash">$ sudo vim /etc/nginx/nginx.conf
+</code></pre>
+<h4 id="Enable-Connection-Credentials-Caching"><a href="#Enable-Connection-Credentials-Caching" class="headerlink" title="Enable Connection Credentials Caching"></a>Enable Connection Credentials Caching</h4><p>Compared to HTTP, HTTPS takes a relatively longer time to establish initial connection between server and user. To minimize this difference in page load speed, we will enable caching of the connection credentials. That means instead of creating a new session on every page requested, the server will use a cached version of the credentials instead.</p>
+<p>To enable session caching, add these lines at the end of <code>http</code> block of your <code>nginx.conf</code> file:</p>
+<pre><code>. . .
+ssl_session_cache shared:SSL:5m;
+ssl_session_timeout 1h;
+</code></pre><p><code>ssl_session_cache specifies</code> the size of cache that will contain session information. 1 MB of it can store information for about 4000 sessions. The default value of 5 MB will be more than enough for most users, but if you expect really heavy traffic, you can increase this value accordingly.</p>
+<p><code>ssl_session_timeout</code> limits the time particular sessions are stored in the cache. This value shouldn’t be too big (more than an hour), but setting the value too low is pointless as well.</p>
+<h4 id="Enable-HTTP-Strict-Transport-Security-HSTS"><a href="#Enable-HTTP-Strict-Transport-Security-HSTS" class="headerlink" title="Enable HTTP Strict Transport Security (HSTS)"></a>Enable HTTP Strict Transport Security (HSTS)</h4><p>Even though we have already made all regular HTTP requests redirect to HTTPS in our Nginx configuration file, we also should enable HTTP Strict Transport Security to avoid having to do those redirects in the first place.</p>
+<p>If the browser finds an HSTS header, it will not try to connect to the server via regular HTTP again for the given time period. No matter what, it will exchange data using only encrypted HTTPS connection. This header should also protect us from protocol downgrade attacks.</p>
+<p>Add this line in <code>nginx.conf</code>:</p>
+<pre><code>. . .
+add_header Strict-Transport-Security &quot;max-age=15768000&quot; always;
+. . .
+</code></pre><p>The <code>max-age</code> is set in seconds. <code>15768000</code> seconds is equivalent to 6 months.</p>
+<p>By default, this header is not added to subdomain requests. If you have subdomains and want HSTS to apply to all of them, you should add the <code>includeSubDomains</code> variable at the end of the line, like this:</p>
+<pre><code>. . .
+add_header Strict-Transport-Security &quot;max-age=15768000; includeSubDomains&quot; always;
+. . .
+</code></pre><p>Save the file, and exit the text editor.</p>
+<p>Once again, check the configuration for syntax errors:</p>
+<pre><code class="bash">$ sudo nginx -t
+</code></pre>
+<p>Finally, restart the Nginx server to apply the changes.</p>
+<pre><code class="bash">$ sudo systemctl restart nginx
+</code></pre>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<li><p><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-with-http-2-support-on-ubuntu-16-04" target="_blank" rel="external">How To Set Up Nginx with HTTP/2 Support on Ubuntu 16.04</a></p>
+</li>
+<li><p><a href="https://en.wikipedia.org/wiki/HTTP/2" target="_blank" rel="external">HTTP/2 - Wikipedia</a></p>
+</li>
+<li><p><a href="https://css-tricks.com/http2-real-world-performance-test-analysis/" target="_blank" rel="external">HTTP/2 – A Real-World Performance Test and Analysis</a></p>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;One of the protocols supported is the relatively new &lt;strong&gt;HTTP/2&lt;/strong&gt;, which was published in May 2015 approximately. One of the main advantages of HTTP/2 is its high transfer speed for content-rich websites. To boost my website as much as possible, I upgraded it with this modern protocol.&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Network" scheme="https://pingchuan.ma/categories/network/"/>
+    
+    
+      <category term="Nginx" scheme="https://pingchuan.ma/tags/nginx/"/>
+    
+      <category term="Ubuntu" scheme="https://pingchuan.ma/tags/ubuntu/"/>
+    
+      <category term="Linux" scheme="https://pingchuan.ma/tags/linux/"/>
+    
+      <category term="Network" scheme="https://pingchuan.ma/tags/network/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Equip Nginx Server with HTTPS</title>
     <link href="https://pingchuan.ma/equip-nginx-server-with-https/"/>
     <id>https://pingchuan.ma/equip-nginx-server-with-https/</id>
     <published>2017-08-07T05:57:47.000Z</published>
-    <updated>2017-08-07T07:36:43.000Z</updated>
+    <updated>2017-08-08T17:26:06.000Z</updated>
     
     <content type="html"><![CDATA[<p><strong>HTTP</strong> is the foundation of data communication for the World Wide Web. However, the connection is not so secure as we thought. To keep our information safe and sound, <strong>HTTPS</strong> was introduced. Next let’s see how to enable HTTPS on website based on Nginx of Ubuntu with the help of <strong>Let’s Encrypt</strong>.</p>
 <a id="more"></a>
-<h2 id="What-is-Let’s-Encrypt"><a href="#What-is-Let’s-Encrypt" class="headerlink" title="What is Let’s Encrypt?"></a>What is Let’s Encrypt?</h2><p>To enable HTTPS on your website, you need to get a certificate (a type of file) from a <strong>Certificate Authority</strong> (<strong>CA</strong>). <a href="https://letsencrypt.org/" target="_blank" rel="external">Let’s Encrypt</a> is a CA. In order to get a certificate for your website’s domain from Let’s Encrypt, you have to demonstrate control over the domain. With Let’s Encrypt, you do this using software that uses the ACME protocol, which typically runs on your web host.</p>
-<h2 id="How-does-HTTPS-work"><a href="#How-does-HTTPS-work" class="headerlink" title="How does HTTPS work?"></a>How does HTTPS work?</h2><p>HTTPS pages typically use one of two secure protocols to encrypt communications - <strong>SSL</strong> (<strong>Secure Sockets Layer</strong>) or <strong>TLS</strong> (<strong>Transport Layer Security</strong>). Both the TLS and SSL protocols use what is known as an ‘asymmetric’ <strong>Public Key Infrastructure</strong> (<strong>PKI</strong>) system. An asymmetric system uses two ‘keys’ to encrypt communications, a ‘public’ key and a ‘private’ key. Anything encrypted with the public key can only be decrypted by the private key and vice versa.</p>
+<h2 id="What-Is-Let’s-Encrypt"><a href="#What-Is-Let’s-Encrypt" class="headerlink" title="What Is Let’s Encrypt?"></a>What Is Let’s Encrypt?</h2><p>To enable HTTPS on your website, you need to get a certificate (a type of file) from a <strong>Certificate Authority</strong> (<strong>CA</strong>). <a href="https://letsencrypt.org/" target="_blank" rel="external">Let’s Encrypt</a> is a CA. In order to get a certificate for your website’s domain from Let’s Encrypt, you have to demonstrate control over the domain. With Let’s Encrypt, you do this using software that uses the ACME protocol, which typically runs on your web host.</p>
+<h2 id="How-Does-HTTPS-Work"><a href="#How-Does-HTTPS-Work" class="headerlink" title="How Does HTTPS Work?"></a>How Does HTTPS Work?</h2><p>HTTPS pages typically use one of two secure protocols to encrypt communications - <strong>SSL</strong> (<strong>Secure Sockets Layer</strong>) or <strong>TLS</strong> (<strong>Transport Layer Security</strong>). Both the TLS and SSL protocols use what is known as an ‘asymmetric’ <strong>Public Key Infrastructure</strong> (<strong>PKI</strong>) system. An asymmetric system uses two ‘keys’ to encrypt communications, a ‘public’ key and a ‘private’ key. Anything encrypted with the public key can only be decrypted by the private key and vice versa.</p>
 <p>As the names suggest, the ‘private’ key should be kept strictly protected and should only be accessible the owner of the private key. In the case of a website, the private key remains securely ensconced on the web server. Conversely, the public key is intended to be distributed to anybody and everybody that needs to be able to decrypt information that was encrypted with the private key.</p>
 <div align="center"><br><img src="/equip-nginx-server-with-https/http-vs-https.png" alt="HTTP v.s. HTTPS" title="HTTP v.s. HTTPS"><br></div>
 
 <h2 id="Why-Let’s-Encrypt"><a href="#Why-Let’s-Encrypt" class="headerlink" title="Why Let’s Encrypt?"></a>Why Let’s Encrypt?</h2><p>Actually, there are hundreds of CA who can provide certificates. However, it is not always free. Let’s Encrypt is free and open project which is capable for providing creditable certificates. It is supported by plentiful large enterprises. So now let’s move on and try it.</p>
-<h2 id="How-to-make-it"><a href="#How-to-make-it" class="headerlink" title="How to make it?"></a>How to make it?</h2><h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
-<li>A Nginx-installed Ubuntu OS.</li>
-<li>A non-root user with the right to <code>sudo</code>.</li>
-<li>You should have the control right of a domain name and associate it with your Nginx-running server. It is recommend that resolve both <code>example.com</code> and <code>www.example.com</code> to your server. E.g. I used CNAME service to redirect <code>www.pingchuan.ma</code> to <code>pingchuan.ma</code>.</li>
+<h2 id="How-to-Make-It"><a href="#How-to-Make-It" class="headerlink" title="How to Make It?"></a>How to Make It?</h2><h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
+<li><p>A <a href="https://pingchuan.ma/install-nginx-on-ubuntu/">Nginx-installed</a> Ubuntu OS.</p>
+</li>
+<li><p>A non-root user with the right to <code>sudo</code>.</p>
+</li>
+<li><p>You should have the control right of a domain name and associate it with your Nginx-running server. It is recommend that resolve both <code>example.com</code> and <code>www.example.com</code> to your server. E.g. I used CNAME service to redirect <code>www.pingchuan.ma</code> to <code>pingchuan.ma</code>.</p>
+</li>
 </ul>
 <p>My <a href="https://m.do.co/c/c037166332e8" title="Click here to get $10 in credit." target="_blank" rel="external">DigitalOcean</a> VPS is installed with Ubuntu 16.04 LTS x64. This post will also be based on it.</p>
 <h3 id="Install-Certbot"><a href="#Install-Certbot" class="headerlink" title="Install Certbot"></a>Install Certbot</h3><p>Let’s Encrypt used <code>certbot</code> to deploy SSL certificate automatically for your server. It is not included in Ubuntu’s default repositories so we add it now:</p>
@@ -61,7 +261,7 @@
 </code></pre>
 <p>If that runs with no errors, reload Nginx to load the new configuration:</p>
 <pre><code>$ sudo systemctl reload nginx
-</code></pre><h3 id="Update-the-Firewall"><a href="#Update-the-Firewall" class="headerlink" title="Update the Firewall"></a>Update the Firewall</h3><p>If you have the <code>ufw</code> enabled, you will need to adjust the settings to allow for HTTPS traffic. If you followed my <a href="https://pingchuan.ma/install-nginx-on-ubuntu/">last tutorial</a> about building Nginx on Ubuntu, you should have done with it, so skip this part and go to next step.</p>
+</code></pre><h3 id="Update-the-Firewall"><a href="#Update-the-Firewall" class="headerlink" title="Update the Firewall"></a>Update the Firewall</h3><p>If you have the <code>ufw</code> enabled, you will need to adjust the settings to allow for HTTPS traffic. If you followed my <a href="https://pingchuan.ma/install-nginx-on-ubuntu/">previous tutorial</a> about building Nginx on Ubuntu, you should have done with it, so skip this part and go to next step.</p>
 <p>We can see the current setting by typing:</p>
 <pre><code class="bash">$ sudo ufw status
 </code></pre>
@@ -74,6 +274,7 @@ OpenSSH             ALLOW       Anywhere
 Nginx HTTP          ALLOW       Anywhere                  
 OpenSSH (v6)        ALLOW       Anywhere (v6)             
 Nginx HTTP (v6)     ALLOW       Anywhere (v6)
+. . .
 </code></pre>
 <p>To additionally let in HTTPS traffic, we can allow the “Nginx Full” profile and then delete the redundant “Nginx HTTP” profile allowance:</p>
 <pre><code class="bash">$ sudo ufw allow &#39;Nginx Full&#39;
@@ -91,6 +292,7 @@ OpenSSH             ALLOW       Anywhere
 Nginx Full          ALLOW       Anywhere                  
 OpenSSH (v6)        ALLOW       Anywhere (v6)             
 Nginx Full (v6)     ALLOW       Anywhere (v6)
+. . .
 </code></pre>
 <h3 id="Obtain-an-SSL-Certificate"><a href="#Obtain-an-SSL-Certificate" class="headerlink" title="Obtain an SSL Certificate"></a>Obtain an SSL Certificate</h3><p><code>certbot</code> provides a variety of ways to obtain SSL certificates, through various plugins. The Nginx plugin will take care of reconfiguring Nginx and reloading the configuration file whenever necessary:</p>
 <pre><code class="bash">$ sudo certbot --nginx -d example.com -d www.example.com
@@ -147,7 +349,7 @@ ssl_dhparam /etc/ssl/certs/dhparam.pem;
 <pre><code class="bash">$ sudo systemctl reload nginx
 </code></pre>
 <p>Your site is now more secure, and should receive an <strong>A</strong> rating.</p>
-<h3 id="Set-Up-Auto-Renewal"><a href="#Set-Up-Auto-Renewal" class="headerlink" title="Set Up Auto Renewal"></a>Set Up Auto Renewal</h3><p>Certificates from Let’s Encrypt certificates are only valid for ninety days. This is to encourage users to automate their certificate renewal process. We will need to set up a regularly run command to check for expiring certificates and renew them automatically.</p>
+<h3 id="Set-up-Auto-Renewal"><a href="#Set-up-Auto-Renewal" class="headerlink" title="Set up Auto Renewal"></a>Set up Auto Renewal</h3><p>Certificates from Let’s Encrypt certificates are only valid for ninety days. This is to encourage users to automate their certificate renewal process. We will need to set up a regularly run command to check for expiring certificates and renew them automatically.</p>
 <p>To run the renewal check daily, we will use cron, a standard system service for running periodic jobs. We tell <code>cron</code> what to do by opening and editing a file called a <code>crontab</code>.</p>
 <pre><code class="bash">$ sudo crontab -e
 </code></pre>
@@ -177,13 +379,13 @@ ssl_dhparam /etc/ssl/certs/dhparam.pem;
       <category term="Network" scheme="https://pingchuan.ma/categories/network/"/>
     
     
-      <category term="Linux" scheme="https://pingchuan.ma/tags/linux/"/>
-    
-      <category term="Network" scheme="https://pingchuan.ma/tags/network/"/>
+      <category term="Nginx" scheme="https://pingchuan.ma/tags/nginx/"/>
     
       <category term="Ubuntu" scheme="https://pingchuan.ma/tags/ubuntu/"/>
     
-      <category term="Nginx" scheme="https://pingchuan.ma/tags/nginx/"/>
+      <category term="Linux" scheme="https://pingchuan.ma/tags/linux/"/>
+    
+      <category term="Network" scheme="https://pingchuan.ma/tags/network/"/>
     
   </entry>
   
@@ -192,15 +394,17 @@ ssl_dhparam /etc/ssl/certs/dhparam.pem;
     <link href="https://pingchuan.ma/install-nginx-on-ubuntu/"/>
     <id>https://pingchuan.ma/install-nginx-on-ubuntu/</id>
     <published>2017-08-06T08:22:22.000Z</published>
-    <updated>2017-08-07T07:50:15.000Z</updated>
+    <updated>2017-08-08T17:24:41.000Z</updated>
     
     <content type="html"><![CDATA[<p>To set up a website based on my VPS, it is necessary to choose a web server which is capable for holding my traffic. When I was a high school boy, I tried to build my personal website on <strong>WordPress</strong> based on Apache, but I found they are both too extravagant for me. This time, I chose <strong>Nginx</strong> to hold my website.</p>
 <a id="more"></a>
-<h2 id="What-is-Nginx"><a href="#What-is-Nginx" class="headerlink" title="What is Nginx?"></a>What is Nginx?</h2><p><a href="https://www.nginx.com/" target="_blank" rel="external">Nginx</a> is one of the most popular web servers in the world and is responsible for hosting some of the largest and highest-traffic sites on the Internet. It is more resource-friendly than Apache in most cases and can be used as a web server or a reverse proxy.</p>
+<h2 id="What-Is-Nginx"><a href="#What-Is-Nginx" class="headerlink" title="What Is Nginx?"></a>What Is Nginx?</h2><p><a href="https://www.nginx.com/" target="_blank" rel="external">Nginx</a> is one of the most popular web servers in the world and is responsible for hosting some of the largest and highest-traffic sites on the Internet. It is more resource-friendly than Apache in most cases and can be used as a web server or a reverse proxy.</p>
 <h2 id="Why-Nginx"><a href="#Why-Nginx" class="headerlink" title="Why Nginx?"></a>Why Nginx?</h2><p>In fact, I have tens of millions of choices, for example, <strong>Nginx</strong>, <strong>Apache</strong>, <strong>lighttpd</strong>, etc. But in my opinion, Nginx is a light-weighted web server which perfectly fits personal users like me. Actually, last semester I enrolled in a <strong>JAVA Programming Language</strong> course, and I suffered a lot from Apache there. So, this time I tried Nginx out and surprised by its usability.</p>
-<h2 id="How-to-make-it"><a href="#How-to-make-it" class="headerlink" title="How to make it?"></a>How to make it?</h2><h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
-<li>An Internet hosting, such as VPS or cloud hosting. And, it should be running Ubuntu.</li>
-<li>A non-root user with the right to <code>sudo</code>.</li>
+<h2 id="How-to-Make-It"><a href="#How-to-Make-It" class="headerlink" title="How to Make It?"></a>How to Make It?</h2><h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
+<li><p>An Internet hosting, such as VPS or cloud hosting. And, it should be running Ubuntu.</p>
+</li>
+<li><p>A non-root user with the right to <code>sudo</code>.</p>
+</li>
 </ul>
 <p>My <a href="https://m.do.co/c/c037166332e8" title="Click here to get $10 in credit." target="_blank" rel="external">DigitalOcean</a> VPS is installed with Ubuntu 16.04 LTS x64. This post will also be based on it.</p>
 <h3 id="Install-Nginx"><a href="#Install-Nginx" class="headerlink" title="Install Nginx"></a>Install Nginx</h3><p>Nginx is so popular that Ubuntu’s default repositories included it:</p>
@@ -217,13 +421,16 @@ $ sudo apt-get install nginx
   Nginx HTTP
   Nginx HTTPS
   OpenSSH
-  ...
+  . . .
 </code></pre>
 <p>There are three profiles registered in Nginx:</p>
 <ul>
-<li><strong>Nginx Full</strong>: This profile opens both port 80 (normal, unencrypted web traffic) and port 443 (TLS/SSL encrypted traffic)</li>
-<li><strong>Nginx HTTP</strong>: This profile opens only port 80 (normal, unencrypted web traffic)</li>
-<li><strong>Nginx HTTPS</strong>: This profile opens only port 443 (TLS/SSL encrypted traffic)</li>
+<li><p><strong>Nginx Full</strong>: This profile opens both port 80 (normal, unencrypted web traffic) and port 443 (TLS/SSL encrypted traffic)</p>
+</li>
+<li><p><strong>Nginx HTTP</strong>: This profile opens only port 80 (normal, unencrypted web traffic)</p>
+</li>
+<li><p><strong>Nginx HTTPS</strong>: This profile opens only port 443 (TLS/SSL encrypted traffic)</p>
+</li>
 </ul>
 <p>For example, to allow HTTP traffic and to prepare for enabling HTTPS, I will type this:</p>
 <pre><code class="bash">$ sudo ufw allow &#39;Nginx Full&#39;
@@ -240,8 +447,9 @@ OpenSSH             ALLOW       Anywhere
 Nginx Full          ALLOW       Anywhere                  
 OpenSSH (v6)        ALLOW       Anywhere (v6)             
 Nginx Full (v6)     ALLOW       Anywhere (v6)
+. . .
 </code></pre>
-<h3 id="Is-it-working"><a href="#Is-it-working" class="headerlink" title="Is it working?"></a>Is it working?</h3><p>To check if Nginx is running, we should type:</p>
+<h3 id="Is-It-working"><a href="#Is-It-working" class="headerlink" title="Is It working?"></a>Is It working?</h3><p>To check if Nginx is running, we should type:</p>
 <pre><code class="bash">$ systemctl status nginx
 </code></pre>
 <p>If it IS running, the output should be something like:</p>
@@ -284,8 +492,10 @@ Nginx Full (v6)     ALLOW       Anywhere (v6)
 <pre><code class="bash">$ sudo systemctl enable nginx
 </code></pre>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-16-04" target="_blank" rel="external">How To Install Nginx on Ubuntu 16.04</a></li>
-<li><a href="https://www.nginx.com/resources/wiki/start/topics/tutorials/install/" target="_blank" rel="external">Install | NGINX</a></li>
+<li><p><a href="https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-16-04" target="_blank" rel="external">How To Install Nginx on Ubuntu 16.04</a></p>
+</li>
+<li><p><a href="https://www.nginx.com/resources/wiki/start/topics/tutorials/install/" target="_blank" rel="external">Install | NGINX</a></p>
+</li>
 </ol>
 ]]></content>
     
@@ -298,13 +508,13 @@ Nginx Full (v6)     ALLOW       Anywhere (v6)
       <category term="Network" scheme="https://pingchuan.ma/categories/network/"/>
     
     
-      <category term="Linux" scheme="https://pingchuan.ma/tags/linux/"/>
-    
-      <category term="Network" scheme="https://pingchuan.ma/tags/network/"/>
+      <category term="Nginx" scheme="https://pingchuan.ma/tags/nginx/"/>
     
       <category term="Ubuntu" scheme="https://pingchuan.ma/tags/ubuntu/"/>
     
-      <category term="Nginx" scheme="https://pingchuan.ma/tags/nginx/"/>
+      <category term="Linux" scheme="https://pingchuan.ma/tags/linux/"/>
+    
+      <category term="Network" scheme="https://pingchuan.ma/tags/network/"/>
     
   </entry>
   
@@ -313,35 +523,42 @@ Nginx Full (v6)     ALLOW       Anywhere (v6)
     <link href="https://pingchuan.ma/free-free-internet/"/>
     <id>https://pingchuan.ma/free-free-internet/</id>
     <published>2017-08-03T03:46:22.000Z</published>
-    <updated>2017-08-07T12:35:33.000Z</updated>
+    <updated>2017-08-08T17:25:47.000Z</updated>
     
     <content type="html"><![CDATA[<p>As a Chinese university student, it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered me anyway. </p>
 <p>Despite the inconvenience discussed above, it is totally free to get online through <strong>IPv6</strong>. Apparently, if I convert my IPv4 network traffic into IPv6 one and introduce an unblocked hosting server to agent it, all problem will be settled. In a nutshell, I am going to:</p>
 <ol>
-<li>get online <strong>free</strong> (free of charge) through IPv6;</li>
-<li>reach out for <strong>free</strong> (unrestricted) Internet;</li>
+<li><p>get online <strong>free</strong> (free of charge) through IPv6;</p>
+</li>
+<li><p>reach out for <strong>free</strong> (unrestricted) Internet;</p>
+</li>
 </ol>
 <a id="more"></a>
-<h2 id="What-is-Shadowsocks"><a href="#What-is-Shadowsocks" class="headerlink" title="What is Shadowsocks?"></a>What is Shadowsocks?</h2><p>According to its <a href="https://github.com/shadowsocks/shadowsocks/tree/master" target="_blank" rel="external">GitHub</a> description, <strong>shadowsocks</strong> works as a fast tunnel proxy with several friendly features:</p>
+<h2 id="What-Is-Shadowsocks"><a href="#What-Is-Shadowsocks" class="headerlink" title="What Is Shadowsocks?"></a>What Is Shadowsocks?</h2><p>According to its <a href="https://github.com/shadowsocks/shadowsocks/tree/master" target="_blank" rel="external">GitHub</a> description, <strong>shadowsocks</strong> works as a fast tunnel proxy with several friendly features:</p>
 <ul>
-<li>TCP &amp; UDP support</li>
-<li>User management API</li>
-<li>TCP Fast Open</li>
-<li>Workers and graceful restart</li>
-<li>Destination IP blacklist</li>
+<li><p>TCP &amp; UDP support</p>
+</li>
+<li><p>User management API</p>
+</li>
+<li><p>TCP Fast Open</p>
+</li>
+<li><p>Workers and graceful restart</p>
+</li>
+<li><p>Destination IP blacklist</p>
+</li>
 </ul>
 <p>As for many people, this multi-featured tool plays an indispensable role in research and study. In particular, it serves me well in network testing and website boosting.</p>
 <h2 id="Why-Shadowsocks"><a href="#Why-Shadowsocks" class="headerlink" title="Why Shadowsocks?"></a>Why Shadowsocks?</h2><p>Technically speaking, I did not really figure out how it works. However, to my experience, shadowsocks can maximum my network <strong>securely</strong>. Moreover, I find it friendly and easy to build for a Linux newbie like me. As a result, I chose shadowsocks.</p>
 <p>Rumor has it that the censorship is fighting against shadowsocks, but I believe that <strong>technology and science commit no crime</strong>. I am not good at memorization, so I recorded my building steps for further reference.</p>
-<h2 id="How-to-Make-it"><a href="#How-to-Make-it" class="headerlink" title="How to Make it?"></a>How to Make it?</h2><h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
+<h2 id="How-to-Make-It"><a href="#How-to-Make-It" class="headerlink" title="How to Make It?"></a>How to Make It?</h2><h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
 <li>An Internet hosting, such as VPS or cloud hosting. <em>DigitalOcean’s VPS service is good enough for me. I would not like to discuss the choosing of hosting service here.</em></li>
 </ul>
 <p>My <a href="https://m.do.co/c/c037166332e8" title="Click here to get $10 in credit." target="_blank" rel="external">DigitalOcean</a> VPS is installed with Ubuntu 16.04 LTS x64. This post will also be based on it.</p>
-<h3 id="Install-pip"><a href="#Install-pip" class="headerlink" title="Install pip"></a>Install pip</h3><p>I am building with python3, so I need pip for python3. Omit it if you have installed it.</p>
+<h3 id="Install-Pip"><a href="#Install-Pip" class="headerlink" title="Install Pip"></a>Install Pip</h3><p>I am building with python3, so I need pip for python3. Omit it if you have installed it.</p>
 <pre><code class="bash">$ sudo apt-get update
 $ sudo apt-get install python3-pip
 </code></pre>
-<h3 id="Install-shadowsocks"><a href="#Install-shadowsocks" class="headerlink" title="Install shadowsocks"></a>Install shadowsocks</h3><p>The author of shadowsocks stopped the maintenance in official pip, so we get the latest version via git.</p>
+<h3 id="Install-Shadowsocks"><a href="#Install-Shadowsocks" class="headerlink" title="Install Shadowsocks"></a>Install Shadowsocks</h3><p>The author of shadowsocks stopped the maintenance in official <code>pip</code>, so we get the latest version via git.</p>
 <pre><code class="bash">$ sudo pip3 install git+https://github.com/shadowsocks/shadowsocks.git@master
 </code></pre>
 <p>To look up the version of shadowsocks, we should use this command:</p>
@@ -493,7 +710,9 @@ net.ipv4.tcp_mtu_probing = 1
 <pre><code class="bash">$ sudo vim /etc/systemd/system/shadowsocks-server.service
 </code></pre>
 <p>Insert a line before <code>ExecStart</code>:</p>
-<pre><code>ExecStartPre = /bin/sh -c &#39;ulimit -n 51200&#39;
+<pre><code>. . .
+ExecStartPre = /bin/sh -c &#39;ulimit -n 51200&#39;
+. . .
 </code></pre><p>Overall <code>shadowsocks-server.service</code>:</p>
 <pre><code>[Unit]
 Description = Shadowsocks Server
@@ -518,8 +737,10 @@ $ sudo systemctl restart shadowsocks-server
 <pre><code class="bash">$ sudo systemctl restart shadowsocks-server
 </code></pre>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li><a href="https://www.polarxiong.com/archives/Ubuntu-16-04%E4%B8%8BShadowsocks%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BC%98%E5%8C%96.html" target="_blank" rel="external">Ubuntu 16.04 下 Shadowsocks 伺服器端安装及優化 (The installation and optimization of Shadowsocks server in Ubuntu 16.04)</a></li>
-<li><a href="http://b.mindy.tk/tjunet" target="_blank" rel="external">我是如何在天津大学上網的 (How do I get online in Tianjin University)</a></li>
+<li><p><a href="https://www.polarxiong.com/archives/Ubuntu-16-04%E4%B8%8BShadowsocks%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BC%98%E5%8C%96.html" target="_blank" rel="external">Ubuntu 16.04 下 Shadowsocks 伺服器端安装及優化 (The installation and optimization of Shadowsocks server in Ubuntu 16.04)</a></p>
+</li>
+<li><p><a href="http://b.mindy.tk/tjunet" target="_blank" rel="external">我是如何在天津大学上網的 (How do I get online in Tianjin University)</a></p>
+</li>
 </ol>
 ]]></content>
     
@@ -528,8 +749,10 @@ $ sudo systemctl restart shadowsocks-server
       &lt;p&gt;As a Chinese university student, it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered me anyway. &lt;/p&gt;
 &lt;p&gt;Despite the inconvenience discussed above, it is totally free to get online through &lt;strong&gt;IPv6&lt;/strong&gt;. Apparently, if I convert my IPv4 network traffic into IPv6 one and introduce an unblocked hosting server to agent it, all problem will be settled. In a nutshell, I am going to:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;get online &lt;strong&gt;free&lt;/strong&gt; (free of charge) through IPv6;&lt;/li&gt;
-&lt;li&gt;reach out for &lt;strong&gt;free&lt;/strong&gt; (unrestricted) Internet;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;get online &lt;strong&gt;free&lt;/strong&gt; (free of charge) through IPv6;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;reach out for &lt;strong&gt;free&lt;/strong&gt; (unrestricted) Internet;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
     
     </summary>
@@ -537,13 +760,13 @@ $ sudo systemctl restart shadowsocks-server
       <category term="Network" scheme="https://pingchuan.ma/categories/network/"/>
     
     
-      <category term="Python" scheme="https://pingchuan.ma/tags/python/"/>
+      <category term="Ubuntu" scheme="https://pingchuan.ma/tags/ubuntu/"/>
     
       <category term="Linux" scheme="https://pingchuan.ma/tags/linux/"/>
     
       <category term="Network" scheme="https://pingchuan.ma/tags/network/"/>
     
-      <category term="Ubuntu" scheme="https://pingchuan.ma/tags/ubuntu/"/>
+      <category term="Python" scheme="https://pingchuan.ma/tags/python/"/>
     
   </entry>
   
@@ -552,7 +775,7 @@ $ sudo systemctl restart shadowsocks-server
     <link href="https://pingchuan.ma/hello-world/"/>
     <id>https://pingchuan.ma/hello-world/</id>
     <published>2017-08-02T15:04:10.000Z</published>
-    <updated>2017-08-06T08:38:55.000Z</updated>
+    <updated>2017-08-06T08:38:52.000Z</updated>
     
     <content type="html"><![CDATA[<p><em>This is my first post!</em></p>
 ]]></content>

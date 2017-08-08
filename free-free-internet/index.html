@@ -115,7 +115,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Python,Linux,Network,Ubuntu," />
+  <meta name="keywords" content="Ubuntu,Linux,Network,Python," />
 
 
 
@@ -134,14 +134,14 @@
 
 
 <meta name="description" content="As a Chinese university student, it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is abo">
-<meta name="keywords" content="Python,Linux,Network,Ubuntu">
+<meta name="keywords" content="Ubuntu,Linux,Network,Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Free Free Internet">
 <meta property="og:url" content="https://pingchuan.ma/free-free-internet/index.html">
 <meta property="og:site_name" content="OpenPIKA">
 <meta property="og:description" content="As a Chinese university student, it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is abo">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-08-07T12:35:33.000Z">
+<meta property="og:updated_time" content="2017-08-08T17:25:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Free Free Internet">
 <meta name="twitter:description" content="As a Chinese university student, it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is abo">
@@ -461,30 +461,37 @@
         <p>As a Chinese university student, it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered me anyway. </p>
 <p>Despite the inconvenience discussed above, it is totally free to get online through <strong>IPv6</strong>. Apparently, if I convert my IPv4 network traffic into IPv6 one and introduce an unblocked hosting server to agent it, all problem will be settled. In a nutshell, I am going to:</p>
 <ol>
-<li>get online <strong>free</strong> (free of charge) through IPv6;</li>
-<li>reach out for <strong>free</strong> (unrestricted) Internet;</li>
+<li><p>get online <strong>free</strong> (free of charge) through IPv6;</p>
+</li>
+<li><p>reach out for <strong>free</strong> (unrestricted) Internet;</p>
+</li>
 </ol>
 <a id="more"></a>
-<h2 id="What-is-Shadowsocks"><a href="#What-is-Shadowsocks" class="headerlink" title="What is Shadowsocks?"></a>What is Shadowsocks?</h2><p>According to its <a href="https://github.com/shadowsocks/shadowsocks/tree/master" target="_blank" rel="external">GitHub</a> description, <strong>shadowsocks</strong> works as a fast tunnel proxy with several friendly features:</p>
+<h2 id="What-Is-Shadowsocks"><a href="#What-Is-Shadowsocks" class="headerlink" title="What Is Shadowsocks?"></a>What Is Shadowsocks?</h2><p>According to its <a href="https://github.com/shadowsocks/shadowsocks/tree/master" target="_blank" rel="external">GitHub</a> description, <strong>shadowsocks</strong> works as a fast tunnel proxy with several friendly features:</p>
 <ul>
-<li>TCP &amp; UDP support</li>
-<li>User management API</li>
-<li>TCP Fast Open</li>
-<li>Workers and graceful restart</li>
-<li>Destination IP blacklist</li>
+<li><p>TCP &amp; UDP support</p>
+</li>
+<li><p>User management API</p>
+</li>
+<li><p>TCP Fast Open</p>
+</li>
+<li><p>Workers and graceful restart</p>
+</li>
+<li><p>Destination IP blacklist</p>
+</li>
 </ul>
 <p>As for many people, this multi-featured tool plays an indispensable role in research and study. In particular, it serves me well in network testing and website boosting.</p>
 <h2 id="Why-Shadowsocks"><a href="#Why-Shadowsocks" class="headerlink" title="Why Shadowsocks?"></a>Why Shadowsocks?</h2><p>Technically speaking, I did not really figure out how it works. However, to my experience, shadowsocks can maximum my network <strong>securely</strong>. Moreover, I find it friendly and easy to build for a Linux newbie like me. As a result, I chose shadowsocks.</p>
 <p>Rumor has it that the censorship is fighting against shadowsocks, but I believe that <strong>technology and science commit no crime</strong>. I am not good at memorization, so I recorded my building steps for further reference.</p>
-<h2 id="How-to-Make-it"><a href="#How-to-Make-it" class="headerlink" title="How to Make it?"></a>How to Make it?</h2><h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
+<h2 id="How-to-Make-It"><a href="#How-to-Make-It" class="headerlink" title="How to Make It?"></a>How to Make It?</h2><h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
 <li>An Internet hosting, such as VPS or cloud hosting. <em>DigitalOcean’s VPS service is good enough for me. I would not like to discuss the choosing of hosting service here.</em></li>
 </ul>
 <p>My <a href="https://m.do.co/c/c037166332e8" title="Click here to get $10 in credit." target="_blank" rel="external">DigitalOcean</a> VPS is installed with Ubuntu 16.04 LTS x64. This post will also be based on it.</p>
-<h3 id="Install-pip"><a href="#Install-pip" class="headerlink" title="Install pip"></a>Install pip</h3><p>I am building with python3, so I need pip for python3. Omit it if you have installed it.</p>
+<h3 id="Install-Pip"><a href="#Install-Pip" class="headerlink" title="Install Pip"></a>Install Pip</h3><p>I am building with python3, so I need pip for python3. Omit it if you have installed it.</p>
 <pre><code class="bash">$ sudo apt-get update
 $ sudo apt-get install python3-pip
 </code></pre>
-<h3 id="Install-shadowsocks"><a href="#Install-shadowsocks" class="headerlink" title="Install shadowsocks"></a>Install shadowsocks</h3><p>The author of shadowsocks stopped the maintenance in official pip, so we get the latest version via git.</p>
+<h3 id="Install-Shadowsocks"><a href="#Install-Shadowsocks" class="headerlink" title="Install Shadowsocks"></a>Install Shadowsocks</h3><p>The author of shadowsocks stopped the maintenance in official <code>pip</code>, so we get the latest version via git.</p>
 <pre><code class="bash">$ sudo pip3 install git+https://github.com/shadowsocks/shadowsocks.git@master
 </code></pre>
 <p>To look up the version of shadowsocks, we should use this command:</p>
@@ -636,7 +643,9 @@ net.ipv4.tcp_mtu_probing = 1
 <pre><code class="bash">$ sudo vim /etc/systemd/system/shadowsocks-server.service
 </code></pre>
 <p>Insert a line before <code>ExecStart</code>:</p>
-<pre><code>ExecStartPre = /bin/sh -c &#39;ulimit -n 51200&#39;
+<pre><code>. . .
+ExecStartPre = /bin/sh -c &#39;ulimit -n 51200&#39;
+. . .
 </code></pre><p>Overall <code>shadowsocks-server.service</code>:</p>
 <pre><code>[Unit]
 Description = Shadowsocks Server
@@ -661,8 +670,10 @@ $ sudo systemctl restart shadowsocks-server
 <pre><code class="bash">$ sudo systemctl restart shadowsocks-server
 </code></pre>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li><a href="https://www.polarxiong.com/archives/Ubuntu-16-04%E4%B8%8BShadowsocks%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BC%98%E5%8C%96.html" target="_blank" rel="external">Ubuntu 16.04 下 Shadowsocks 伺服器端安装及優化 (The installation and optimization of Shadowsocks server in Ubuntu 16.04)</a></li>
-<li><a href="http://b.mindy.tk/tjunet" target="_blank" rel="external">我是如何在天津大学上網的 (How do I get online in Tianjin University)</a></li>
+<li><p><a href="https://www.polarxiong.com/archives/Ubuntu-16-04%E4%B8%8BShadowsocks%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BC%98%E5%8C%96.html" target="_blank" rel="external">Ubuntu 16.04 下 Shadowsocks 伺服器端安装及優化 (The installation and optimization of Shadowsocks server in Ubuntu 16.04)</a></p>
+</li>
+<li><p><a href="http://b.mindy.tk/tjunet" target="_blank" rel="external">我是如何在天津大学上網的 (How do I get online in Tianjin University)</a></p>
+</li>
 </ol>
 
       
@@ -681,13 +692,13 @@ $ sudo systemctl restart shadowsocks-server
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"># Python</a>
+            <a href="/tags/ubuntu/" rel="tag"># Ubuntu</a>
           
             <a href="/tags/linux/" rel="tag"># Linux</a>
           
             <a href="/tags/network/" rel="tag"># Network</a>
           
-            <a href="/tags/ubuntu/" rel="tag"># Ubuntu</a>
+            <a href="/tags/python/" rel="tag"># Python</a>
           
         </div>
       
@@ -799,7 +810,7 @@ $ sudo systemctl restart shadowsocks-server
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -895,7 +906,7 @@ $ sudo systemctl restart shadowsocks-server
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-Shadowsocks"><span class="nav-number">1.</span> <span class="nav-text">What is Shadowsocks?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Shadowsocks"><span class="nav-number">2.</span> <span class="nav-text">Why Shadowsocks?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-Make-it"><span class="nav-number">3.</span> <span class="nav-text">How to Make it?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Prerequisites"><span class="nav-number">3.1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-pip"><span class="nav-number">3.2.</span> <span class="nav-text">Install pip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-shadowsocks"><span class="nav-number">3.3.</span> <span class="nav-text">Install shadowsocks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implement-Safer-Encryption-Methods-optional"><span class="nav-number">3.4.</span> <span class="nav-text">Implement Safer Encryption Methods (optional)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Work-with-Configuration-File"><span class="nav-number">3.5.</span> <span class="nav-text">Work with Configuration File</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Usage"><span class="nav-number">3.6.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-with-Startup"><span class="nav-number">3.7.</span> <span class="nav-text">Run with Startup</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimizations"><span class="nav-number">4.</span> <span class="nav-text">Optimizations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Enable-BBR"><span class="nav-number">4.1.</span> <span class="nav-text">Enable BBR</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Update-Linux-Kernel"><span class="nav-number">4.1.1.</span> <span class="nav-text">Update Linux Kernel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Edit-Configuration-File"><span class="nav-number">4.1.2.</span> <span class="nav-text">Edit Configuration File</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Validate"><span class="nav-number">4.1.3.</span> <span class="nav-text">Validate</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optimize-I-O"><span class="nav-number">4.2.</span> <span class="nav-text">Optimize I/O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Enable-TCP-Fast-Open"><span class="nav-number">4.3.</span> <span class="nav-text">Enable TCP Fast Open</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-Is-Shadowsocks"><span class="nav-number">1.</span> <span class="nav-text">What Is Shadowsocks?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Shadowsocks"><span class="nav-number">2.</span> <span class="nav-text">Why Shadowsocks?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-Make-It"><span class="nav-number">3.</span> <span class="nav-text">How to Make It?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Prerequisites"><span class="nav-number">3.1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-Pip"><span class="nav-number">3.2.</span> <span class="nav-text">Install Pip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-Shadowsocks"><span class="nav-number">3.3.</span> <span class="nav-text">Install Shadowsocks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implement-Safer-Encryption-Methods-optional"><span class="nav-number">3.4.</span> <span class="nav-text">Implement Safer Encryption Methods (optional)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Work-with-Configuration-File"><span class="nav-number">3.5.</span> <span class="nav-text">Work with Configuration File</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Usage"><span class="nav-number">3.6.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-with-Startup"><span class="nav-number">3.7.</span> <span class="nav-text">Run with Startup</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimizations"><span class="nav-number">4.</span> <span class="nav-text">Optimizations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Enable-BBR"><span class="nav-number">4.1.</span> <span class="nav-text">Enable BBR</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Update-Linux-Kernel"><span class="nav-number">4.1.1.</span> <span class="nav-text">Update Linux Kernel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Edit-Configuration-File"><span class="nav-number">4.1.2.</span> <span class="nav-text">Edit Configuration File</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Validate"><span class="nav-number">4.1.3.</span> <span class="nav-text">Validate</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optimize-I-O"><span class="nav-number">4.2.</span> <span class="nav-text">Optimize I/O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Enable-TCP-Fast-Open"><span class="nav-number">4.3.</span> <span class="nav-text">Enable TCP Fast Open</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>
