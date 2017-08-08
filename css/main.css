@@ -1830,7 +1830,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #1342fc;
+  background: #d26cff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2661,7 +2661,8 @@ hr {
     line-height: 34px;
   }
 }
-.logo-line-before {
+.logo-line-before,
+.logo-line-after {
   display: block;
   overflow: hidden;
   margin: 0 auto;
@@ -2671,32 +2672,12 @@ hr {
   transition-delay: 0s;
 }
 @media (max-width: 767px) {
-  .logo-line-before {
-    display: none;
-  }
-}
-.logo-line-before i {
-  position: relative;
-  display: block;
-  height: 1px;
-  background: #222;
-}
-@media (max-width: 767px) {
-  .logo-line-before i {
-    height: 3px;
-  }
-}
-.logo-line-after {
-  display: block;
-  overflow: hidden;
-  margin: 0 auto;
-  width: 75%;
-}
-@media (max-width: 767px) {
+  .logo-line-before,
   .logo-line-after {
     display: none;
   }
 }
+.logo-line-before i,
 .logo-line-after i {
   position: relative;
   display: block;
@@ -2704,12 +2685,13 @@ hr {
   background: #222;
 }
 @media (max-width: 767px) {
+  .logo-line-before i,
   .logo-line-after i {
     height: 3px;
   }
 }
 .site-title {
-  transition-duration: 0.2s;
+  transition-duration: 0.1s;
   transition-timing-function: ease-in-out;
   transition-delay: 0s;
 }
