@@ -1670,7 +1670,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #b0ffb0;
+  background: #fff070;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2526,6 +2526,11 @@ hr {
   .logo-line-after i {
     height: 3px;
   }
+}
+.site-title {
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
 }
 .site-title:hover {
   text-shadow: 0 0 1px #000;
