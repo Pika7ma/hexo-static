@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pingchuan.ma/"/>
-  <updated>2017-08-08T17:40:31.000Z</updated>
+  <updated>2017-08-09T03:01:13.000Z</updated>
   <id>https://pingchuan.ma/</id>
   
   <author>
@@ -20,11 +20,11 @@
     <link href="https://pingchuan.ma/set-up-nginx-with-http-2-support/"/>
     <id>https://pingchuan.ma/set-up-nginx-with-http-2-support/</id>
     <published>2017-08-08T16:17:48.000Z</published>
-    <updated>2017-08-08T17:40:31.000Z</updated>
+    <updated>2017-08-09T03:01:13.000Z</updated>
     
     <content type="html"><![CDATA[<p>One of the protocols supported is the relatively new <strong>HTTP/2</strong>, which was published in May 2015 approximately. One of the main advantages of HTTP/2 is its high transfer speed for content-rich websites. To boost my website as much as possible, I upgraded it with this modern protocol.</p>
 <a id="more"></a>
-<h2 id="What-is-HTTP-2"><a href="#What-is-HTTP-2" class="headerlink" title="What is HTTP/2?"></a>What is HTTP/2?</h2><p><strong>HTTP/2</strong> (originally named <strong>HTTP/2.0</strong>) is a major revision of the HTTP network protocol used by the World Wide Web. It was derived from the earlier experimental <strong>SPDY</strong> protocol, originally developed by Google. HTTP/2 was developed by the Hypertext Transfer Protocol working group <strong>httpbis</strong> (where <em>bis</em> means “second”) of the <a href="http://ietf.org/" target="_blank" rel="external">Internet Engineering Task Force</a>. HTTP/2 is the first new version of HTTP since HTTP 1.1, which was standardized in <a href="https://tools.ietf.org/html/rfc2068" target="_blank" rel="external">RFC 2068</a> in 1997. </p>
+<h2 id="What-is-HTTP-2"><a href="#What-is-HTTP-2" class="headerlink" title="What is HTTP/2?"></a>What is HTTP/2?</h2><p><strong>HTTP/2</strong> (originally named <strong>HTTP/2.0</strong>) is a major revision of the HTTP network protocol used by the World Wide Web. It was derived from the earlier experimental <strong>SPDY</strong> protocol, originally developed by Google. HTTP/2 was developed by the Hypertext Transfer Protocol working group <strong>httpbis</strong> (where <em>bis</em> means “second”) of the <a href="https://ietf.org/" target="_blank" rel="external">Internet Engineering Task Force</a>. HTTP/2 is the first new version of HTTP since HTTP 1.1, which was standardized in <a href="https://tools.ietf.org/html/rfc2068" target="_blank" rel="external">RFC 2068</a> in 1997. </p>
 <h2 id="Why-HTTP-2"><a href="#Why-HTTP-2" class="headerlink" title="Why HTTP/2?"></a>Why HTTP/2?</h2><p>In a nutshell, HTTP/2 has been released to address the inherent problems of HTTP1.1:</p>
 <ul>
 <li><p><strong>HTTP/2 is binary</strong> instead of textual like HTTP1.1 - this makes it transfer and parsing of data over HTTP/2 inherently more machine-friendly, thus faster, more efficient and less error prone.</p>
@@ -65,8 +65,15 @@
 <p>The output should be similar to the following:</p>
 <pre><code class="bash">nginx version: nginx/1.10.3 (Ubuntu)
 </code></pre>
+<p>Then you should check your OpenSSL version. HTTP/2 happens to fail to be enabled on machines with OpenSSL lower than 1.0.2. The newer version was released long ago, but just in case, let’s check it out:</p>
+<pre><code class="bash">$ openssl version
+</code></pre>
+<p>Then my output is:</p>
+<pre><code class="bash">OpenSSL 1.0.2g  1 Mar 2016
+</code></pre>
+<p>It is good enough for me. But if you found it appears to a number lower than 1.0.2, go ahead google an upgrading solution to fix it.</p>
 <p>In the next several steps, we will modify the Nginx configuration files. Each step will change an Nginx configuration option. We will test the syntax of the configuration file along the way. Finally, we will verify that Nginx supports HTTP/2 and make a few changes to optimize performance.</p>
-<h3 id="Change-the-Listening-Port-and-Enabling-HTTP-2"><a href="#Change-the-Listening-Port-and-Enabling-HTTP-2" class="headerlink" title="Change the Listening Port and Enabling HTTP/2"></a>Change the Listening Port and Enabling HTTP/2</h3><p>The first change we will make will be to change the listening port from <code>80</code> to <code>443</code>.</p>
+<h3 id="Change-the-Listening-Port-and-Enable-HTTP-2"><a href="#Change-the-Listening-Port-and-Enable-HTTP-2" class="headerlink" title="Change the Listening Port and Enable HTTP/2"></a>Change the Listening Port and Enable HTTP/2</h3><p>The first change we will make will be to change the listening port from <code>80</code> to <code>443</code>.</p>
 <p>Let’s open the configuration file:</p>
 <pre><code class="bash">$ sudo vim /etc/nginx/sites-available/default
 </code></pre>
@@ -378,7 +385,7 @@ Select the appropriate number [1-2] then [enter] (press &#39;c&#39; to cancel):
     <link href="https://pingchuan.ma/install-nginx-on-ubuntu/"/>
     <id>https://pingchuan.ma/install-nginx-on-ubuntu/</id>
     <published>2017-08-06T08:22:22.000Z</published>
-    <updated>2017-08-08T17:39:35.000Z</updated>
+    <updated>2017-08-08T17:24:41.000Z</updated>
     
     <content type="html"><![CDATA[<p>To set up a website based on my VPS, it is necessary to choose a web server which is capable for holding my traffic. When I was a high school boy, I tried to build my personal website on <strong>WordPress</strong> based on Apache, but I found they are both too extravagant for me. This time, I chose <strong>Nginx</strong> to hold my website.</p>
 <a id="more"></a>
@@ -757,7 +764,7 @@ $ sudo systemctl restart shadowsocks-server
     <link href="https://pingchuan.ma/hello-world/"/>
     <id>https://pingchuan.ma/hello-world/</id>
     <published>2017-08-02T15:04:10.000Z</published>
-    <updated>2017-08-06T08:38:52.000Z</updated>
+    <updated>2017-08-06T08:38:55.000Z</updated>
     
     <content type="html"><![CDATA[<p><em>This is my first post!</em></p>
 ]]></content>
