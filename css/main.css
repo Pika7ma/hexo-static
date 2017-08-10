@@ -1830,7 +1830,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #e847ff;
+  background: #ff8b46;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2960,4 +2960,9 @@ hr {
   width: 0;
   height: 2px;
   background: #6d6d6d;
+}
+@media (max-width: 767px) {
+  .posts-expand .post-title-link:hover::before {
+    visibility: hidden;
+  }
 }
