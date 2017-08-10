@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pingchuan.ma/"/>
-  <updated>2017-08-09T03:01:13.000Z</updated>
+  <updated>2017-08-10T11:34:57.000Z</updated>
   <id>https://pingchuan.ma/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://pingchuan.ma/set-up-nginx-with-http-2-support/"/>
     <id>https://pingchuan.ma/set-up-nginx-with-http-2-support/</id>
     <published>2017-08-08T16:17:48.000Z</published>
-    <updated>2017-08-09T03:01:13.000Z</updated>
+    <updated>2017-08-10T11:34:57.000Z</updated>
     
     <content type="html"><![CDATA[<p>One of the protocols supported is the relatively new <strong>HTTP/2</strong>, which was published in May 2015 approximately. One of the main advantages of HTTP/2 is its high transfer speed for content-rich websites. To boost my website as much as possible, I upgraded it with this modern protocol.</p>
 <a id="more"></a>
@@ -42,7 +42,7 @@
 
 <p>These things are the best (if simplistic) depiction of how HTTP/2 is better than HTTP1.1. Rather than the browser having to go back to the server to fetch every single resource, it’s picking up all the resources and transferring them at once.</p>
 <h2 id="How-to-make-it"><a href="#How-to-make-it" class="headerlink" title="How to make it?"></a>How to make it?</h2><h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
-<li><p>A <a href="https://pingchuan.ma/install-nginx-on-ubuntu/">Nginx-installed</a> Ubuntu OS.</p>
+<li><p>An <a href="https://pingchuan.ma/install-nginx-on-ubuntu/">Nginx-installed</a> Ubuntu OS.</p>
 </li>
 <li><p>A non-root user with the right to <code>sudo</code>.</p>
 </li>
@@ -212,7 +212,7 @@ ssl_session_timeout 1h;
     <link href="https://pingchuan.ma/equip-nginx-server-with-https/"/>
     <id>https://pingchuan.ma/equip-nginx-server-with-https/</id>
     <published>2017-08-07T05:57:47.000Z</published>
-    <updated>2017-08-08T17:40:10.000Z</updated>
+    <updated>2017-08-10T11:34:54.000Z</updated>
     
     <content type="html"><![CDATA[<p><strong>HTTP</strong> is the foundation of data communication for the World Wide Web. However, the connection is not so secure as we thought. To keep our information safe and sound, <strong>HTTPS</strong> was introduced. Next let’s see how to enable HTTPS on website based on Nginx of Ubuntu with the help of <strong>Let’s Encrypt</strong>.</p>
 <a id="more"></a>
@@ -223,7 +223,7 @@ ssl_session_timeout 1h;
 
 <h2 id="Why-Let’s-Encrypt"><a href="#Why-Let’s-Encrypt" class="headerlink" title="Why Let’s Encrypt?"></a>Why Let’s Encrypt?</h2><p>Actually, there are hundreds of CA who can provide certificates. However, it is not always free. Let’s Encrypt is free and open project which is capable for providing creditable certificates. It is supported by plentiful large enterprises. So now let’s move on and try it.</p>
 <h2 id="How-to-Make-It"><a href="#How-to-Make-It" class="headerlink" title="How to Make It?"></a>How to Make It?</h2><h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
-<li><p>A <a href="https://pingchuan.ma/install-nginx-on-ubuntu/">Nginx-installed</a> Ubuntu OS.</p>
+<li><p>An <a href="https://pingchuan.ma/install-nginx-on-ubuntu/">Nginx-installed</a> Ubuntu OS.</p>
 </li>
 <li><p>A non-root user with the right to <code>sudo</code>.</p>
 </li>
@@ -385,7 +385,7 @@ Select the appropriate number [1-2] then [enter] (press &#39;c&#39; to cancel):
     <link href="https://pingchuan.ma/install-nginx-on-ubuntu/"/>
     <id>https://pingchuan.ma/install-nginx-on-ubuntu/</id>
     <published>2017-08-06T08:22:22.000Z</published>
-    <updated>2017-08-08T17:24:41.000Z</updated>
+    <updated>2017-08-10T11:34:57.000Z</updated>
     
     <content type="html"><![CDATA[<p>To set up a website based on my VPS, it is necessary to choose a web server which is capable for holding my traffic. When I was a high school boy, I tried to build my personal website on <strong>WordPress</strong> based on Apache, but I found they are both too extravagant for me. This time, I chose <strong>Nginx</strong> to hold my website.</p>
 <a id="more"></a>
@@ -514,7 +514,7 @@ Nginx Full (v6)     ALLOW       Anywhere (v6)
     <link href="https://pingchuan.ma/free-free-internet/"/>
     <id>https://pingchuan.ma/free-free-internet/</id>
     <published>2017-08-03T03:46:22.000Z</published>
-    <updated>2017-08-08T17:40:27.000Z</updated>
+    <updated>2017-08-10T11:34:55.000Z</updated>
     
     <content type="html"><![CDATA[<p>As a Chinese university student, it is especially difficult for me to accomplish my research with Google or Wikipedia. Additionally, my university is using a tolling network, whose Internet fee is about $0.3/GB. It is not a big deal but it bothered me anyway. </p>
 <p>Despite the inconvenience discussed above, it is totally free to get online through <strong>IPv6</strong>. Apparently, if I convert my IPv4 network traffic into IPv6 one and introduce an unblocked hosting server to agent it, all problem will be settled. In a nutshell, I am going to:</p>
@@ -764,7 +764,7 @@ $ sudo systemctl restart shadowsocks-server
     <link href="https://pingchuan.ma/hello-world/"/>
     <id>https://pingchuan.ma/hello-world/</id>
     <published>2017-08-02T15:04:10.000Z</published>
-    <updated>2017-08-06T08:38:55.000Z</updated>
+    <updated>2017-08-10T11:34:56.000Z</updated>
     
     <content type="html"><![CDATA[<p><em>This is my first post!</em></p>
 ]]></content>

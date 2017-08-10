@@ -2,37 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://pingchuan.ma/set-up-nginx-with-http-2-support/</loc>
-    
-    <lastmod>2017-08-09T03:01:13.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://pingchuan.ma/free-free-internet/</loc>
-    
-    <lastmod>2017-08-08T17:40:27.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://pingchuan.ma/equip-nginx-server-with-https/</loc>
-    
-    <lastmod>2017-08-08T17:40:10.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://pingchuan.ma/install-nginx-on-ubuntu/</loc>
     
-    <lastmod>2017-08-08T17:24:41.000Z</lastmod>
+    <lastmod>2017-08-10T11:34:57.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://pingchuan.ma/set-up-nginx-with-http-2-support/</loc>
+    
+    <lastmod>2017-08-10T11:34:57.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://pingchuan.ma/hello-world/</loc>
     
-    <lastmod>2017-08-06T08:38:55.000Z</lastmod>
+    <lastmod>2017-08-10T11:34:56.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://pingchuan.ma/free-free-internet/</loc>
+    
+    <lastmod>2017-08-10T11:34:55.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://pingchuan.ma/equip-nginx-server-with-https/</loc>
+    
+    <lastmod>2017-08-10T11:34:54.000Z</lastmod>
     
   </url>
   
