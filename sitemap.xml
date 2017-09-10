@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://pingchuan.ma/install-node-js-on-ubuntu-using-nvm/</loc>
+    
+    <lastmod>2017-09-10T07:44:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://pingchuan.ma/install-nginx-on-ubuntu/</loc>
     
     <lastmod>2017-08-10T11:34:57.000Z</lastmod>
